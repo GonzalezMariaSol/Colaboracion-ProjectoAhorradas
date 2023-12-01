@@ -3,10 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- LINKED GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <!-- LINKED FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- LINKED A TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- LINKED CSS -->
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Projecto Ahorradas</title>
 </head>
-<body>
+<body class="font-['Raleway']">
+    <header class="header bg-black bg-opacity-60 text-black flex justify-between items-center">
+        <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
+            <!-- HAY QUE REDIRIGIR A PAGINA PRINCIPAL -->
+            <p
+                class="font-bold text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                AhorrADA$
+            </p>
+        </div>
+        <!-- ME GUSTARIA AGREGAR UN BOTON MODO CLARO -  MODO OSCURO -->
+        <nav class="header-navbar mr-16">
+            <ul class="nav-ul flex space-x-4">
+                <li class="header-li-1 bg-white bg-opacity-60 text-xl w-32 h-9 flex items-center justify-center rounded-full">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <button class="text-center">Balance</button>
+                    <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
+                </li>
+                <li class="header-li-2 bg-white bg-opacity-60 text-xl w-32 h-9 flex items-center justify-center rounded-full">
+                    <i class="fa-solid fa-tags"></i>
+                    <button class="text-center">Categorias</button>
+                    <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
+                </li>
+                <li class="header-li-3 bg-white bg-opacity-60 text-xl w-32 h-9 flex items-center justify-center rounded-full">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <button class="text-center">Reportes</button>
+                    <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
+                </li>
+            </ul>
+        </nav>
+    </header>
     <script src="main.js"></script>
 </body>
 </html>
