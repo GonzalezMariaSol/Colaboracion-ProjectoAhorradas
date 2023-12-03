@@ -1,7 +1,35 @@
-body{
-min-height: 100vh;
-display:  flex;
-background-color: rgb(233, 231, 231);
-display:  flex;
-flex-direction: column;
+body {
+    min-height: 100vh;
+    display: flex;
+    background-color: rgb(233, 231, 231);
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media(max-width:425px) {
+    section>.categoria {
+        width: 80%;
+    }
+
+    section>.editarCategory {
+        width: 80%;
+    }
+
+    section>.reportes {
+        width: 80%;
+    }
+}
+@media(max-width:293px) {
+    section>.categoria {
+        width: 90%;
+    }
+
+    section>.editarCategory {
+        width: 90%;
+    }
+
+    section>.reportes {
+        width: 90%;
+    }
 }
