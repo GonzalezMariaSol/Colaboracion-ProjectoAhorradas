@@ -6,21 +6,12 @@ body {
     flex-direction: column;
 }
 
-
-@media(max-width:425px) {
-    section>.categoria {
-        width: 80%;
-    }
-
-    section>.editarCategory {
-        width: 80%;
-    }
-
-    section>.reportes {
-        width: 80%;
-    }
+.hidden{
+    display: none;
 }
-@media(max-width:293px) {
+
+
+@media(max-width:544px) {
     section>.categoria {
         width: 90%;
     }
@@ -32,4 +23,21 @@ body {
     section>.reportes {
         width: 90%;
     }
+    section>.reportesFiltrados{
+        width: 90%;
+    }
 }
+@media(max-width:412px) {
+    
+   tr>th{
+        font-size: 0.8rem;
+    }
+    div>.totales{
+        font-size: 1.5rem;
+    }
+    div>.totalesMes{
+        font-size: 1.5rem;
+    }
+   
+}
+   
