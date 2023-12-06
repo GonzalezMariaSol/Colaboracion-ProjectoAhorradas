@@ -54,54 +54,54 @@
     <main class="main-visual-page flex justify-center">
         <div class="div-father-BalFiltersNewOp w-4/5 my-14 flex justify-center flex-row gap-x-8">
             <div class="columna-balance-filtros flex flex-col gap-y-8">
-                <section class="section-balance bg-amber-600 h-1/2 w-56	">
+                <section class="section-balance bg-[#ffffff92] w-60 p-5 rounded-md ">
                     <!-- clase del 13-11 se ve balance  -->
-                    <p>Balance</p>
+                    <p class="title-section-balance text-xl font-bold mb-4 md:mb-8">Balance</p>
                     <ul class="balance-ul">
-                        <li class="section-balance-li-1">
+                        <li class="section-balance-li-1 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Ganancias</p>
-                            <p>+ $0</p>
+                            <p class="text-lime-500">+ $0</p>
                         </li>
-                        <li class="section-balance-li-2">
-                            <p>Ganancias</p>
-                            <p>- $0</p>
+                        <li class="section-balance-li-2 flex flex-row items-center justify-between mb-2 md:mb-4">
+                            <p>Gastos</p>
+                            <p class="text-red-600">- $0</p>
                         </li>
-                        <li class="section-balance-li-3">
+                        <li class="section-balance-li-3 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Total</p>
-                            <p>$0</p>
+                            <p class="text-blue-500	">$0</p>
                         </li>
                     </ul>
                 </section>
 
-                <section class="section-filters bg-yellow-300 h-1/2 w-56	">
-                    <div>
+                <section class="section-filters bg-[#ffffff92] w-60 p-5 rounded-md">
+                    <div class="div-filters-header flex flex-row items-center justify-between mb-4 md:mb-8">
                         <!-- clase del 11-03 se ve buscador q va mostrando resultados similares -->
-                        <p>Filtros</p>
+                        <p class="title-section-filters text-xl text-left font-bold">Filtros</p>
                         <!-- clase del 11-17 que se ve filtrar por fecha con new date() -->
-                        <button>Ocultar Filtros</button>
+                        <button class="text-sm text-right">Ocultar Filtros</button>
                     </div>
                     <form>
                         <ul class="form-filters-ul">
-                            <li class="section-filters-li-1">
+                            <li class="section-filters-li-1 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-type">Tipo</label>
-                                <select class="form-select-type">
+                                <select class="form-select-type p-2 rounded-md">
                                     <option>Gasto</option>
                                     <option>Ganancia</option>
                                 </select>
                             </li>
-                            <li class="section-filters-li-2">
+                            <li class="section-filters-li-2 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-category">Category</label>
-                                <select class="form-select-category">
+                                <select class="form-select-category p-2 rounded-md ">
                                     <option></option>
                                 </select>
                             </li>
-                            <li class="section-filters-li-3">
+                            <li class="section-filters-li-3 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="">Desde</label>
-                                <input type="date" class="input-date">
+                                <input type="date" class="input-date p-2 rounded-md ">
                             </li>
-                            <li class="section-filters-li-4">
+                            <li class="section-filters-li-4 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="">Ordenar por</label>
-                                <select>
+                                <select class="p-2rounded-md ">
                                     <option>Mas reciente</option>
                                     <option>Menos reciente</option>
                                     <option>Mayo monto</option>
@@ -115,11 +115,11 @@
                 </section>
             </div>
 
-            <section class="section-operations bg-lime-400 w-3/5	">
-                <div class="">
-                    <p>Operaciones</p>
+            <section class="section-operations bg-[#ffffff92] w-3/5 p-5 rounded-md">
+                <div class="div-operations-header flex flex-row items-center justify-between">
+                    <p class="title-section-operations text-xl text-left font-bold ">Operaciones</p>
                     <!-- clase del 13-11 se ve info para crear tabla para cda nueva operacion -->
-                    <button class="button-newOperation">+ Nueva Operacion</button>
+                    <button class="button-newOperation text-right">+ Nueva Operacion</button>
                     <!-- clase del 11-6 se ve ejecucion de nueva operacion -->
                 </div>
                 <div class="view-no-operations">
