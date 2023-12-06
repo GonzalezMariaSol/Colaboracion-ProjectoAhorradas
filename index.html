@@ -20,7 +20,7 @@
 </head>
 
 <body class="font-['Raleway']">
-    <header class="header bg-black bg-opacity-60 text-black flex justify-between items-center">
+    <header class="header bg-[#aeff8e88] text-black flex justify-between items-center">
         <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
             <!-- HAY QUE REDIRIGIR A PAGINA PRINCIPAL -->
             <p
@@ -119,17 +119,51 @@
                 <div class="div-operations-header flex flex-row items-center justify-between">
                     <p class="title-section-operations text-xl text-left font-bold ">Operaciones</p>
                     <!-- clase del 13-11 se ve info para crear tabla para cda nueva operacion -->
-                    <button class="button-newOperation text-right">+ Nueva Operacion</button>
+                    <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md">+ Nueva Operacion</button>
                     <!-- clase del 11-6 se ve ejecucion de nueva operacion -->
                 </div>
-                <div class="view-no-operations">
-                    <img src="img/sinOperaciones.png">
-                    <p>Sin Resultados</p>
+                <div class="view-no-operations mt-10 flex items-center flex-col">
+                    <img class="mr-4" src="img/sinOperaciones.png" alt="Sin Operaciones">
+                    <p class="text-xl font-bold	">Sin Resultados</p>
                     <p>Cambia los filtros o agrega operaciones</p>
                 </div>
             </section>
 
-
+            <!-- <section class="section-newOperation h-screen flex items-center justify-center flex-col">
+                <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
+                    
+                    <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8">Nueva Operacion</p>
+        
+                    <form action="" class="flex flex-col">
+                        <label class="font-bold" for="input-description-text">Descripcion</label>
+                        <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md">
+        
+                        <label class="font-bold" for="input-amount-numb" >Monto</label>
+                        <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md">
+        
+                        <label class="font-bold" for="select-type">Tipo</label>
+                        <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type">
+                            <option>Ganancia</option>
+                            <option>Gasto</option>
+                        </select>
+        
+                        <label class="font-bold" for="select-category">Categoria</label>
+                        <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category">
+                            <option></option>
+                        </select>
+        
+                        <label class="font-bold" for="input-date">Fecha</label>
+                        <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md">
+                    </form>
+        
+                    <div class="w-full flex justify-end">
+                        <div class="options-for-newOperation">
+                            <button class="text-black bg-slate-100 p-2 rounded-md">Cancelar</button>
+                            <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
         </div>
     </main>
     <script src="main.js"></script>
