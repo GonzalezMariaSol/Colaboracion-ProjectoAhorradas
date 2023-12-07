@@ -161,36 +161,42 @@
     </main>
 
 
-    <!-- VISTA NUEVA OPERACION -->
+    <!-- VISTA NUEVA OPERACION // EDITAR OPERACION-->
     <section class="section-newOperation view h-screen flex items-center justify-center flex-col hidden">
         <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
             <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8">Nueva Operacion</p>
+            <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8 hidden">Editar Operacion</p>
             <form action="" class="flex flex-col">
-                <label for="input-description-text" class="font-bold" name="description" id="input-text-description" placeholder="Descripcion">Descripcion</label>
-                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md">
+                <label for="input-description-text" class="font-bold">Descripcion</label>
+                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description" placeholder="Descripcion" required>
+                <p class="warning-text description mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label for="input-amount-numb" class="font-bold" name="amount" id="input-numb-amount" placeholder="Monto">Monto</label>
-                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md">
+                <label for="input-amount-numb" class="font-bold">Monto</label>
+                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount" placeholder="Monto" required>
+                <p class="warning-text amount mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label for="select-type" class="font-bold" >Tipo</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type">
+                <label for="select-type" class="font-bold">Tipo</label>
+                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
                     <option>Ganancia</option>
                     <option>Gasto</option>
                 </select>
+                <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label for="select-category" class="font-bold" >Categoria</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category">
+                <label for="select-category" class="font-bold">Categoria</label>
+                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
                     <option></option>
                 </select>
+                <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label for="input-date" class="font-bold" name="date" id="input-date" placeholder="Fecha">Fecha</label>
-                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md">
+                <label for="input-date" class="font-bold">Fecha</label>
+                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha" required>
+                <p class="warning-text date mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
             </form>
-
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
                     <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
+                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden" id="btn-add-newOp">Editar</button>
                 </div>
             </div>
         </div>
