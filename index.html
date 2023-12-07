@@ -22,13 +22,11 @@
 
 <body class="font-['Raleway']">
     <header class="header bg-[#aeff8e88] text-black flex justify-between items-center">
-        <a href="#main-view">
-            <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
-                <p
-                    class="font-bold text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    AhorrADA$</p>
-            </div>
-        </a>
+        <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
+            <a class="font-bold text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                href="index.html">
+                AhorrADA$</a>
+        </div>
         <nav class="header-navbar mr-16">
             <ul class="nav-ul flex space-x-4">
                 <!-- ME GUSTARIA AGREGAR UN BOTON MODO CLARO -  MODO OSCURO -->
@@ -62,15 +60,15 @@
                     <ul class="balance-ul">
                         <li class="section-balance-li-1 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Ganancias</p>
-                            <p class="text-lime-500">+ $0</p>
+                            <p class="text-lime-500 font-bold">+ $0</p>
                         </li>
                         <li class="section-balance-li-2 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Gastos</p>
-                            <p class="text-red-600">- $0</p>
+                            <p class="text-red-600 font-bold">- $0</p>
                         </li>
                         <li class="section-balance-li-3 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Total</p>
-                            <p class="text-blue-500	">$0</p>
+                            <p class="text-blue-500	font-bold">$0</p>
                         </li>
                     </ul>
                 </section>
@@ -80,7 +78,8 @@
                         <!-- clase del 11-03 se ve buscador q va mostrando resultados similares -->
                         <p class="title-section-filters text-xl text-left font-bold">Filtros</p>
                         <!-- clase del 11-17 que se ve filtrar por fecha con new date() -->
-                        <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-filters">Ocultar Filtros</button>
+                        <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-filters">Ocultar
+                            Filtros</button>
                     </div>
                     <form>
                         <ul class="form-filters-ul">
@@ -121,14 +120,61 @@
                 <div class="div-operations-header flex flex-row items-center justify-between">
                     <p class="title-section-operations text-xl text-left font-bold ">Operaciones</p>
                     <!-- clase del 13-11 se ve info para crear tabla para cda nueva operacion -->
-                    <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md" id="btn-newOp">+ Nueva
+                    <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md"
+                        id="btn-newOp">+ Nueva
                         Operacion</button>
                     <!-- clase del 11-6 se ve ejecucion de nueva operacion -->
                 </div>
-                <div class="view-no-operations mt-10 flex items-center flex-col">
+                <div class="view-no-operations mt-10 flex items-center flex-col hidden">
                     <img class="mr-4" src="img/sinOperaciones.png" alt="Sin Operaciones">
                     <p class="text-xl font-bold	">Sin Resultados</p>
                     <p>Cambia los filtros o agrega operaciones</p>
+                </div>
+                <div class="div-table-container mt-10">
+                    <table class="table-userInfo">
+                        <thead> <!-- HILERA ⇄ 1 - titulos -->
+                            <tr> <!-- COLUMNA ⇅  -->
+                                <th class="w-1/5 text-center pb-3">Descripcion</th> <!-- ⇅ COLUMNA 1 -->
+                                <th class="w-1/5 text-center pb-3">Categoria</th> <!-- ⇅ COLUMNA 2 -->
+                                <th class="w-1/5 text-center pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
+                                <th class="w-1/5 text-center pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
+                                <th class="w-1/5 text-center pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
+                              </tr>
+                        </thead>
+
+                        <tbody class="tbody-info-loaded"> <!-- EL CUERPO DE LA TABLA DONDE VA A ESTAR LA INFO -->
+                            <tr > <!-- ⇄ HILERA 2 - contenido -->
+                                <td class="text-center">supermercado jumbo</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">gastos</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">01/10/1009</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">1500000</td> <!-- aca iria lo que el usuario cargo -->
+                                <td>
+                                    <label for="section-table">
+                                        <section class="section-opt-table" id="section-table">
+                                            <option class="text-center">Eliminar</option>
+                                            <option class="text-center">Editar</option>
+                                        </section>
+                                    </label>
+                                </td> <!-- aca iria lo que el usuario cargo -->
+                            </tr>
+                            <tr> <!-- ⇄ HILERA 2 - contenido -->
+                                <td class="text-center">supermercado jumbo</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center ">gastos</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">01/10/1009</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">1500000</td> <!-- aca iria lo que el usuario cargo -->
+                                <td>
+                                    <label for="">
+                                        <section class="section-opt-table">
+                                            <option class="text-center">Eliminar</option>
+                                            <option class="text-center">Editar</option>
+                                        </section>
+                                    </label>
+                                </td> <!-- aca iria lo que el usuario cargo -->
+                            </tr>
+
+
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </div>
@@ -143,7 +189,7 @@
                 <label class="font-bold" for="input-description-text">Descripcion</label>
                 <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md">
 
-                <label class="font-bold" for="input-amount-numb" >Monto</label>
+                <label class="font-bold" for="input-amount-numb">Monto</label>
                 <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md">
 
                 <label class="font-bold" for="select-type">Tipo</label>
@@ -163,8 +209,8 @@
 
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
-                    <button class="text-black bg-slate-100 p-2 rounded-md">Cancelar</button>
-                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2">Agregar</button>
+                    <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
+                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
                 </div>
             </div>
         </div>
@@ -258,14 +304,13 @@
                 <div class="flex mt-[2rem] justify-end mb-[2rem]">
                     <button
                         class="w-[5rem]  h-[2.5rem] bg-[#f5f5f5] border-slate-50 rounded-[0.3rem] mr-[1rem] ">Cancelar</button>
-                    <button
-                        class="w-[5rem]  h-[2.5rem] bg-[#a3fc9b] rounded-[0.3rem] text-black">Editar</button>
+                    <button class="w-[5rem]  h-[2.5rem] bg-[#a3fc9b] rounded-[0.3rem] text-black">Editar</button>
                 </div>
             </form>
         </div>
     </section>
 
-    
+
     <!-- SECCION REPORTES -->
     <section class="section-reports view flex  justify-center items-center mb-[2rem] hidden">
         <div class=" reportes w-[60%] h-[50%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
@@ -347,4 +392,3 @@
 </body>
 
 </html>
-
