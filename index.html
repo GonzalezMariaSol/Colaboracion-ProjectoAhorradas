@@ -35,25 +35,25 @@
                 <li
                     class="header-li-1 bg-white bg-opacity-60 text-xl w-32 h-9 flex items-center justify-center rounded-full">
                     <i class="fa-solid fa-chart-line"></i>
-                    <button class="text-center">Balance</button>
+                    <button class="text-center" id="btn-balance-navb">Balance</button>
                     <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
                 </li>
                 <li
                     class="header-li-2 bg-white bg-opacity-60 text-xl w-32 h-9 flex items-center justify-center rounded-full">
                     <i class="fa-solid fa-tags"></i>
-                    <button class="text-center">Categorias</button>
+                    <button class="text-center" id="btn-category-navb">Categorias</button>
                     <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
                 </li>
                 <li
                     class="header-li-3 bg-white bg-opacity-60 text-xl w-32 h-9 flex items-center justify-center rounded-full">
                     <i class="fa-solid fa-chart-pie"></i>
-                    <button class="text-center">Reportes</button>
+                    <button class="text-center" id="btn-reports-navb">Reportes</button>
                     <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
                 </li>
             </ul>
         </nav>
     </header>
-    <main class="main-visual-page flex justify-center" id="main-view">
+    <main class="main-page view flex justify-center" id="main-view">
         <div class="div-father-BalFiltersNewOp w-4/5 my-14 flex justify-center flex-row gap-x-8">
             <div class="columna-balance-filtros flex flex-col gap-y-8">
                 <section class="section-balance bg-[#ffffff92] w-60 p-5 rounded-md ">
@@ -80,7 +80,7 @@
                         <!-- clase del 11-03 se ve buscador q va mostrando resultados similares -->
                         <p class="title-section-filters text-xl text-left font-bold">Filtros</p>
                         <!-- clase del 11-17 que se ve filtrar por fecha con new date() -->
-                        <button class="text-blue-500 text-sm font-medium text-right">Ocultar Filtros</button>
+                        <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-filters">Ocultar Filtros</button>
                     </div>
                     <form>
                         <ul class="form-filters-ul">
@@ -121,7 +121,7 @@
                 <div class="div-operations-header flex flex-row items-center justify-between">
                     <p class="title-section-operations text-xl text-left font-bold ">Operaciones</p>
                     <!-- clase del 13-11 se ve info para crear tabla para cda nueva operacion -->
-                    <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md">+ Nueva
+                    <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md" id="btn-newOp">+ Nueva
                         Operacion</button>
                     <!-- clase del 11-6 se ve ejecucion de nueva operacion -->
                 </div>
@@ -136,7 +136,7 @@
 
 
     <!-- VISTA NUEVA OPERACION -->
-    <section class="section-newOperation h-screen flex items-center justify-center flex-col hidden">
+    <section class="section-newOperation view h-screen flex items-center justify-center flex-col hidden">
         <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
             <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8">Nueva Operacion</p>
             <form action="" class="flex flex-col">
@@ -172,7 +172,7 @@
 
 
     <!-- SECCION CATEGORIA -->
-    <section class=" flex  justify-center items-center mb-[3rem] mt-[3rem]">
+    <section class="section-category view flex  justify-center items-center mb-[3rem] mt-[3rem] hidden">
         <div class="categoria w-[60%] h-[20%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem] ">Categoria</h2>
             <form action="">
@@ -245,7 +245,7 @@
 
 
     <!-- SECCION EDITAR CATEGORIA -->
-    <section class=" flex  justify-center items-center mb-[2rem] hidden">
+    <section class="section-edit-category view flex  justify-center items-center mb-[2rem] hidden">
         <div class=" editarCategory w-[60%] h-[80%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem]">Editar categoría</h2>
             <form action="">
@@ -267,7 +267,7 @@
 
     
     <!-- SECCION REPORTES -->
-    <section class=" flex  justify-center items-center mb-[2rem]  ">
+    <section class="section-reports view flex  justify-center items-center mb-[2rem] hidden">
         <div class=" reportes w-[60%] h-[50%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem]">Reportes</h2>
             <div class=" flex justify-center">
@@ -280,7 +280,7 @@
 
 
     <!-- SECCION REPORTES FILTRADOS -->
-    <section class=" flex justify-center items-center  hidden">
+    <section class="section-edit-reports view flex justify-center items-center  hidden">
         <div class=" reportesFiltrados w-[60%] h-[50%]  pl-[1rem] pr-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem]">Reportes</h2>
             <h3 class="text-[2rem]">Resumen</h3>
