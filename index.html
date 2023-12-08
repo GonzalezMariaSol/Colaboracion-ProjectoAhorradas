@@ -131,7 +131,7 @@
                     <p>Cambia los filtros o agrega operaciones</p>
                 </div>
                 <div class="div-table-container mt-10">
-                    <table class="table-userInfo">
+                    <table class="table-userOperation">
                         <thead> <!-- HILERA ⇄ 1 - titulos -->
                             <tr> <!-- COLUMNA ⇅  -->
                                 <th class="w-1/5 text-center pb-3">Descripcion</th> <!-- ⇅ COLUMNA 1 -->
@@ -144,35 +144,15 @@
 
                         <tbody class="tbody-info-loaded"> <!-- EL CUERPO DE LA TABLA DONDE VA A ESTAR LA INFO -->
                             <tr > <!-- ⇄ HILERA 2 - contenido -->
-                                <td class="text-center">supermercado jumbo</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">gastos</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">01/10/1009</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">1500000</td> <!-- aca iria lo que el usuario cargo -->
-                                <td>
-                                    <label for="section-table">
-                                        <section class="section-opt-table" id="section-table">
-                                            <option class="text-center">Eliminar</option>
-                                            <option class="text-center">Editar</option>
-                                        </section>
-                                    </label>
+                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
+                                <td class="flex flex-col">
+                                    <button class="text-center">Eliminar</button>
+                                    <button class="text-center">Editar</button>
                                 </td> <!-- aca iria lo que el usuario cargo -->
                             </tr>
-                            <tr> <!-- ⇄ HILERA 2 - contenido -->
-                                <td class="text-center">supermercado jumbo</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center ">gastos</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">01/10/1009</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">1500000</td> <!-- aca iria lo que el usuario cargo -->
-                                <td>
-                                    <label for="">
-                                        <section class="section-opt-table">
-                                            <option class="text-center">Eliminar</option>
-                                            <option class="text-center">Editar</option>
-                                        </section>
-                                    </label>
-                                </td> <!-- aca iria lo que el usuario cargo -->
-                            </tr>
-
-
                         </tbody>
                     </table>
                 </div>
@@ -181,36 +161,42 @@
     </main>
 
 
-    <!-- VISTA NUEVA OPERACION -->
+    <!-- VISTA NUEVA OPERACION // EDITAR OPERACION-->
     <section class="section-newOperation view h-screen flex items-center justify-center flex-col hidden">
         <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
             <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8">Nueva Operacion</p>
+            <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8 hidden">Editar Operacion</p>
             <form action="" class="flex flex-col">
-                <label class="font-bold" for="input-description-text">Descripcion</label>
-                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md">
+                <label for="input-description-text" class="font-bold">Descripcion</label>
+                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description" placeholder="Descripcion" required>
+                <p class="warning-text description mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label class="font-bold" for="input-amount-numb">Monto</label>
-                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md">
+                <label for="input-amount-numb" class="font-bold">Monto</label>
+                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount" placeholder="Monto" required>
+                <p class="warning-text amount mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label class="font-bold" for="select-type">Tipo</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type">
+                <label for="select-type" class="font-bold">Tipo</label>
+                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
                     <option>Ganancia</option>
                     <option>Gasto</option>
                 </select>
+                <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label class="font-bold" for="select-category">Categoria</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category">
+                <label for="select-category" class="font-bold">Categoria</label>
+                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
                     <option></option>
                 </select>
+                <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label class="font-bold" for="input-date">Fecha</label>
-                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md">
+                <label for="input-date" class="font-bold">Fecha</label>
+                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha" required>
+                <p class="warning-text date mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
             </form>
-
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
                     <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
+                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden" id="btn-add-newOp">Editar</button>
                 </div>
             </div>
         </div>
