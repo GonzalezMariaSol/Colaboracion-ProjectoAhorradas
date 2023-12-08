@@ -209,9 +209,6 @@ const initializeApp = () => {
 window.addEventListener("load", initializeApp) // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
 
-
-
-
 const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
     e.preventDefault() //evita que se recargue la pagina mientras carguen datos
     const currentInfo = getInfo("Operations") //PIDO la info
