@@ -1,7 +1,14 @@
 // UTILITIES ******************************************************************************************
 const just = (selector) => document.querySelector(selector); //punto para clases, # para id
 const all = (selector) => document.querySelectorAll(selector);
+
 const randomId = () => self.crypto.randomUUID();
+
+const setInfo = (key, arrInfo) => localStorage.setItem(key, JSON.stringify(arrInfo)) //definimos la info en el LS. Se le pasa una key y un arr c info y lo que hace es crear eso en el LS 
+const getInfo = (key) => JSON.parse(localStorage.getItem(key)) //pedimos la info al LS. Se pasa una key, y la busca en el LS y con el parse la transformamos a obj asi podemos manipularla
+
+
+
 
 const showView = (view) => {//hago una funcion que muestre y oculte las vistas
   all(".view").forEach((view) => {//primero digo que por cda clase que tenga en su nombre view (todas)
@@ -38,6 +45,7 @@ just("#btn-balance-navb").addEventListener("click", () => showView("main-page"))
 just("#btn-category-navb").addEventListener("click", () => showView("section-category")) //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
 
 just("#btn-reports-navb").addEventListener("click", () => showView("section-reports")) //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+
 
 
 
@@ -110,14 +118,14 @@ just("#btn-reports-navb").addEventListener("click", () => showView("section-repo
 
 
 
+// LOCAL STORAGE **************************************************************************************************
+const totalInfo = getInfo("Operations") || [] //totalInfo va a guardar primero la info que hay bajo el nombre de operations O si no hay info, entonces un array vacio
 
 
 
 
 // FUNCIONALIDAD DE OPERACIONES *****************************************************************************************
 
-//esto se tiene que borrar luego
-const operationPlaceholder = []
 
 const shapeDate = (objOperation) => {//hago una funcion la cual va a estar dando la forma de dd/mm/aa a la fecha
     const day = objOperation.fecha.getDate() //capturo el numero del dia
@@ -143,7 +151,6 @@ const renderOperations = (arrOperations) => {//arrOperations va a ser el del loc
     `
   }
 };
-renderOperations(operationPlaceholder) //aca tengo que pasarle el arr de info q tengo en el LS
 
 
 
@@ -185,20 +192,31 @@ console.log(saveUserOperation())
 
 
 
-//------------BOTON + NUEVA OPERACION
+//------------BOTON + NUEVA OPERACION 
+//!NO ENTIENDO PORQUE TENEMOS Q ESPERAR A QUE LA PAGINA CARGUE, Y SIMPLEMENTE NO USAMOS EL EVENTO CLICK (para los botones, para ls si entiendo)
 const initializeApp = () => {
+
+    setInfo("Operations", totalInfo) //creamos una key llamada Operations y el array va a ser lo que guarde totalInfo
+
+    renderOperations(totalInfo) //! no entiendo tendria que hacer un set y un estilo de totalinfo por cda key? no puedo hacer tipo const totalInfo = (key) => getInfo(key) || [] y luego hacer renderOperations(totalInfo("Operations")) ; totalInfo("Reports") y etc?
+
     just("#btn-newOp").addEventListener("click", () => showView("section-newOperation")) //escucha el click sobre btn de nueva operacion y esconde todas las vistas excepto la de nueva operacion
 
     just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e))
+
+
 }
 window.addEventListener("load", initializeApp) // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
 
+
+
+
 const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
     e.preventDefault() //evita que se recargue la pagina mientras carguen datos
-    const newOperation = saveUserOperation() //guardamos en una variable el objeto que obtenemos de la funcion saveUserOperation
-    operationPlaceholder.push(newOperation) //lo pusheamos al arr vacio 
-    console.log(operationPlaceholder)
+    const currentInfo = getInfo("Operations") //PIDO la info
+    currentInfo.push(saveUserOperation()) //MODIFICAMOS pusheando el objeto q nos trajimos del form al arr que esta bajo la key operations
+    setInfo("Operations", currentInfo)//MANDAMOS a la key operations, el array modificado-actualizado
 }
 
 
@@ -218,7 +236,7 @@ just("#btn-cancel-newOp").addEventListener("click", () => showView("main-page"))
 
 
 
-
+//NO ME FUNCIONA MANDAR LA INFO DEL LS AL TABLE
 
 
 
