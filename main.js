@@ -65,7 +65,7 @@ just("#btn-reports-navb").addEventListener("click", () => showView("section-repo
 
 
 
-// FUNCIONALIDAD DE BALANCE *****************************************************************************************
+// // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 
 
 
@@ -94,7 +94,7 @@ just("#btn-reports-navb").addEventListener("click", () => showView("section-repo
 
 
 
-// FUNCIONALIDAD DE FILTROS *****************************************************************************************
+// // FUNCIONALIDAD DE FILTROS *****************************************************************************************
 
 
 
@@ -118,7 +118,7 @@ just("#btn-reports-navb").addEventListener("click", () => showView("section-repo
 
 
 
-// LOCAL STORAGE **************************************************************************************************
+// // LOCAL STORAGE **************************************************************************************************
 const totalInfo = getInfo("Operations") || [] //totalInfo va a guardar primero la info que hay bajo el nombre de operations O si no hay info, entonces un array vacio
 
 
@@ -128,16 +128,16 @@ const totalInfo = getInfo("Operations") || [] //totalInfo va a guardar primero l
 
 
 const shapeDate = (objOperation) => {//hago una funcion la cual va a estar dando la forma de dd/mm/aa a la fecha
-    const day = objOperation.fecha.getDate() //capturo el numero del dia
-    const month = objOperation.fecha.getMonth() + 1; //capturo el numero del mes +1 porque los meses van de 0 a 11
-    const year = objOperation.fecha.getFullYear()// capturo el numero de anio
-    return `${day}/${month}/${year}` //y retorno la fecha en el orden que yo quiera mostrar
+  const day = objOperation.fecha.getDate() //capturo el numero del dia
+  const month = objOperation.fecha.getMonth() + 1; //capturo el numero del mes +1 porque los meses van de 0 a 11
+  const year = objOperation.fecha.getFullYear()// capturo el numero de anio
+  return `${day}/${month}/${year}` //y retorno la fecha en el orden que yo quiera mostrar
 }
 
 const renderOperations = (arrOperations) => {//arrOperations va a ser el del local storage
   for (const operation of arrOperations) {//por cda operacion(me trae cda hilera) del array operations
     just(".table-userOperation").innerHTML +=//crear los td para cada una de mis columnas dentro de la tabla q llamamos
-    `
+      `
         <tr>
             <td class="text-center">${operation.descripcion}</td>
             <td class="text-center">${operation.categoria}</td>
@@ -172,15 +172,15 @@ const renderOperations = (arrOperations) => {//arrOperations va a ser el del loc
 // FUNCIONALIDAD DE NUEVA OPERACION *****************************************************************************************
 
 
-const saveUserOperation = () =>{//transformamos los datos que entran por el formulario en un obj
-    return {
-        id: randomId(),
-        descripcion:just("#input-description-text").value,
-        monto:just("#input-amount-numb").value,
-        tipo:just("#select-type").value,
-        categoria:just("#select-category").value,
-        fecha:just("#input-date").value,
-    }
+const saveUserOperation = () => {//transformamos los datos que entran por el formulario en un obj
+  return {
+    id: randomId(),
+    descripcion: just("#input-description-text").value,
+    monto: just("#input-amount-numb").value,
+    tipo: just("#select-type").value,
+    categoria: just("#select-category").value,
+    fecha: just("#input-date").value,
+  }
 }
 console.log(saveUserOperation())
 
@@ -196,13 +196,13 @@ console.log(saveUserOperation())
 //!NO ENTIENDO PORQUE TENEMOS Q ESPERAR A QUE LA PAGINA CARGUE, Y SIMPLEMENTE NO USAMOS EL EVENTO CLICK (para los botones, para ls si entiendo)
 const initializeApp = () => {
 
-    setInfo("Operations", totalInfo) //creamos una key llamada Operations y el array va a ser lo que guarde totalInfo
+  setInfo("Operations", totalInfo) //creamos una key llamada Operations y el array va a ser lo que guarde totalInfo
 
-    renderOperations(totalInfo) //! no entiendo tendria que hacer un set y un estilo de totalinfo por cda key? no puedo hacer tipo const totalInfo = (key) => getInfo(key) || [] y luego hacer renderOperations(totalInfo("Operations")) ; totalInfo("Reports") y etc?
+  renderOperations(totalInfo) //! no entiendo tendria que hacer un set y un estilo de totalinfo por cda key? no puedo hacer tipo const totalInfo = (key) => getInfo(key) || [] y luego hacer renderOperations(totalInfo("Operations")) ; totalInfo("Reports") y etc?
 
-    just("#btn-newOp").addEventListener("click", () => showView("section-newOperation")) //escucha el click sobre btn de nueva operacion y esconde todas las vistas excepto la de nueva operacion
+  just("#btn-newOp").addEventListener("click", () => showView("section-newOperation")) //escucha el click sobre btn de nueva operacion y esconde todas las vistas excepto la de nueva operacion
 
-    just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e))
+  just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e))
 
 
 }
@@ -213,10 +213,10 @@ window.addEventListener("load", initializeApp) // esto va a esperar a que toda l
 
 
 const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
-    e.preventDefault() //evita que se recargue la pagina mientras carguen datos
-    const currentInfo = getInfo("Operations") //PIDO la info
-    currentInfo.push(saveUserOperation()) //MODIFICAMOS pusheando el objeto q nos trajimos del form al arr que esta bajo la key operations
-    setInfo("Operations", currentInfo)//MANDAMOS a la key operations, el array modificado-actualizado
+  e.preventDefault() //evita que se recargue la pagina mientras carguen datos
+  const currentInfo = getInfo("Operations") //PIDO la info
+  currentInfo.push(saveUserOperation()) //MODIFICAMOS pusheando el objeto q nos trajimos del form al arr que esta bajo la key operations
+  setInfo("Operations", currentInfo)//MANDAMOS a la key operations, el array modificado-actualizado
 }
 
 
@@ -236,18 +236,89 @@ just("#btn-cancel-newOp").addEventListener("click", () => showView("main-page"))
 
 
 
-//NO ME FUNCIONA MANDAR LA INFO DEL LS AL TABLE
+// NO ME FUNCIONA MANDAR LA INFO DEL LS AL TABLE
+
+
+
+//................................ SECCION CATEGORIA .......................................................
+
+const categories = getInfo("categories") || []
+
+
+
+
+const category = [
+  {
+    id: randomId(),
+    category: "Comidas",
+
+  },
+
+  {
+    id: randomId(),
+    category: "Sevicios",
+
+  },
+  {
+    id: randomId(),
+    category: "Salidas",
+
+  },
+  {
+    id: randomId(),
+    category: "Educacion",
+
+  },
+  {
+    id: randomId,
+    category: "Transporte",
+
+  },
+  {
+    id: randomId(),
+    category: "Trabajo",
+
+  }
+]
+//------------------------------------ RENDER------------------------------------------------
+
+const renderCategory = (arrayCategorys) => {
+  for (const item of arrayCategorys) {
+
+    just("#container-category").innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
+    <p
+        class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
+        ${item.category}</p>
+    <div class="flex">
+        <a href=""  class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]">Editar</a>
+        <a href="" class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</a>
+    </div> `
+
+  }
+}
+
+renderCategory(category)
+
+
+const savecategory = () => {
+  return {
+    id: randomId(),
+    category: just("#input-add").value,
+
+  }
+}
 
 
 
 
 
 
+// -----------------------------------EVENTS---------------------------------------------------
 
 
-
-
-
-
-
-
+just("#btn-add").addEventListener("click", (e) => {
+  e.preventDefault()
+  const newCategory = savecategory()
+  category.push(newCategory)
+  console.log(category);
+})
