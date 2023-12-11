@@ -37,7 +37,7 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
             <td class="text-center">${operation.monto}</td>
             <td class="flex flex-col">
                 <button class="text-center">Eliminar</button>
-                <button class="text-center" id="btn-edit-operation" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
+                <button class="text-center" id="btn-edit-operation" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
             </td> 
         </tr>
     `
@@ -45,21 +45,23 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
 };
 
 
+
+//!REVEER ESTOOOO
 //????????????????????????????????????????????????????????? CHEQUEAR QUE BTN EDIT OPERATION HAY DOS BTN UNO DEL TABLE Y OTRO EN QUE EJECUTA, CHEQUEAR ESO
 //EJECUTIONOFNEWOP SE ENCARGA DE OCULTAR SECTIONS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
 const ejecutionOfNewOp = (opId) => { //cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
 
       // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
       showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
-      just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "editar"
+      just("#btn-confirm-editOp").classList.remove("hidden") //mas que se muestre el btn con nombre "confirmar"
       just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
       just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
       just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
-
+      
       // ACA EJECUTAMOS LA EDICION/CAMBIOS DEL USUARIO ↓↓↓↓
       just("#btn-edit-operation").setAttribute("info-id", opId) //*no me queda en claro porque tendriamos q darle esta nueva info al btn edit operation, entiendo lo que estoy haciendo, pero no entiendo porque deberia de hacerlo
 
-      //!NO FUNCIONA ESTO
+      //!NO FUNCIONA ESTO no me edita lo que yo edite
       // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
       const choosenOperation = getInfo("Operations").find(operation => operation.id === opId)
 //obtenemos la info del LS que este bajo la key operations (q trae un arr) el cual le decimos que por cda operation q haya ahi adentro, solo traeme LA OPERACION en el que operation.id sea === al id que le estamos pasando por parametro (q es el que el usuario le hizo click) -choosenOperation entonces devuelve un obj donde estan todas las key + el id unico-
@@ -121,7 +123,7 @@ const initializeApp = () => {
   // BTN + NUEVA OPERACION
   just("#btn-newOp").addEventListener("click", () => {
     showViews("section-newOperation")
-    just("#btn-edit-newOp").classList.add("hidden")
+    just("#btn-confirm-editOp").classList.add("hidden")
     just("#editOp-tittle").classList.add("hidden")
     just("#btn-add-newOp").classList.remove("hidden")
     just("#newOp-tittle").classList.remove("hidden")
@@ -130,10 +132,7 @@ const initializeApp = () => {
   // BTN AGREGAR - NUEVA OPERACION 
   just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e)) //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
-  // BTN EDITAR OPERACION
-  just("#btn-edit-operation").addEventListener("click", (e) => {
-    e.preventDefault()
-  })
+
 
   // -----------BOTON CANCELAR OPERACION
   just("#btn-cancel-newOp").addEventListener("click", () => showViews("main-page")) //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
@@ -155,6 +154,7 @@ const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va
     console.log(currentInfo)
     setInfo("Operations", currentInfo)//MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
 }//!faltaria a esta funcion que al darle click el btn me redirija a la pagina principal y ya actualizada
+//!NO ME ESTA EDITANDO LA INFO QUE LE CAMBIO
 
 
 
