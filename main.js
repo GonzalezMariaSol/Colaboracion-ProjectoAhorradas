@@ -45,7 +45,6 @@ just("#btn-reports-navb").addEventListener("click", () => showViews("section-rep
 
 
 
-
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 
 
