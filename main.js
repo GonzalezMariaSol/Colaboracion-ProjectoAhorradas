@@ -8,8 +8,6 @@ const setInfo = (key, arrInfo) => localStorage.setItem(key, JSON.stringify(arrIn
 const getInfo = (key) => JSON.parse(localStorage.getItem(key)) //pedimos la info al LS. Se pasa una key, y la busca en el LS y con el parse la transformamos a obj asi podemos manipularla
 
 
-
-
 const showViews = (view) => {//hago una funcion que muestre y oculte las vistas
   all(".view").forEach((view) => {//primero digo que por cda clase que tenga en su nombre view (todas)
     view.classList.add("hidden"); //entonces me agregue la clase hidden
@@ -18,17 +16,8 @@ const showViews = (view) => {//hago una funcion que muestre y oculte las vistas
 };
 
 
-
-const showElement = (selectors) => {
-  for (const selector of selectors) {
-    just(selector).classList.remove("hidden")
-  }
-}
-const hideElement = (selectors) => {
-  for (const selector of selectors) {
-    just(selector).classList.add("hidden")
-  }
-}
+const showElement = (selector) => just(selector).classList.remove("hidden")
+const hideElement = (selector) => just(selector).classList.add("hidden")
 
 
 
@@ -289,9 +278,12 @@ const category = [
 
   }
 ]
+
+
+
 //------------------------------------ RENDER------------------------------------------------
 
-const renderCategory = (arrayCategorys) => {
+const renderCategory = (arrayCategorys) => {   //
   for (const item of arrayCategorys) {
 
     just("#container-category").innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
@@ -299,17 +291,17 @@ const renderCategory = (arrayCategorys) => {
         class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
         ${item.category}</p>
     <div class="flex">
-        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory()" >Editar</button>
+        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${item.id}')" >Editar</button>
         <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
     </div> `
 
   }
 }
 
-renderCategory(category)
 
 
-const savecategory = () => {
+
+const savecategory = () => {   //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
   return {
     id: randomId(),
     category: just("#input-add").value,
@@ -317,20 +309,14 @@ const savecategory = () => {
   }
 }
 
-// const editCategory = () => {
-//   showElement(".section-edit-category")
-//   hideElement("#section-category")
+const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
+  showElement(".section-edit-category")
+  hideElement("#section-category")
+ 
+  // PASE POR PARAMETRO EL ID DE MI OBJETO
+}
 
-// }
 
-
-const editCategory  = () => {
-  all(".edit").forEach(element => {
-    element.addEventListener("click", () => { //cuando clickeen en btn editar op
-        showViews("section-edit-category") //oculte todas las vistas y muestre la seccion de editar operacion
-      })
-  }) 
-  }
 
 
 
@@ -339,14 +325,17 @@ const editCategory  = () => {
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
+  setInfo("categories", category)  // ENVIO INFORMACION AL LOCAL STORAGE
+  const traigoInfo = getInfo("categories")  // TRAIGO LA INFO DEL LOCAL STORAGE
+  renderCategory(traigoInfo) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
 
-  just("#btn-add").addEventListener("click", (e) => {
+  just("#btn-add-categories").addEventListener("click", (e) => {
     e.preventDefault()
-    const newCategory = savecategory()
-    category.push(newCategory)
-    console.log(category);
+    const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
+    datoActual.push(savecategory())  // MODIFICO  EL DATO 
+    setInfo("categories", datoActual)  // ENVIOO LA INFO AL LOCAL STORAGE  //! NO LOGRE PINTAR LA PANTALLA
+
   })
 }
-
 
 window.addEventListener("load", inicializeApp())
