@@ -141,14 +141,27 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
             <td class="text-center">${operation.monto}</td>
             <td class="flex flex-col">
                 <button class="text-center">Eliminar</button>
-                <button class="text-center" onclick="">Editar</button>
+                <button class="text-center" id="btn-edit-operation" onclick="just("#btn-edit-operation").addEventListener("click", () => { 
+                  showViews("section-editOperation")
+                  just("#btn-edit-newOp").classList.remove("hidden")
+                  just("#editOp-tittle").classList.remove("hidden")
+                  just("#btn-add-newOp").classList.add("hidden") 
+                  just("#newOp-tittle").classList.add("hidden")
+                }) ">Editar</button>
             </td> 
         </tr>
     `
   }
 };
 
-
+// // EXPLICACION DE LO Q ESTA EN ONCLICK DEL BTN EDIT OPERATION
+// just("#btn-edit-operation").addEventListener("click", () => { //cuando clickeen en btn editar op
+//   showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
+//   just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "editar"
+//   just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
+//   just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
+//   just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
+// }) 
 
 
 
