@@ -10,7 +10,7 @@ const getInfo = (key) => JSON.parse(localStorage.getItem(key)) //pedimos la info
 
 
 
-const showView = (view) => {//hago una funcion que muestre y oculte las vistas
+const showViews = (view) => {//hago una funcion que muestre y oculte las vistas
   all(".view").forEach((view) => {//primero digo que por cda clase que tenga en su nombre view (todas)
     view.classList.add("hidden"); //entonces me agregue la clase hidden
   });
@@ -21,12 +21,12 @@ const showView = (view) => {//hago una funcion que muestre y oculte las vistas
 
 const showElement = (selectors) => {
   for (const selector of selectors) {
-    all(selector).classList.remove("hidden")
+    just(selector).classList.remove("hidden")
   }
 }
 const hideElement = (selectors) => {
   for (const selector of selectors) {
-    all(selector).classList.add("hidden")
+    just(selector).classList.add("hidden")
   }
 }
 
@@ -52,11 +52,11 @@ const hideElement = (selectors) => {
 
 // FUNCIONALIDAD DEL NAVBAR *****************************************************************************************
 
-just("#btn-balance-navb").addEventListener("click", () => showView("main-page")) //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
+just("#btn-balance-navb").addEventListener("click", () => showViews("main-page")) //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
 
-just("#btn-category-navb").addEventListener("click", () => showView("section-category")) //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
+just("#btn-category-navb").addEventListener("click", () => showViews("section-category")) //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
 
-just("#btn-reports-navb").addEventListener("click", () => showView("section-reports")) //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+just("#btn-reports-navb").addEventListener("click", () => showViews("section-reports")) //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
 
 
@@ -212,7 +212,7 @@ const initializeApp = () => {
 
   renderOperations(totalInfo) //! no entiendo tendria que hacer un set y un estilo de totalinfo por cda key? no puedo hacer tipo const totalInfo = (key) => getInfo(key) || [] y luego hacer renderOperations(totalInfo("Operations")) ; totalInfo("Reports") y etc?
 
-  just("#btn-newOp").addEventListener("click", () => showView("section-newOperation")) //escucha el click sobre btn de nueva operacion y esconde todas las vistas excepto la de nueva operacion
+  just("#btn-newOp").addEventListener("click", () => showViews("section-newOperation")) //escucha el click sobre btn de nueva operacion y esconde todas las vistas excepto la de nueva operacion
 
   just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e))
 
@@ -238,7 +238,7 @@ const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va
 
 
 // -----------BOTON CANCELAR
-just("#btn-cancel-newOp").addEventListener("click", () => showView("main-page")) //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+just("#btn-cancel-newOp").addEventListener("click", () => showViews("main-page")) //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
 // -----------BOTON AGREGAR
 
 
@@ -299,8 +299,8 @@ const renderCategory = (arrayCategorys) => {
         class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
         ${item.category}</p>
     <div class="flex">
-        <a href=""  class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]" onclick="editCategory()" >Editar</a>
-        <a href="" class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</a>
+        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory()" >Editar</button>
+        <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
     </div> `
 
   }
@@ -320,10 +320,17 @@ const savecategory = () => {
 // const editCategory = () => {
 //   showElement(".section-edit-category")
 //   hideElement("#section-category")
+
 // }
-const mostarShowEditCategory=()=>{
-  just(".edit").addEventListener("click",()=>showView("section-edit-category"))
-}
+
+
+const editCategory  = () => {
+  all(".edit").forEach(element => {
+    element.addEventListener("click", () => { //cuando clickeen en btn editar op
+        showViews("section-edit-category") //oculte todas las vistas y muestre la seccion de editar operacion
+      })
+  }) 
+  }
 
 
 
@@ -332,8 +339,8 @@ const mostarShowEditCategory=()=>{
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
-  
-just("#btn-add").addEventListener("click", (e) => {
+
+  just("#btn-add").addEventListener("click", (e) => {
     e.preventDefault()
     const newCategory = savecategory()
     category.push(newCategory)
