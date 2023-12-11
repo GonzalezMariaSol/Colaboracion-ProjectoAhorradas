@@ -11,11 +11,11 @@ const setInfo = (key, arrInfo) => localStorage.setItem(key, JSON.stringify(arrIn
 
 
 const showViews = (view) => {//hago una funcion que muestre y oculte las vistas
-  all(".view").forEach((view) => {//primero digo que por cda clase que tenga en su nombre view (todas)
-    view.classList.add("hidden"); //entonces me agregue la clase hidden
+  all(".view").forEach((view) => {//primero digo que por cda secction q en su clase que tenga como nombre view (basicamente todas)
+    view.classList.add("hidden"); //entonces a esas que contengan el "view" me agregue la clase hidden (osea esconderia todas)
   });
-  just(`.${view}`).classList.remove("hidden"); //y luego le decimos che, pero a esta en especifico, sacale ese hidden y mostramela
-};
+  just(`.${view}`).classList.remove("hidden"); //PERO luego le decimos che, pero a esta en especifico (la q estamos pasando x parametro), sacale ese hidden y mostramela
+};//osea que cuando llamemos a showViews basicamente vamos a estar escondiendo a todas las vistas, excepto la q le pasemos x parametro
 
 
 
@@ -141,30 +141,34 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
             <td class="text-center">${operation.monto}</td>
             <td class="flex flex-col">
                 <button class="text-center">Eliminar</button>
-                <button class="text-center" id="btn-edit-operation" onclick="just("#btn-edit-operation").addEventListener("click", () => { 
-                  showViews("section-editOperation")
-                  just("#btn-edit-newOp").classList.remove("hidden")
-                  just("#editOp-tittle").classList.remove("hidden")
-                  just("#btn-add-newOp").classList.add("hidden") 
-                  just("#newOp-tittle").classList.add("hidden")
-                }) ">Editar</button>
+                <button class="text-center" id="btn-edit-operation" onclick="all("#btn-edit-operation").forEach(element => {
+                  element.addEventListener("click", () => {
+                      showViews("section-editOperation")
+                      just("#btn-edit-newOp").classList.remove("hidden")
+                      just("#editOp-tittle").classList.remove("hidden")
+                      just("#btn-add-newOp").classList.add("hidden")
+                      just("#newOp-tittle").classList.add("hidden")
+                    })
+                }) 
+                ">Editar</button>
             </td> 
         </tr>
     `
   }
 };
 
+
+
 // // EXPLICACION DE LO Q ESTA EN ONCLICK DEL BTN EDIT OPERATION
-// just("#btn-edit-operation").addEventListener("click", () => { //cuando clickeen en btn editar op
-//   showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
-//   just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "editar"
-//   just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
-//   just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
-//   just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
+// all("#btn-edit-operation").forEach(element => {
+//   element.addEventListener("click", () => { //cuando clickeen en btn editar op
+//       showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
+//       just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "editar"
+//       just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
+//       just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
+//       just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
+//     })
 // }) 
-
-
-
 
 
 
@@ -212,13 +216,22 @@ const initializeApp = () => {
 
     // showOperations(totalInfo) //!porque si descomento esto se rompe todo mi codigo?
 
-    just("#btn-newOp").addEventListener("click", () => showViews("section-newOperation")) //escucha el click sobre btn de nueva operacion y esconde todas las vistas excepto la de nueva operacion
+    just("#btn-newOp").addEventListener("click", () => {
+      showViews("section-newOperation")
+      just("#btn-edit-newOp").classList.add("hidden")
+      just("#editOp-tittle").classList.add("hidden")
+      just("#btn-add-newOp").classList.remove("hidden")
+      just("#newOp-tittle").classList.remove("hidden")
+    })
 
     just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e)) //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
     console.log("me ejecute")
 }
 window.addEventListener("load", initializeApp) // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
+
+
+
 
 
 //?PUSHOBJTOARR FUNCIONA BIEN
