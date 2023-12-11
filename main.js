@@ -19,6 +19,18 @@ const showView = (view) => {//hago una funcion que muestre y oculte las vistas
 
 
 
+const showElement = (selectors) => {
+  for (const selector of selectors) {
+    all(selector).classList.remove("hidden")
+  }
+}
+const hideElement = (selectors) => {
+  for (const selector of selectors) {
+    all(selector).classList.add("hidden")
+  }
+}
+
+
 
 
 
@@ -242,9 +254,6 @@ just("#btn-cancel-newOp").addEventListener("click", () => showView("main-page"))
 
 //................................ SECCION CATEGORIA .......................................................
 
-const categories = getInfo("categories") || []
-
-
 
 
 const category = [
@@ -290,7 +299,7 @@ const renderCategory = (arrayCategorys) => {
         class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
         ${item.category}</p>
     <div class="flex">
-        <a href=""  class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]">Editar</a>
+        <a href=""  class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]" onclick="editCategory()" >Editar</a>
         <a href="" class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</a>
     </div> `
 
@@ -308,6 +317,13 @@ const savecategory = () => {
   }
 }
 
+// const editCategory = () => {
+//   showElement(".section-edit-category")
+//   hideElement("#section-category")
+// }
+const mostarShowEditCategory=()=>{
+  just(".edit").addEventListener("click",()=>showView("section-edit-category"))
+}
 
 
 
@@ -315,10 +331,15 @@ const savecategory = () => {
 
 // -----------------------------------EVENTS---------------------------------------------------
 
-
+const inicializeApp = () => {
+  
 just("#btn-add").addEventListener("click", (e) => {
-  e.preventDefault()
-  const newCategory = savecategory()
-  category.push(newCategory)
-  console.log(category);
-})
+    e.preventDefault()
+    const newCategory = savecategory()
+    category.push(newCategory)
+    console.log(category);
+  })
+}
+
+
+window.addEventListener("load", inicializeApp())

@@ -139,11 +139,11 @@
                                 <th class="w-1/5 text-center pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
                                 <th class="w-1/5 text-center pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
                                 <th class="w-1/5 text-center pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
-                              </tr>
+                            </tr>
                         </thead>
 
                         <tbody class="tbody-info-loaded"> <!-- EL CUERPO DE LA TABLA DONDE VA A ESTAR LA INFO -->
-                            <tr > <!-- ⇄ HILERA 2 - contenido -->
+                            <tr> <!-- ⇄ HILERA 2 - contenido -->
                                 <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
                                 <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
                                 <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
@@ -168,35 +168,44 @@
             <p class="title-section-newOperation text-xl font-bold mb-4 md:mb-8 hidden">Editar Operacion</p>
             <form action="" class="flex flex-col">
                 <label for="input-description-text" class="font-bold">Descripcion</label>
-                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description" placeholder="Descripcion" required>
-                <p class="warning-text description mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
+                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description"
+                    placeholder="Descripcion" required>
+                <p class="warning-text description mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
+                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="input-amount-numb" class="font-bold">Monto</label>
-                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount" placeholder="Monto" required>
-                <p class="warning-text amount mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
+                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount"
+                    placeholder="Monto" required>
+                <p class="warning-text amount mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
+                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="select-type" class="font-bold">Tipo</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
                     <option>Ganancia</option>
                     <option>Gasto</option>
                 </select>
-                <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
+                <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
+                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="select-category" class="font-bold">Categoria</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
                     <option></option>
                 </select>
-                <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
+                <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
+                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="input-date" class="font-bold">Fecha</label>
-                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha" required>
-                <p class="warning-text date mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation" style="color: #ff0000;"></i>Este campo es obligatorio</p>
+                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha"
+                    required>
+                <p class="warning-text date mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
+                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
             </form>
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
                     <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
-                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden" id="btn-add-newOp">Editar</button>
+                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden"
+                        id="btn-add-newOp">Editar</button>
                 </div>
             </div>
         </div>
@@ -204,7 +213,8 @@
 
 
     <!-- SECCION CATEGORIA -->
-    <section id="section-category" class=" section-category view flex  justify-center items-center mb-[3rem] mt-[3rem] hidden">
+    <section id="section-category"
+        class=" section-category view flex  justify-center items-center mb-[3rem] mt-[3rem] hidden">
         <div class="categoria w-[60%] h-[20%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem] ">Categoria</h2>
             <form action="">
@@ -212,12 +222,25 @@
                     <label for="" class="text-[1rem]">Nombre </label>
                 </div>
                 <div class="w-[100%] flex justify-between">
-                    <input id="input-add"  type="text" class="w-[85%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
-                    <button id="btn-add" class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black">Agregar</button>
+                    <input id="input-add" type="text"
+                        class="w-[85%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
+                    <button id="btn-add"
+                        class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black">Agregar</button>
                 </div>
             </form>
-            <ul  class="mt-[2rem]" id="container-category">
-            
+            <ul class="mt-[2rem]" id="container-category">
+                <li class="h-[2rem] flex  justify-between mb-[1rem]">
+                    <p
+                        class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
+                        ${item.category}</p>
+                    <div class="flex">
+                        <a href="" class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"
+                            onclick="mostarShowEditCategory()">Editar</a>
+                        <a href="" class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</a>
+                    </div>
+                </li>
+
+
             </ul>
         </div>
     </section>
