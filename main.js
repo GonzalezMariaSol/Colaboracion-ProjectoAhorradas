@@ -4,8 +4,9 @@ const all = (selector) => document.querySelectorAll(selector);
 
 const randomId = () => self.crypto.randomUUID();
 
-const showElement = (selector) => just(selector).classList.remove("hidden")
-const hideElement = (selector) => just(selector).classList.add("hidden")
+const showElement = (selector) => just(selector).classList.remove("hidden") // MUESTRA LA VENTANA
+const hideElement = (selector) => just(selector).classList.add("hidden") // OCULTA LA VENTANA
+const clear = (selector) => just(selector).innerText = "" // LIMPIA EL CONTENEDOR
 
 // LOCAL STORAGE ******************************************************************************************
 const getInfo = (key) => JSON.parse(localStorage.getItem(key)) //pedimos la info al LS. Se pasa una key, y la busca en el LS y con el parse la transformamos a obj asi podemos manipularla
@@ -30,7 +31,7 @@ const showViews = (view) => {//hago una funcion que muestre y oculte las vistas
 const showOperations = (arrOperations) => {//arrOperations va a ser lo que obtengamos del local storage q ya viene con forma de arr
   for (const operation of arrOperations) {//por cda operacion(me trae cda hilera) del array operations
     just(".table-userOperation").innerHTML +=//crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
-    `
+      `
         <tr>
             <td class="text-center">${operation.descripcion}</td>
             <td class="text-center">${operation.categoria}</td>
@@ -50,25 +51,25 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
 //EJECUTIONOFNEWOP SE ENCARGA DE OCULTAR SECTIONS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
 const ejecutionOfNewOp = (opId) => { //cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
 
-      // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
-      showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
-      just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "editar"
-      just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
-      just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
-      just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
+  // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
+  showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
+  just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "editar"
+  just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
+  just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
+  just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
 
-      // ACA EJECUTAMOS LA EDICION/CAMBIOS DEL USUARIO ↓↓↓↓
-      just("#btn-edit-operation").setAttribute("info-id", opId) //*no me queda en claro porque tendriamos q darle esta nueva info al btn edit operation, entiendo lo que estoy haciendo, pero no entiendo porque deberia de hacerlo
+  // ACA EJECUTAMOS LA EDICION/CAMBIOS DEL USUARIO ↓↓↓↓
+  just("#btn-edit-operation").setAttribute("info-id", opId) //*no me queda en claro porque tendriamos q darle esta nueva info al btn edit operation, entiendo lo que estoy haciendo, pero no entiendo porque deberia de hacerlo
 
-      //!NO FUNCIONA ESTO
-      // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
-      const choosenOperation = getInfo("Operations").find(operation => operation.id === opId)
-//obtenemos la info del LS que este bajo la key operations (q trae un arr) el cual le decimos que por cda operation q haya ahi adentro, solo traeme LA OPERACION en el que operation.id sea === al id que le estamos pasando por parametro (q es el que el usuario le hizo click) -choosenOperation entonces devuelve un obj donde estan todas las key + el id unico-
-    just("#input-description-text").value = choosenOperation.descripcion //al precargar va a mostrar el value de la op que selecciono
-    just("#input-amount-numb").value = choosenOperation.monto //al precargar va a mostrar el value de la op que selecciono
-    just("#select-type").value = choosenOperation.tipo //al precargar va a mostrar el value de la op que selecciono
-    just("#select-category").value = choosenOperation.categoria //al precargar va a mostrar el value de la op que selecciono
-    just("#input-date").value = choosenOperation.fecha //al precargar va a mostrar el value de la op que selecciono
+  //!NO FUNCIONA ESTO
+  // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
+  const choosenOperation = getInfo("Operations").find(operation => operation.id === opId)
+  //obtenemos la info del LS que este bajo la key operations (q trae un arr) el cual le decimos que por cda operation q haya ahi adentro, solo traeme LA OPERACION en el que operation.id sea === al id que le estamos pasando por parametro (q es el que el usuario le hizo click) -choosenOperation entonces devuelve un obj donde estan todas las key + el id unico-
+  just("#input-description-text").value = choosenOperation.descripcion //al precargar va a mostrar el value de la op que selecciono
+  just("#input-amount-numb").value = choosenOperation.monto //al precargar va a mostrar el value de la op que selecciono
+  just("#select-type").value = choosenOperation.tipo //al precargar va a mostrar el value de la op que selecciono
+  just("#select-category").value = choosenOperation.categoria //al precargar va a mostrar el value de la op que selecciono
+  just("#input-date").value = choosenOperation.fecha //al precargar va a mostrar el value de la op que selecciono
 }
 
 
@@ -80,14 +81,14 @@ const ejecutionOfNewOp = (opId) => { //cada "nueva op" ademas de tener las "cons
 //?SAVEUSEROPERATION FUNCIONA BIEN
 //SAVEUSEROPERATION TOMA LOS DATOS SUELTOS DEL FORM Y LOS TRANSFORMA EN UN OBJ
 const saveUserOperation = () => {//transformamos los datos que entran a traves del form (que son datos sueltos) en un obj
-    return {
-        id: randomId(),
-        descripcion:just("#input-description-text").value,
-        monto:just("#input-amount-numb").value,
-        tipo:just("#select-type").value,
-        categoria:just("#select-category").value,
-        fecha:just("#input-date").value,
-    }
+  return {
+    id: randomId(),
+    descripcion: just("#input-description-text").value,
+    monto: just("#input-amount-numb").value,
+    tipo: just("#select-type").value,
+    categoria: just("#select-category").value,
+    fecha: just("#input-date").value,
+  }
 }
 console.log(saveUserOperation())
 
@@ -151,12 +152,12 @@ window.addEventListener("load", initializeApp) // esto va a esperar a que toda l
 //?PUSHOBJTOARR FUNCIONA BIEN
 //PUSHOBJTOARR SE EJECUTA DENTRO DE initializeApp, Y SE ENCARGA DE PEDIR INFO EN FORMATO OBJ, LO TRANSFORMA A ARR Y LO DEVUELVE MODIFICADO
 const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
-    e.preventDefault() //evita que se recargue la web y perder los datos
-    const currentInfo = getInfo("Operations") //PIDO la info q viene en forma de ARR (porque operations q viene desde el LS es un arr) y la guardo en una variable
-    console.log(currentInfo)
-    currentInfo.push(saveUserOperation()) //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS
-    console.log(currentInfo)
-    setInfo("Operations", currentInfo)//MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
+  e.preventDefault() //evita que se recargue la web y perder los datos
+  const currentInfo = getInfo("Operations") //PIDO la info q viene en forma de ARR (porque operations q viene desde el LS es un arr) y la guardo en una variable
+  console.log(currentInfo)
+  currentInfo.push(saveUserOperation()) //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS
+  console.log(currentInfo)
+  setInfo("Operations", currentInfo)//MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
 }//!faltaria a esta funcion que al darle click el btn me redirija a la pagina principal y ya actualizada
 
 
@@ -283,21 +284,23 @@ const category = [
   }
 ]
 
-
+const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL Y SI NO TIENE LO BUSCA EN EL ARRAY DE CATEGORIAS QUE TENGO
 
 //------------------------------------ RENDER------------------------------------------------
 
 const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
-  for (const item of arrayCategorys) {
+  clear("#container-category")
+  for (const categorie of arrayCategorys) {
 
     just("#container-category").innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
     <p
         class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
-        ${item.category}</p>
+        ${categorie.category}</p>
     <div class="flex">
-        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${item.id}')" >Editar</button>
+        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
         <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
     </div> `
+
 
   }
 }
@@ -315,11 +318,19 @@ const savecategory = () => {   //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
 
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
   showElement(".section-edit-category")
-  hideElement("#section-category")
+  hideElement(".section-category")
+  const datoActual = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
+  just("#input-edit").value= datoActual.category
 
   // PASE POR PARAMETRO EL ID DE MI OBJETO
 }
 
+const addCategory = () => {
+  const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
+  datoActual.push(savecategory())  // MODIFICO  EL DATO 
+  setInfo("categories", datoActual)   // ENVIOO LA INFO AL LOCAL STORE  
+  renderCategory(datoActual)  // CUANDO  LIMPIO ACTUALIZO CON EL DATO ACTUAL
+}
 
 
 
@@ -329,18 +340,12 @@ const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CA
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
-  setInfo("categories", category)  // ENVIO INFORMACION AL LOCAL STORAGE
-  const traigoInfo = getInfo("categories")  // TRAIGO LA INFO DEL LOCAL STORAGE
-  renderCategory(traigoInfo) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
+  setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
+  renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
 
   just("#btn-add-categories").addEventListener("click", (e) => {
     e.preventDefault()
-    const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
-    datoActual.push(savecategory())  // MODIFICO  EL DATO 
-    just("#container-category").innerText = " " // LIMPIO LA PANTALLA  
-    renderCategory(datoActual)  // CUANDO  LIMPIO ACTUALIZO CON EL DATO ACTUAL
-    setInfo("categories", datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
-
+    addCategory()
 
 
   })
