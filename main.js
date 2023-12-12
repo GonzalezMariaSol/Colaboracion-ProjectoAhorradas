@@ -50,35 +50,23 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
 //!REVEER ESTOOOO
 //????????????????????????????????????????????????????????? CHEQUEAR QUE BTN EDIT OPERATION HAY DOS BTN UNO DEL TABLE Y OTRO EN QUE EJECUTA, CHEQUEAR ESO
 //EJECUTIONOFNEWOP SE ENCARGA DE OCULTAR SECTIONS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
-// const ejecutionOfNewOp = (opId) => { //cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
-
-//       // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
-//       showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
-//       just("#btn-confirm-editOp").classList.remove("hidden") //mas que se muestre el btn con nombre "confirmar"
-//       just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
-//       just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
-//       just("#newOp-tittle").classList.add("hidden") // y se esconda el titulo "nueva Operacion"
-      
-//       // ACA EJECUTAMOS LA EDICION/CAMBIOS DEL USUARIO ↓↓↓↓
-//       just("#btn-edit-operation").setAttribute("info-id", opId) //*no me queda en claro porque tendriamos q darle esta nueva info al btn edit operation, entiendo lo que estoy haciendo, pero no entiendo porque deberia de hacerlo
-
-//       //!NO FUNCIONA ESTO no me edita lo que yo edite
-//       // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
-//       const choosenOperation = getInfo("Operations").find(operation => operation.id === opId)
-// //obtenemos la info del LS que este bajo la key operations (q trae un arr) el cual le decimos que por cda operation q haya ahi adentro, solo traeme LA OPERACION en el que operation.id sea === al id que le estamos pasando por parametro (q es el que el usuario le hizo click) -choosenOperation entonces devuelve un obj donde estan todas las key + el id unico-
-//     just("#input-description-text").value = choosenOperation.descripcion //al precargar va a mostrar el value de la op que selecciono
-//     just("#input-amount-numb").value = choosenOperation.monto //al precargar va a mostrar el value de la op que selecciono
-//     just("#select-type").value = choosenOperation.tipo //al precargar va a mostrar el value de la op que selecciono
-//     just("#select-category").value = choosenOperation.categoria //al precargar va a mostrar el value de la op que selecciono
-//     just("#input-date").value = choosenOperation.fecha //al precargar va a mostrar el value de la op que selecciono
-// }
-
-const ejecutionOfNewOp = (opId) => {
+const ejecutionOfNewOp = (opId) => {//cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
+  //       // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
   showViews("section-editOperation") //oculte todas las vistas y muestre la seccion de editar operacion
-      just("#btn-edit-newOp").classList.remove("hidden") //mas que se muestre el btn con nombre "confirmar"
+      just("#btn-confirm-edit").classList.remove("hidden") //mas que se muestre el btn con nombre "confirmar"
       just("#editOp-tittle").classList.remove("hidden") // y se muestre el titulo correspondiente q seria "editar operacion"
       just("#btn-add-newOp").classList.add("hidden") // y se esconda el btn "agregar" (operacion)
-      just("#newOp-tittle").classList.add("hidden")
+      just("#newOp-tittle").classList.add("hidden") //y se esconda el titulo "nueva Operacion"
+
+      //       // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
+      const choosenOperation = getInfo("Operations").find(operation => operation.id === opId)
+
+      // //obtenemos la info del LS que este bajo la key operations (q trae un arr) el cual le decimos que por cda operation q haya ahi adentro, solo traeme LA OPERACION en el que operation.id sea === al id que le estamos pasando por parametro (q es el que el usuario le hizo click) -choosenOperation entonces devuelve un obj donde estan todas las key + el id unico-
+          just("#input-description-text").value = choosenOperation.descripcion //al precargar va a mostrar el value de la op que selecciono
+    just("#input-amount-numb").value = choosenOperation.monto //al precargar va a mostrar el value de la op que selecciono
+    just("#select-type").value = choosenOperation.tipo //al precargar va a mostrar el value de la op que selecciono
+    just("#select-category").value = choosenOperation.categoria //al precargar va a mostrar el value de la op que selecciono
+    just("#input-date").value = choosenOperation.fecha //
 }
 
 
@@ -126,12 +114,13 @@ console.log(totalOperations)
 
 //NI BIEN ABRIMOS LA WEB QUIERO ... ***************************************************************************************
 const initializeApp = () => {
-
+  //?setInfo funciona bien
   setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio 
-
+  
+  //?showOperations funciona bien
   showOperations(totalOperations)
 
-  //BTNS DEL NAVBAR *****************************************************************************************
+  //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
   just("#btn-balance-navb").addEventListener("click", () => showViews("main-page")) //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
 
   just("#btn-category-navb").addEventListener("click", () => showViews("section-category")) //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
@@ -139,10 +128,10 @@ const initializeApp = () => {
   just("#btn-reports-navb").addEventListener("click", () => showViews("section-reports")) //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
 
-  // BTN + NUEVA OPERACION
+  // BTN + NUEVA OPERACION //?funciona bien 
   just("#btn-newOp").addEventListener("click", () => {
     showViews("section-editOperation")
-    just("#btn-edit-newOp").classList.add("hidden")
+    just("#btn-confirm-edit").classList.add("hidden")
     just("#editOp-tittle").classList.add("hidden") 
     just("#btn-add-newOp").classList.remove("hidden") 
     just("#newOp-tittle").classList.remove("hidden")
