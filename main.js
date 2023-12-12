@@ -46,15 +46,26 @@ const showOperations = (arrOperations) => {
   }
 };
 
+//?ejecutionDeleteBtn FUNCIONA BIEN
+//SE OCUPA DE HACER EL CAMBIO DE PANTALLAS MAS TAMBIEN GUARDAR LA INFO DE EL ID DE CUAL DE TODAS LAS OP SE QUIERE ELIMINAR
 const ejecutionDeleteBtn = (opId) => {
+  //NO QUIERO Q SE MUESTRE EL HEADER TMPOCO
   just(".header").classList.add("hidden")
+  //ESCONDEMOS TODO EL DOC EXCEPTO EL ALERTA DE QUERER BORRAR
   showViews("section-confirm-delete")
-  // LE PASo EL ID DE LA OP Q SE QUIERE ELIMINAR AL BOTON EN EL HTML Q CONFIRMARIA EL ELIMINAR (el q dice "ELIMINAR") por esto es q luego podemos hacer la accion de eliminar
+  // LE PASO EL ID DE LA OP Q SE QUIERE ELIMINAR AL BOTON EN EL HTML Q CONFIRMARIA EL ELIMINAR (el q dice "ELIMINAR") por esto es q luego podemos hacer la accion de eliminar
   just(".btn-confirm-delete").setAttribute("id", opId);
+//CUANDO ESCUCHE EL CLIK EL BTN ELIMINAR
+  just(".btn-confirm-delete").addEventListener("click", () => {
+    const userId = just(".btn-confirm-delete").getAttribute("id") //NOS GUARDAMOS EL ID CORRESPONDIENTE QUE TRAE EL BTN
+    runBtnConfirmDelete(userId) //Y SE LO PASAMOS A NUESTRA FUNCION
+    window.location.reload()
+    })
+}
 
-  // const choosenOpForDelete = getInfo("Operations").find(
-  //   (operation) => operation.id === opId
-  // );
+const runBtnConfirmDelete = (opId) => {//NUESTRA FUNCION RECIBE 1 SOLO ID
+  const currentOperations = getInfo("Operations").filter(op => op.id != opId) //Y LE DECIMOS Q NOS DEVUELVA TODAS LAS OPERACIONES PERO NO LA QUE TENGA EL MISMO ID AL QUE LE PASAMOS
+  setInfo("Operations", currentOperations) //Y DEVOLVEMOS TODAS LAS OPERACIONES EXCLUYENDO LA QUE COINCIDIA EL ID
 }
 
 //?EJECUTIONOFNEWOP FUNCIONA BIEN
@@ -136,17 +147,17 @@ const initializeApp = () => {
   just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
   // -----------BOTON CANCELAR OPERACION //?funciona bien
-  just("#btn-cancel-newOp").addEventListener("click", () =>{
+  just("#btn-cancel-newOp").addEventListener("click", () =>{ //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
     showViews("main-page")
-
- //! just(".btn-confirm-delete").addEventListener("click", () => )
-
-
     window.location.reload()
-}); //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+})
 
   just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)) //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
 
+  just(".btn-cancel-delete").addEventListener("click", () =>{ //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
+    showViews("main-page")
+    window.location.reload()
+})
 };
 window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
