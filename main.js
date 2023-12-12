@@ -38,7 +38,7 @@ const showOperations = (arrOperations) => {
             <td class="text-center">${operation.monto}</td>
             <td class="flex flex-col">
                 <button class="text-center">Eliminar</button>
-                <button class="text-center" id="btn-edit-operation" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
+                <button class="text-center" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
             </td> 
         </tr>
     `;
