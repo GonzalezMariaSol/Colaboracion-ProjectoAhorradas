@@ -46,9 +46,7 @@ const showOperations = (arrOperations) => {//arrOperations va a ser lo que obten
 };
 
 
-
-//!REVEER ESTOOOO
-//????????????????????????????????????????????????????????? CHEQUEAR QUE BTN EDIT OPERATION HAY DOS BTN UNO DEL TABLE Y OTRO EN QUE EJECUTA, CHEQUEAR ESO
+//?EJECUTIONOFNEWOP FUNCIONA BIEN
 //EJECUTIONOFNEWOP SE ENCARGA DE OCULTAR SECTIONS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
 const ejecutionOfNewOp = (opId) => {//cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
   //       // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
@@ -137,12 +135,12 @@ const initializeApp = () => {
     just("#newOp-tittle").classList.remove("hidden")
   })
 
-  // BTN AGREGAR - NUEVA OPERACION 
+  // BTN AGREGAR - NUEVA OPERACION //?funciona bien 
   just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e)) //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
 
 
-  // -----------BOTON CANCELAR OPERACION
+  // -----------BOTON CANCELAR OPERACION //?funciona bien 
   just("#btn-cancel-newOp").addEventListener("click", () => showViews("main-page")) //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
 }
 window.addEventListener("load", initializeApp) // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
@@ -161,11 +159,9 @@ const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va
     currentInfo.push(saveUserOperation()) //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS
     console.log(currentInfo)
     setInfo("Operations", currentInfo)//MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
-}//!faltaria a esta funcion que al darle click el btn me redirija a la pagina principal y ya actualizada
-//!NO ME ESTA EDITANDO LA INFO QUE LE CAMBIO
-
-
-
+    console.log("apretaste btn aceptar nueva operacion")
+    window.location.reload()
+  }
 
 
 
