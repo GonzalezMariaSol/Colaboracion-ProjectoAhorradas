@@ -150,7 +150,8 @@
                                 <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
                                 <td class="flex flex-col">
                                     <button class="text-center">Eliminar</button>
-                                    <button class="text-center" id="btn-edit-operation" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
+                                    <button class="text-center" id="btn-edit-operation"
+                                        onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
                                 </td> <!-- aca iria lo que el usuario cargo -->
                             </tr>
                         </tbody>
@@ -162,10 +163,13 @@
 
 
     <!-- VISTA NUEVA OPERACION // EDITAR OPERACION-->
-    <section class="section-newOperation section-editOperation view h-screen my-14 flex items-center justify-center flex-col hidden">
+    <section
+        class="section-newOperation section-editOperation view h-screen my-14 flex items-center justify-center flex-col hidden">
         <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
-            <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8" id="newOp-tittle">Nueva Operacion</p>
-            <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8 hidden" id="editOp-tittle">Editar Operacion</p>
+            <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8"
+                id="newOp-tittle">Nueva Operacion</p>
+            <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8 hidden"
+                id="editOp-tittle">Editar Operacion</p>
             <form action="" class="flex flex-col">
                 <label for="input-description-text" class="font-bold">Descripcion</label>
                 <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description"
@@ -204,7 +208,8 @@
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
                     <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
-                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden" id="btn-confirm-edit">Confirmar</button>
+                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden"
+                        id="btn-confirm-edit">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -226,7 +231,7 @@
                 </div>
             </form>
             <ul class="mt-[2rem]" id="container-category">
-               
+
             </ul>
         </div>
     </section>
