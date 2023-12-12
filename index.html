@@ -21,7 +21,7 @@
 </head>
 
 <body class="font-['Raleway']">
-    <header class="header bg-[#aeff8e88] text-black flex justify-between items-center">
+    <header class="header bg-[#aeff8e88] hidden flex justify-between items-center">
         <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
             <a class="font-bold text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 href="index.html">
@@ -51,7 +51,7 @@
             </ul>
         </nav>
     </header>
-    <main class="main-page view flex justify-center" id="main-view">
+    <main class="main-page view flex justify-center hidden" id="main-view">
         <div class="div-father-BalFiltersNewOp w-4/5 my-14 flex justify-center flex-row gap-x-8">
             <div class="columna-balance-filtros flex flex-col gap-y-8">
                 <section class="section-balance bg-[#ffffff92] w-60 p-5 rounded-md ">
@@ -154,7 +154,7 @@
 
     <!-- VISTA NUEVA OPERACION // EDITAR OPERACION-->
     <section
-        class="section-newOperation section-editOperation view h-screen my-14 flex items-center justify-center flex-col hidden">
+        class="section-newOperation hidden section-editOperation view h-screen my-14 flex items-center justify-center flex-col hidden">
         <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
             <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8"
                 id="newOp-tittle">Nueva Operacion</p>
@@ -198,7 +198,8 @@
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
                     <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
-                    <button class="btn-confirm-edit text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden">Confirmar</button>
+                    <button
+                        class="btn-confirm-edit text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -323,6 +324,16 @@
                 </tr>
             </table>
     </section>
+    <section class="flex items-center justify-center h-screen">
+        <div class="bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
+            <p class="text-center font-bold text-xl">¿Estás seguro que quieres borrar esta operación?</p>
+            <div class="mt-4 w-64	flex justify-between">
+                <button class="bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
+                <button class="bg-[#ff0000] font-bold h-10 w-24 mr-2 rounded-md">ELIMINAR</button>
+            </div>
+        </div>
+    </section>
+
 
     <script src="main.js"></script>
 </body>
