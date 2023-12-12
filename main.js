@@ -9,7 +9,8 @@ const hideElement = (selector) => just(selector).classList.add("hidden");
 
 // LOCAL STORAGE ******************************************************************************************
 const getInfo = (key) => JSON.parse(localStorage.getItem(key)); //pedimos la info al LS. Se pasa una key, y la busca en el LS y con el parse la transformamos a obj asi podemos manipularla
-const setInfo = (key, arrInfo) => localStorage.setItem(key, JSON.stringify(arrInfo)); //definimos la info en el LS. Se le pasa una key y un arr c info y lo que hace es crear eso en el LS
+const setInfo = (key, arrInfo) =>
+  localStorage.setItem(key, JSON.stringify(arrInfo)); //definimos la info en el LS. Se le pasa una key y un arr c info y lo que hace es crear eso en el LS
 
 // MUESTRA - OCULTAR SECTIONS-VISTAS
 const showViews = (view) => {
@@ -51,10 +52,12 @@ const ejecutionOfNewOp = (opId) => {
   //cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
   // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
   showViews("section-editOperation"); //oculte todas las vistas y muestre la seccion de editar operacion
-  just("#btn-confirm-edit").classList.remove("hidden"); //mas que se muestre el btn con nombre "confirmar"
+  just(".btn-confirm-edit").classList.remove("hidden"); //mas que se muestre el btn con nombre "confirmar"
   just("#editOp-tittle").classList.remove("hidden"); // y se muestre el titulo correspondiente q seria "editar operacion"
   just("#btn-add-newOp").classList.add("hidden"); // y se esconda el btn "agregar" (operacion)
   just("#newOp-tittle").classList.add("hidden"); //y se esconda el titulo "nueva Operacion"
+
+  just(".btn-confirm-edit").setAttribute("id", opId);
 
   // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
   const choosenOperation = getInfo("Operations").find(
@@ -99,14 +102,20 @@ const initializeApp = () => {
   showOperations(totalOperations);
 
   //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
-  just("#btn-balance-navb").addEventListener("click", () => showViews("main-page")); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
-  just("#btn-category-navb").addEventListener("click", () => showViews("section-category")); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
-  just("#btn-reports-navb").addEventListener("click", () => showViews("section-reports")); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+  just("#btn-balance-navb").addEventListener("click", () =>
+    showViews("main-page")
+  ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
+  just("#btn-category-navb").addEventListener("click", () =>
+    showViews("section-category")
+  ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
+  just("#btn-reports-navb").addEventListener("click", () =>
+    showViews("section-reports")
+  ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
   // BTN + NUEVA OPERACION //?funciona bien
   just("#btn-newOp").addEventListener("click", () => {
     showViews("section-editOperation");
-    just("#btn-confirm-edit").classList.add("hidden");
+    just(".btn-confirm-edit").classList.add("hidden");
     just("#editOp-tittle").classList.add("hidden");
     just("#btn-add-newOp").classList.remove("hidden");
     just("#newOp-tittle").classList.remove("hidden");
@@ -119,6 +128,9 @@ const initializeApp = () => {
   just("#btn-cancel-newOp").addEventListener("click", () =>
     showViews("main-page")
   ); //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+
+  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)) //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
+
 };
 window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
@@ -133,6 +145,20 @@ const pushObjToArr = (e) => {
   console.log(currentInfo);
   setInfo("Operations", currentInfo); //MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
   console.log("apretaste btn aceptar nueva operacion");
+  window.location.reload();
+};
+
+const runBtnConfirm = (e) => {
+  e.preventDefault(); //primero q nada no te me refresques porque i need you
+  const opId = just(".btn-confirm-edit").getAttribute("id"); //en una variable PIDO el id que esta guardando el btn confirmar en editar operacion (q seria el id unico de ESA operacion elegida)
+  const currentOperations = getInfo("Operations").map((op) => { //getInfo  un array de operaciones,y usamos map para crear un nuevo array (currentOperations) donde se han aplicado ciertas transformaciones (lo q edito el usuario)
+    if (op.id === opId) {
+      //si el id de la operacion que estoy recorriendo coincide con el id de la operacion que se eligió
+      return saveUserOperation(); //tonce devolveme el obj con la info que cambio el usuario
+    }
+    return op; //sino se modifico nada entonces devolveme la misma operacion con la q ingreso
+  });
+  setInfo("Operations", currentOperations)
   window.location.reload();
 };
 
