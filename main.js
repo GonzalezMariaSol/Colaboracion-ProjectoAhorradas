@@ -268,7 +268,7 @@ const category = [
 
   },
   {
-    id: randomId,
+    id: randomId(),
     category: "Transporte",
 
   },
@@ -283,7 +283,7 @@ const category = [
 
 //------------------------------------ RENDER------------------------------------------------
 
-const renderCategory = (arrayCategorys) => {   //
+const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
   for (const item of arrayCategorys) {
 
     just("#container-category").innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
@@ -312,7 +312,7 @@ const savecategory = () => {   //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
   showElement(".section-edit-category")
   hideElement("#section-category")
- 
+
   // PASE POR PARAMETRO EL ID DE MI OBJETO
 }
 
@@ -333,7 +333,11 @@ const inicializeApp = () => {
     e.preventDefault()
     const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
     datoActual.push(savecategory())  // MODIFICO  EL DATO 
-    setInfo("categories", datoActual)  // ENVIOO LA INFO AL LOCAL STORAGE  //! NO LOGRE PINTAR LA PANTALLA
+    just("#container-category").innerText = " " // LIMPIO LA PANTALLA  
+    renderCategory(datoActual)  // CUANDO  LIMPIO ACTUALIZO CON EL DATO ACTUAL
+    setInfo("categories", datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
+
+
 
   })
 }
