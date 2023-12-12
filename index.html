@@ -21,7 +21,7 @@
 </head>
 
 <body class="font-['Raleway']">
-    <header class="header bg-[#aeff8e88] hidden flex justify-between items-center">
+    <header class="header bg-[#aeff8e88] flex justify-between items-center">
         <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
             <a class="font-bold text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 href="index.html">
@@ -51,7 +51,7 @@
             </ul>
         </nav>
     </header>
-    <main class="main-page view flex justify-center hidden" id="main-view">
+    <main class="main-page view flex justify-center" id="main-view">
         <div class="div-father-BalFiltersNewOp w-4/5 my-14 flex justify-center flex-row gap-x-8">
             <div class="columna-balance-filtros flex flex-col gap-y-8">
                 <section class="section-balance bg-[#ffffff92] w-60 p-5 rounded-md ">
@@ -324,15 +324,16 @@
                 </tr>
             </table>
     </section>
-    <section class="flex items-center justify-center h-screen">
-        <div class="bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
-            <p class="text-center font-bold text-xl">¿Estás seguro que quieres borrar esta operación?</p>
-            <div class="mt-4 w-64	flex justify-between">
-                <button class="bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
-                <button class="bg-[#ff0000] font-bold h-10 w-24 mr-2 rounded-md">ELIMINAR</button>
+    <section class="section-confirm-delete flex items-center justify-center h-screen hidden">
+        <div class="div-container-confirm-delete bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
+            <p class="text-are-u-sure text-center font-bold text-xl">¿Estás seguro que quieres borrar esta operación?</p>
+            <div class="div-btn mt-4 w-64 flex justify-between">
+                <button class="btn-cancel-delete bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
+                <button class="btn-confirm-delete bg-[#ff0000] font-bold h-10 w-24 mr-2 rounded-md">ELIMINAR</button>
             </div>
         </div>
     </section>
+    
 
 
     <script src="main.js"></script>

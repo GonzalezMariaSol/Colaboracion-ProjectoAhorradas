@@ -38,7 +38,7 @@ const showOperations = (arrOperations) => {
             <td class="text-center">${operation.fecha}</td>
             <td class="text-center">${operation.monto}</td>
             <td class="flex flex-col">
-                <button class="text-center">Eliminar</button>
+                <button class="text-center" onclick="ejecutionDeleteBtn('${operation.id}')">Eliminar</button>
                 <button class="text-center" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
             </td> 
         </tr>
@@ -46,8 +46,19 @@ const showOperations = (arrOperations) => {
   }
 };
 
+const ejecutionDeleteBtn = (opId) => {
+  just(".header").classList.add("hidden")
+  showViews("section-confirm-delete")
+  // LE PASo EL ID DE LA OP Q SE QUIERE ELIMINAR AL BOTON EN EL HTML Q CONFIRMARIA EL ELIMINAR (el q dice "ELIMINAR") por esto es q luego podemos hacer la accion de eliminar
+  just(".btn-confirm-delete").setAttribute("id", opId);
+
+  // const choosenOpForDelete = getInfo("Operations").find(
+  //   (operation) => operation.id === opId
+  // );
+}
+
 //?EJECUTIONOFNEWOP FUNCIONA BIEN
-//EJECUTIONOFNEWOP SE ENCARGA DE OCULTAR SECTIONS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
+//EJECUTIONOFNEWOP SE ENCARGA DE HACER EL CAMBIO DE PANTALLAS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
 const ejecutionOfNewOp = (opId) => {
   //cada "nueva op" ademas de tener las "consingnas" tiene un id unico, ese id es el q pasamos x parametro para poder luego encontrar especificamente la info q este junto a ese id
   // CUANDO HAGA CLICK EN EL BTN VA A EJECUTARSE ESTOS CAMBIOS ↓↓↓↓
@@ -57,14 +68,14 @@ const ejecutionOfNewOp = (opId) => {
   just("#btn-add-newOp").classList.add("hidden"); // y se esconda el btn "agregar" (operacion)
   just("#newOp-tittle").classList.add("hidden"); //y se esconda el titulo "nueva Operacion"
 
+  // LE PASAMOS EL ID DE LA OP ELEGIDA AL BOTON DEL FORM (el q dice "confirmar") a raiz de aca es que luego podemos hacer la edicion
   just(".btn-confirm-edit").setAttribute("id", opId);
-
-  // LO QUE HACEMOS ACA ES PINTAR LA INFO Q SE ELIGIO PARA CAMBIAR EN LOS INPUTS ↓↓↓↓
+  // PEDIMOS LAS OPERACIONES Y ENCONTRAMOS ESPECIFICAMENTE AL QUE LE DIMOS CLICK↓↓↓↓
   const choosenOperation = getInfo("Operations").find(
     (operation) => operation.id === opId
   );
 
-  //obtenemos la info del LS que este bajo la key operations (q trae un arr) el cual le decimos que por cda operation q haya ahi adentro, solo traeme LA OPERACION en el que operation.id sea === al id que le estamos pasando por parametro (q es el que el usuario le hizo click) -choosenOperation entonces devuelve un obj donde estan todas las key + el id unico-
+  //obtenemos en -choosenOperation q devuelve un obj donde estan todas las key + el id unico- que nos precargue la info q se eligio editar
   just("#input-description-text").value = choosenOperation.descripcion; //al precargar va a mostrar el value de la op que selecciono
   just("#input-amount-numb").value = choosenOperation.monto; //al precargar va a mostrar el value de la op que selecciono
   just("#select-type").value = choosenOperation.tipo; //al precargar va a mostrar el value de la op que selecciono
@@ -122,24 +133,29 @@ const initializeApp = () => {
   });
 
   // BTN AGREGAR - NUEVA OPERACION //?funciona bien
-  just("#btn-add-newOp").addEventListener("click", (e) => pushObjToArr(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
   // -----------BOTON CANCELAR OPERACION //?funciona bien
-  just("#btn-cancel-newOp").addEventListener("click", () =>
+  just("#btn-cancel-newOp").addEventListener("click", () =>{
     showViews("main-page")
-  ); //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+
+ //! just(".btn-confirm-delete").addEventListener("click", () => )
+
+
+    window.location.reload()
+}); //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
 
   just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)) //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
 
 };
 window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
-//?PUSHOBJTOARR FUNCIONA BIEN
-//PUSHOBJTOARR SE EJECUTA DENTRO DE initializeApp, Y SE ENCARGA DE PEDIR INFO EN FORMATO OBJ, LO TRANSFORMA A ARR Y LO DEVUELVE MODIFICADO
-const pushObjToArr = (e) => {
+//?runBtnAddNewOp FUNCIONA BIEN
+//runBtnAddNewOp SE EJECUTA DENTRO DE initializeApp, Y SE ENCARGA DE PEDIR INFO EN FORMATO OBJ, LO TRANSFORMA A ARR Y LO DEVUELVE MODIFICADO
+const runBtnAddNewOp = (e) => {
   //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
   e.preventDefault(); //evita que se recargue la web y perder los datos
-  const currentInfo = getInfo("Operations"); //PIDO la info q viene en forma de ARR (porque operations q viene desde el LS es un arr) y la guardo en una variable
+  const currentInfo = getInfo("Operations"); //PIDO las operaciones q viene en forma de ARR (porque operations q viene desde el LS es un arr) y la guardo en una variable
   console.log(currentInfo);
   currentInfo.push(saveUserOperation()); //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS
   console.log(currentInfo);
@@ -161,6 +177,9 @@ const runBtnConfirm = (e) => {
   setInfo("Operations", currentOperations)
   window.location.reload();
 };
+
+
+
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 
