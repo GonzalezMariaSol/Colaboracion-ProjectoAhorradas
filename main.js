@@ -32,8 +32,8 @@ const showOperations = (arrOperations) => {
     just(".table-userOperation").innerHTML +=
       //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
       `
-        <tr>
-            <td class="text-center">${operation.descripcion}</td>
+        <tr class="border-b-[2vw] border-transparent">
+            <td class="mb-28 text-center">${operation.descripcion}</td>
             <td class="text-center">${operation.categoria}</td>
             <td class="text-center">${operation.fecha}</td>
             <td class="text-center">${operation.monto}</td>
@@ -164,7 +164,14 @@ const runBtnConfirm = (e) => {
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 
+
+
+
 // FUNCIONALIDAD DE FILTROS *****************************************************************************************
+//me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
+
+
+
 
 // // LOCAL STORAGE **************************************************************************************************
 
