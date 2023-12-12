@@ -4,7 +4,8 @@ const all = (selector) => document.querySelectorAll(selector);
 
 const randomId = () => self.crypto.randomUUID();
 
-
+const showElement = (selector) => just(selector).classList.remove("hidden")
+const hideElement = (selector) => just(selector).classList.add("hidden")
 
 // LOCAL STORAGE ******************************************************************************************
 const getInfo = (key) => JSON.parse(localStorage.getItem(key)) //pedimos la info al LS. Se pasa una key, y la busca en el LS y con el parse la transformamos a obj asi podemos manipularla
@@ -69,6 +70,8 @@ const ejecutionOfNewOp = (opId) => { //cada "nueva op" ademas de tener las "cons
     just("#select-category").value = choosenOperation.categoria //al precargar va a mostrar el value de la op que selecciono
     just("#input-date").value = choosenOperation.fecha //al precargar va a mostrar el value de la op que selecciono
 }
+
+
 
 
 
@@ -190,9 +193,19 @@ const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va
 
 
 
-//!PORQUE NO PUEDO EJECUTAR ESTO PORQUE ME ROMPE EL CODIGOU? SAD SAD
-// //?SHAPEDATE FUNCIONA BIEN
-// //SHAPEDATE LE DA FORMA DE DD/MM/AA A LA FECHA 
+
+
+
+
+
+
+
+
+
+
+// // LOCAL STORAGE **************************************************************************************************
+
+
 // const shapeDate = (objOperation) => {//hago una funcion la cual va a estar dando la forma de dd/mm/aa a la fecha
 //   const separateDate = objOperation.fecha
 //     const day = separateDate.getDate() //capturo el numero del dia
@@ -217,3 +230,120 @@ const pushObjToArr = (e) => { //pusheamos el obj capturado al array que luego va
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//................................ SECCION CATEGORIA .......................................................
+
+
+
+const category = [
+  {
+    id: randomId(),
+    category: "Comidas",
+
+  },
+
+  {
+    id: randomId(),
+    category: "Sevicios",
+
+  },
+  {
+    id: randomId(),
+    category: "Salidas",
+
+  },
+  {
+    id: randomId(),
+    category: "Educacion",
+
+  },
+  {
+    id: randomId(),
+    category: "Transporte",
+
+  },
+  {
+    id: randomId(),
+    category: "Trabajo",
+
+  }
+]
+
+
+
+//------------------------------------ RENDER------------------------------------------------
+
+const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+  for (const item of arrayCategorys) {
+
+    just("#container-category").innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
+    <p
+        class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
+        ${item.category}</p>
+    <div class="flex">
+        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${item.id}')" >Editar</button>
+        <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
+    </div> `
+
+  }
+}
+
+
+
+
+const savecategory = () => {   //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
+  return {
+    id: randomId(),
+    category: just("#input-add").value,
+
+  }
+}
+
+const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
+  showElement(".section-edit-category")
+  hideElement("#section-category")
+
+  // PASE POR PARAMETRO EL ID DE MI OBJETO
+}
+
+
+
+
+
+
+
+// -----------------------------------EVENTS---------------------------------------------------
+
+const inicializeApp = () => {
+  setInfo("categories", category)  // ENVIO INFORMACION AL LOCAL STORAGE
+  const traigoInfo = getInfo("categories")  // TRAIGO LA INFO DEL LOCAL STORAGE
+  renderCategory(traigoInfo) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
+
+  just("#btn-add-categories").addEventListener("click", (e) => {
+    e.preventDefault()
+    const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
+    datoActual.push(savecategory())  // MODIFICO  EL DATO 
+    just("#container-category").innerText = " " // LIMPIO LA PANTALLA  
+    renderCategory(datoActual)  // CUANDO  LIMPIO ACTUALIZO CON EL DATO ACTUAL
+    setInfo("categories", datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
+
+
+
+  })
+}
+
+window.addEventListener("load", inicializeApp())
