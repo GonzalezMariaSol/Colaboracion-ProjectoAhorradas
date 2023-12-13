@@ -99,10 +99,10 @@ const ejecutionOfNewOp = (opId) => {
 
 //?SAVEUSEROPERATION FUNCIONA BIEN
 //SAVEUSEROPERATION TOMA LOS DATOS SUELTOS DEL FORM Y LOS TRANSFORMA EN UN OBJ
-const saveUserOperation = () => {
+const saveUserOperation = (opId) => { //necesitamos recibir un parametro para luego poder decidir si le asignamos uno o si ya tiene, se lo conservamos
   //transformamos los datos que entran a traves del form (que son datos sueltos) en un obj
   return {
-    id: randomId(),
+    id: opId ?  opId : randomId(), //tengo operacion con id? entonces guardame ESE id de esa operacion : SINO generame uno con el randomId
     descripcion: just("#input-description-text").value,
     monto: just("#input-amount-numb").value,
     tipo: just("#select-type").value,
@@ -171,7 +171,7 @@ const runBtnAddNewOp = (e) => {
   //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
   e.preventDefault(); //evita que se recargue la web y perder los datos
   const currentInfo = getInfo("Operations"); //PIDO las operaciones q viene en forma de ARR (porque operations q viene desde el LS es un arr) y la guardo en una variable
-  currentInfo.push(saveUserOperation()); //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS
+  currentInfo.push(saveUserOperation()); //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS. en este caso saveUserOperation no le pasamos parametro porque al ser una NUEVA OPERACION no va a tener id, por lo que va a ser falso la primer condicion y va a pasar un randomId
   setInfo("Operations", currentInfo); //MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
   //TODO: aca deberia poner una funcion para cambiar el orden de la fecha?????
   window.location.reload();
@@ -184,7 +184,7 @@ const runBtnConfirm = (e) => {
     //getInfo  un array de operaciones,y usamos map para crear un nuevo array (currentOperations) donde se han aplicado ciertas transformaciones (lo q edito el usuario)
     if (op.id === opId) {
       //si el id de la operacion que estoy recorriendo coincide con el id de la operacion que se eligió
-      return saveUserOperation(); //tonce devolveme el obj con la info que cambio el usuario
+      return saveUserOperation(opId); //tonce devolveme el obj con la info que cambio el usuario, aca si le pasamos parametro a savaUserOperation porque la operacion ya fue creada y asignada con un ID y nosotros deberiamos respetar ese id en vez de cambiarlo por uno nuevo
     }
     return op; //sino se modifico nada entonces devolveme la misma operacion con la q ingreso
   });
