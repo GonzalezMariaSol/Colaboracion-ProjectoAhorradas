@@ -27,6 +27,10 @@ const showViews = (view) => {
 //SHOWOPERATIONS ES QUIEN IMPRIME EN PANTALLA LAS CASILLAS CON LA INFO QUE CARGO EL USUARIO
 const showOperations = (arrOperations) => {
   //arrOperations va a ser lo que obtengamos del local storage q ya viene con forma de arr
+  if (!(arrOperations && arrOperations.length > 0)) {
+    just(".view-no-operations").classList.remove("hidden");
+    just(".div-table-container").classList.add("hidden");
+  }
   for (const operation of arrOperations) {
     //por cda operacion(me trae cda hilera) del array operations
     just(".table-userOperation").innerHTML +=
@@ -121,12 +125,6 @@ const totalOperations = getInfo("Operations") || []; //totalOperations va a guar
 
 //NI BIEN ABRIMOS LA WEB QUIERO ... ***************************************************************************************
 const initializeApp = () => {
-  const operationsInfo = getInfo("Operations");
-  if (!(operationsInfo && operationsInfo.length > 0)) {
-    just(".view-no-operations").classList.remove("hidden");
-    just(".div-table-container").classList.add("hidden");
-  }
-
   //?setInfo funciona bien
   setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
