@@ -32,17 +32,18 @@ const showOperations = (arrOperations) => {
     just(".table-userOperation").innerHTML +=
       //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
       `
-      <tr class="border-b-8 border-transparent">
-      <td class="text-center border-r-6 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
-      <td class="text-center border-r-6 border-transparent">${operation.categoria}</td>
-      <td class="text-center border-r-6 border-transparent">${operation.fecha}</td>
-      <td class="text-center border-r-6 border-transparent break-all">${operation.monto}</td>
-      <td class="flex flex-col">
-          <button class="text-center mb-1 border-r-6 border-transparent bg-[#ebfffc] text-emerald-500 rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
-          <button class="text-center border-r-6 border-transparent bg-[#ebfffc] text-emerald-500 rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
-      </td>
-  </tr>
-    `;
+      <tr>
+        <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
+        <td class="text-center border-r-6 p-3 border-transparent">${operation.categoria}</td>
+        <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
+        <td class="text-center border-r-6 p-3 border-transparent break-all">${operation.monto}</td>
+        <td class="p-3 flex flex-col">
+            <button class="bg-[#ebfffc] text-emerald-500 text-center mb-1 border-r-6 border-transparent rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
+            <button class="bg-[#ebfffc] text-emerald-500 text-center border-r-6 border-transparent rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
+        </td>
+      </tr>
+      <tr class="m-28 border-[1vh] border-[#ffffff92] rounded-full"></tr>
+      `;
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
 
@@ -99,10 +100,11 @@ const ejecutionOfNewOp = (opId) => {
 
 //?SAVEUSEROPERATION FUNCIONA BIEN
 //SAVEUSEROPERATION TOMA LOS DATOS SUELTOS DEL FORM Y LOS TRANSFORMA EN UN OBJ
-const saveUserOperation = (opId) => { //necesitamos recibir un parametro para luego poder decidir si le asignamos uno o si ya tiene, se lo conservamos
+const saveUserOperation = (opId) => {
+  //necesitamos recibir un parametro para luego poder decidir si le asignamos uno o si ya tiene, se lo conservamos
   //transformamos los datos que entran a traves del form (que son datos sueltos) en un obj
   return {
-    id: opId ?  opId : randomId(), //tengo operacion con id? entonces guardame ESE id de esa operacion : SINO generame uno con el randomId
+    id: opId ? opId : randomId(), //tengo operacion con id? entonces guardame ESE id de esa operacion : SINO generame uno con el randomId
     descripcion: just("#input-description-text").value,
     monto: just("#input-amount-numb").value,
     tipo: just("#select-type").value,
@@ -119,6 +121,12 @@ const totalOperations = getInfo("Operations") || []; //totalOperations va a guar
 
 //NI BIEN ABRIMOS LA WEB QUIERO ... ***************************************************************************************
 const initializeApp = () => {
+  const operationsInfo = getInfo("Operations");
+  if (!(operationsInfo && operationsInfo.length > 0)) {
+    just(".view-no-operations").classList.remove("hidden");
+    just(".div-table-container").classList.add("hidden");
+  }
+
   //?setInfo funciona bien
   setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
@@ -191,6 +199,20 @@ const runBtnConfirm = (e) => {
   setInfo("Operations", currentOperations);
   window.location.reload();
 };
+
+// GENERAR CATEGORIAS EN LA TABLA Y EN FILTROS
+
+const printCategoriasInSelectOpt = () => {
+  for (const categoria of getInfo("categories")) {
+    just(".form-select-category").innerHTML += `
+<option>${categoria.category}</option>`;
+    just("#select-category").innerHTML += `
+<option>${categoria.category}</option>`;
+  }
+};
+printCategoriasInSelectOpt();
+
+// PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 
