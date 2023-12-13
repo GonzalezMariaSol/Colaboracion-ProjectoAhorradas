@@ -81,36 +81,41 @@
                         <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-show-filters">Ocultar
                             Filtros</button>
                     </div>
-                    <form>
+                    <form class="form-filters">
                         <ul class="form-filters-ul">
                             <li class="section-filters-li-1 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-type">Tipo</label>
                                 <select class="form-select-type p-2 rounded-md">
-                                    <option>Gasto</option>
-                                    <option>Ganancia</option>
+                                    <option value="todos" selected>Todos</option>
+                                    <option value="gasto">Gasto</option>
+                                    <option value="ganancia">Ganancia</option>
                                 </select>
                             </li>
                             <li class="section-filters-li-2 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-category">Category</label>
                                 <select class="form-select-category p-2 rounded-md" id="categorias">
+                                    <option value="todos" selected>Todos</option>
                                 </select>
                             </li>
                             <li class="section-filters-li-3 mb-2 md:mb-4 flex flex-col flex-col ">
-                                <label for="">Desde</label>
-                                <input type="date" class="input-date p-2 rounded-md ">
+                                <label for="input-date">Desde</label>
+                                <input type="date" class="input-date p-2 rounded-md" id="input-date">
                             </li>
                             <li class="section-filters-li-4 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="">Ordenar por</label>
                                 <select class="p-2 rounded-md ">
-                                    <option>Mas reciente</option>
-                                    <option>Menos reciente</option>
-                                    <option>Mayo monto</option>
-                                    <option>Menor monto</option>
-                                    <option>A-Z</option>
-                                    <option>Z-A</option>
+                                    <option value="masReciente">Mas reciente</option>
+                                    <option value="menosReciente">Menos reciente</option>
+                                    <option value="menorMonto">Menor monto</option>
+                                    <option value="mayorMonto">Mayor monto</option>
+                                    <option value="AZ">A-Z</option>
+                                    <option value="ZA">Z-A</option>
                                 </select>
                             </li>
                         </ul>
+                        <div class="flex items-center">
+                        <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button" onclick="resetearFormulario()">Resetear</button>
+                        </div>
                     </form>
                 </section>
             </div>
@@ -176,8 +181,8 @@
 
                 <label for="select-type" class="font-bold">Tipo</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
-                    <option>Ganancia</option>
-                    <option>Gasto</option>
+                    <option value="ganancia">Ganancia</option>
+                    <option value="gasto">Gasto</option>
                 </select>
                 <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
                         style="color: #ff0000;"></i>Este campo es obligatorio</p>
@@ -197,9 +202,9 @@
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
-                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
+                    <button class="text-black bg-[#a3fc9b] p-2 ml-7 rounded-md" id="btn-add-newOp">Agregar</button>
                     <button
-                        class="btn-confirm-edit text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden">Confirmar</button>
+                        class="btn-confirm-edit text-black bg-[#a3fc9b] p-2 ml-7 rounded-md ml-2 hidden">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -217,7 +222,7 @@
                     <input id="input-add" type="text"
                         class="w-[85%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
                     <button id="btn-add-categories"
-                        class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black">Agregar</button>
+                        class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black font-bold">Agregar</button>
                 </div>
             </form>
             <ul class="mt-[2rem]" id="container-category">
