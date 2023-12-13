@@ -32,41 +32,45 @@ const showOperations = (arrOperations) => {
     just(".table-userOperation").innerHTML +=
       //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
       `
-        <tr class="border-b-[2vw] border-transparent">
-            <td class="mb-28 text-center">${operation.descripcion}</td>
-            <td class="text-center">${operation.categoria}</td>
-            <td class="text-center">${operation.fecha}</td>
-            <td class="text-center">${operation.monto}</td>
-            <td class="flex flex-col">
-                <button class="text-center" onclick="ejecutionDeleteBtn('${operation.id}')">Eliminar</button>
-                <button class="text-center" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
-            </td> 
-        </tr>
+      <tr class="border-b-8 border-transparent">
+      <td class="text-center border-r-6 border-transparent">${operation.descripcion}</td>
+      <td class="text-center border-r-6 border-transparent">${operation.categoria}</td>
+      <td class="text-center border-r-6 border-transparent">${operation.fecha}</td>
+      <td class="text-center border-r-6 border-transparent break-all">${operation.monto}</td>
+      <td class="flex flex-col">
+          <button class="text-center border-r-6 border-transparent" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
+          <button class="text-center border-r-6 border-transparent" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
+      </td>
+  </tr>
+  
     `;
-  }
+  } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
 
 //?ejecutionDeleteBtn FUNCIONA BIEN
 //SE OCUPA DE HACER EL CAMBIO DE PANTALLAS MAS TAMBIEN GUARDAR LA INFO DE EL ID DE CUAL DE TODAS LAS OP SE QUIERE ELIMINAR
-const ejecutionDeleteBtn = (opId) => {
+const ejecutionDeleteBtn = (opId, opDescription) => {
+  //entra el id y descripcion q se manipula
   //NO QUIERO Q SE MUESTRE EL HEADER TMPOCO
-  just(".header").classList.add("hidden")
+  just(".header").classList.add("hidden");
   //ESCONDEMOS TODO EL DOC EXCEPTO EL ALERTA DE QUERER BORRAR
-  showViews("section-confirm-delete")
+  showViews("section-confirm-delete");
   // LE PASO EL ID DE LA OP Q SE QUIERE ELIMINAR AL BOTON EN EL HTML Q CONFIRMARIA EL ELIMINAR (el q dice "ELIMINAR") por esto es q luego podemos hacer la accion de eliminar
   just(".btn-confirm-delete").setAttribute("id", opId);
-//CUANDO ESCUCHE EL CLIK EL BTN ELIMINAR
+  just(".operation-description").innerText = `${opDescription}`; //le agregamos al texto de "estas seguro q querer eliminar y le ponemos la descripcion que se puso asi se asegura que estamos borrando el que queremos borrar "
+  //CUANDO ESCUCHE EL CLIK EL BTN ELIMINAR
   just(".btn-confirm-delete").addEventListener("click", () => {
-    const userId = just(".btn-confirm-delete").getAttribute("id") //NOS GUARDAMOS EL ID CORRESPONDIENTE QUE TRAE EL BTN
-    runBtnConfirmDelete(userId) //Y SE LO PASAMOS A NUESTRA FUNCION
-    window.location.reload()
-    })
-}
-
-const runBtnConfirmDelete = (opId) => {//NUESTRA FUNCION RECIBE 1 SOLO ID
-  const currentOperations = getInfo("Operations").filter(op => op.id != opId) //Y LE DECIMOS Q NOS DEVUELVA TODAS LAS OPERACIONES PERO NO LA QUE TENGA EL MISMO ID AL QUE LE PASAMOS
-  setInfo("Operations", currentOperations) //Y DEVOLVEMOS TODAS LAS OPERACIONES EXCLUYENDO LA QUE COINCIDIA EL ID
-}
+    const userId = just(".btn-confirm-delete").getAttribute("id"); //NOS GUARDAMOS EL ID CORRESPONDIENTE QUE TRAE EL BTN
+    runBtnConfirmDelete(userId); //Y SE LO PASAMOS A NUESTRA FUNCION
+    window.location.reload(); //!porque luego del reload se me rompe la estructura del table?
+  });
+};
+// NUNCA MEZCLAR LA FUNCION Q MANIPULA EL DOM ↑↑ CON LA FUNCION Q MANIPULA EL LS ↓↓ PORQUE DE ESTA MANERA SE PUEDEN REUTILIZAR
+const runBtnConfirmDelete = (opId) => {
+  //NUESTRA FUNCION RECIBE 1 SOLO ID
+  const currentOperations = getInfo("Operations").filter((op) => op.id != opId); //Y LE DECIMOS Q NOS DEVUELVA TODAS LAS OPERACIONES PERO NO LA QUE TENGA EL MISMO ID AL QUE LE PASAMOS
+  setInfo("Operations", currentOperations); //Y DEVOLVEMOS TODAS LAS OPERACIONES Q NO COINCIDIA CON EL ID
+}; //!hicimos esto y no el localStorage.removeItem('miDato') porque si uso el remove estaria borrando TODO el array con los obj dentros? no hay manera de filtrar y decirle removeItem ESTE?
 
 //?EJECUTIONOFNEWOP FUNCIONA BIEN
 //EJECUTIONOFNEWOP SE ENCARGA DE HACER EL CAMBIO DE PANTALLAS, MOSTRAR EL QUE QUEREMOS + SI SE QUIERE EDITAR QUE SE CARGUE LA INFO DEL QUE SE QUIERE EDITAR
@@ -113,7 +117,6 @@ console.log(saveUserOperation());
 //?TOTALOperations FUNCIONA BIEN - muestra un arr vacio al principio y luego si recargo me muestra si cargue o no algo al arr
 //TOTALOperations VALE LO Q LA KEY TENGA O SINO UN ARR VACIO
 const totalOperations = getInfo("Operations") || []; //totalOperations va a guardar primero la info que hay bajo el nombre de operations O si no hay info, entonces un array vacio
-console.log(totalOperations);
 
 //NI BIEN ABRIMOS LA WEB QUIERO ... ***************************************************************************************
 const initializeApp = () => {
@@ -147,17 +150,19 @@ const initializeApp = () => {
   just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
   // -----------BOTON CANCELAR OPERACION //?funciona bien
-  just("#btn-cancel-newOp").addEventListener("click", () =>{ //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
-    showViews("main-page")
-    window.location.reload()
-})
+  just("#btn-cancel-newOp").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
 
-  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)) //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
+  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
 
-  just(".btn-cancel-delete").addEventListener("click", () =>{ //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
-    showViews("main-page")
-    window.location.reload()
-})
+  just(".btn-cancel-delete").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
 };
 window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
@@ -167,41 +172,31 @@ const runBtnAddNewOp = (e) => {
   //pusheamos el obj capturado al array que luego va a crear las filas de nuestro table
   e.preventDefault(); //evita que se recargue la web y perder los datos
   const currentInfo = getInfo("Operations"); //PIDO las operaciones q viene en forma de ARR (porque operations q viene desde el LS es un arr) y la guardo en una variable
-  console.log(currentInfo);
   currentInfo.push(saveUserOperation()); //MODIFICAMOS poruqe el saveUserOperation es un obj (con la info del form) al cual tenemos q ponerlo dentro de un arr (en este caso currentInfo) para poder luego leerlo dentro del LS
-  console.log(currentInfo);
   setInfo("Operations", currentInfo); //MANDAMOS al LS bajo la key operations el arr q modificamos (currentInfo) antes para poder guardar la nueva info
-  console.log("apretaste btn aceptar nueva operacion");
+  //TODO: aca deberia poner una funcion para cambiar el orden de la fecha?????
   window.location.reload();
 };
 
 const runBtnConfirm = (e) => {
   e.preventDefault(); //primero q nada no te me refresques porque i need you
   const opId = just(".btn-confirm-edit").getAttribute("id"); //en una variable PIDO el id que esta guardando el btn confirmar en editar operacion (q seria el id unico de ESA operacion elegida)
-  const currentOperations = getInfo("Operations").map((op) => { //getInfo  un array de operaciones,y usamos map para crear un nuevo array (currentOperations) donde se han aplicado ciertas transformaciones (lo q edito el usuario)
+  const currentOperations = getInfo("Operations").map((op) => {
+    //getInfo  un array de operaciones,y usamos map para crear un nuevo array (currentOperations) donde se han aplicado ciertas transformaciones (lo q edito el usuario)
     if (op.id === opId) {
       //si el id de la operacion que estoy recorriendo coincide con el id de la operacion que se eligió
       return saveUserOperation(); //tonce devolveme el obj con la info que cambio el usuario
     }
     return op; //sino se modifico nada entonces devolveme la misma operacion con la q ingreso
   });
-  setInfo("Operations", currentOperations)
+  setInfo("Operations", currentOperations);
   window.location.reload();
 };
 
-
-
-
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
-
-
-
 
 // FUNCIONALIDAD DE FILTROS *****************************************************************************************
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
-
-
-
 
 // // LOCAL STORAGE **************************************************************************************************
 
