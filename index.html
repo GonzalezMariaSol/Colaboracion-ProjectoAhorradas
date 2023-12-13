@@ -60,15 +60,15 @@
                     <ul class="balance-ul">
                         <li class="section-balance-li-1 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Ganancias</p>
-                            <p class="text-lime-500 font-bold">+ $0</p>
+                            <p class="text-lime-500 font-bold">+ $ <span class="full-earnings"></span></p>
                         </li>
                         <li class="section-balance-li-2 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Gastos</p>
-                            <p class="text-red-600 font-bold">- $0</p>
+                            <p class="text-red-600 font-bold">- $ <span class="full-expenses"></span></p>
                         </li>
                         <li class="section-balance-li-3 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Total</p>
-                            <p class="text-blue-500	font-bold">$0</p>
+                            <p class="full-balance text-blue-500 font-bold">$ <span class="full-balance-num"></span></p>
                         </li>
                     </ul>
                 </section>
@@ -92,8 +92,7 @@
                             </li>
                             <li class="section-filters-li-2 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-category">Category</label>
-                                <select class="form-select-category p-2 rounded-md ">
-                                    <option></option>
+                                <select class="form-select-category p-2 rounded-md" id="categorias">
                                 </select>
                             </li>
                             <li class="section-filters-li-3 mb-2 md:mb-4 flex flex-col flex-col ">
@@ -102,7 +101,7 @@
                             </li>
                             <li class="section-filters-li-4 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="">Ordenar por</label>
-                                <select class="p-2rounded-md ">
+                                <select class="p-2 rounded-md ">
                                     <option>Mas reciente</option>
                                     <option>Menos reciente</option>
                                     <option>Mayo monto</option>
@@ -134,11 +133,13 @@
                     <table class="table-userOperation">
                         <thead> <!-- HILERA ⇄ 1 - titulos -->
                             <tr> <!-- COLUMNA ⇅  -->
-                                <th class="w-1/5 text-center pb-3">Descripcion</th> <!-- ⇅ COLUMNA 1 -->
-                                <th class="w-1/5 text-center pb-3">Categoria</th> <!-- ⇅ COLUMNA 2 -->
-                                <th class="w-1/5 text-center pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
-                                <th class="w-1/5 text-center pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
-                                <th class="w-1/5 text-center pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
+                                <!-- ⇅ COLUMNA 1 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Categoria</th>
+                                <!-- ⇅ COLUMNA 2 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
+                                <th class="w-1/5 pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
                             </tr>
                         </thead>
 
@@ -183,7 +184,6 @@
 
                 <label for="select-category" class="font-bold">Categoria</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
-                    <option></option>
                 </select>
                 <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
                         style="color: #ff0000;"></i>Este campo es obligatorio</p>
@@ -326,16 +326,16 @@
     </section>
     <section class="section-confirm-delete flex items-center justify-center h-screen hidden">
         <div class="div-container-confirm-delete bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
-            <p class="text-are-u-sure text-center font-bold text-xl">¿Estás seguro que quieres borrar esta operación?</p>
+            <p class="text-are-u-sure font-bold text-xl">
+                ¿Estás seguro que quieres borrar la operación:
+                <span class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
+            </p>
             <div class="div-btn mt-4 w-64 flex justify-between">
                 <button class="btn-cancel-delete bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
                 <button class="btn-confirm-delete bg-[#ff0000] font-bold h-10 w-24 mr-2 rounded-md">ELIMINAR</button>
             </div>
         </div>
     </section>
-    
-
-
     <script src="main.js"></script>
 </body>
 
