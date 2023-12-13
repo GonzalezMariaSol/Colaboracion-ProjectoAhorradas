@@ -253,9 +253,6 @@ const hideFilters = () => {
 }
 
 
-
-
-// FUNCIONALIDAD DE FILTROS *****************************************************************************************
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
 
 //!tengo que ver como fucionar los 2 initialize app de cada una
