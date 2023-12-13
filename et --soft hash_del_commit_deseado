@@ -1,0 +1,214 @@
+[33mcommit 4383e1d9bde85abf73a1135a0c680b79065bd5d3[m[33m ([m[1;36mHEAD -> [m[1;32mproduction-Sol[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: fe948a9 c1e1b33
+Author: María Sol González <102563745+GonzalezMariaSol@users.noreply.github.com>
+Date:   Wed Dec 13 17:33:00 2023 -0300
+
+    Merge pull request #18 from GonzalezMariaSol/production-Sol
+    
+    finalizacion de funcionalidad para el btn mostrar-ocultar filtros
+
+[33mcommit c1e1b33a68e37a27000adc783d9916d55a4eef3e[m[33m ([m[1;31morigin/production-Sol[m[33m)[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 17:31:32 2023 -0300
+
+    finalizacion de funcionalidad para el btn mostrar-ocultar filtros
+
+[33mcommit fe948a95c0efe127563df68d96ee6970eba5d69d[m
+Merge: 0b6446c 6399146
+Author: María Sol González <102563745+GonzalezMariaSol@users.noreply.github.com>
+Date:   Wed Dec 13 17:08:29 2023 -0300
+
+    Merge pull request #17 from GonzalezMariaSol/production-Sol
+    
+    Production sol
+
+[33mcommit 63991469015f1588f93410f98b9957c1d3143b60[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 17:07:59 2023 -0300
+
+    se termino la funcionalidad de balance en su totalidad - incluyendo los estilos-
+
+[33mcommit 2dbe273c5cc660c41f1379df2ec4c7b6ed035d62[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 17:07:33 2023 -0300
+
+    agregue el tag span asi puedo agregar en js los totales en balance
+
+[33mcommit 0ea6ed2788a149c65326be3b5f17fd47034051a1[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 15:52:33 2023 -0300
+
+    cambie de lugar la funcion porque seria mas claro que este dentro de showOperations - corresponde mejor
+
+[33mcommit 87f11cd685c6950a08b45cc4db0bce9cfa20c6df[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 15:50:33 2023 -0300
+
+    se agrego el mostrar-ocultar de la img cuando no hay operaciones
+
+[33mcommit 813b7777dac4934dddd6bae7cb9513df67f4cd3d[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 14:25:43 2023 -0300
+
+    se arreglo el tema de poder conservar el id una vez que se haya editado la operacion
+
+[33mcommit 26272f73b634256f44cee42709055d5de3c66eda[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 14:10:08 2023 -0300
+
+    le di color a los btn editar eliminar del table
+
+[33mcommit 414660e661a088c3c9fc8580243a6878375b0b33[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 14:03:09 2023 -0300
+
+    toquetie cositas para que se vea mas lindo el mensaje de confirmacion para eliminar
+
+[33mcommit 9af8b5c75ca136447d77df3e2ff66094504d2cc8[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 13:49:16 2023 -0300
+
+    arreglo del text overflow del section donde pregunta si estas seguro de eliminar
+
+[33mcommit 9ad52fcc4fb456dab45b7814f9f7f230857e4305[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 13:32:32 2023 -0300
+
+    mejoras sobre texto que si era muy largo se salia de las cajas -- arreglado --
+
+[33mcommit 03a1230fa506ebb60f479e87793fadfe793b681e[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 13:24:59 2023 -0300
+
+    le agregue clases para ordenar un poco mejor cda celda de la que estamos ejecutando con un innerHTML del table
+
+[33mcommit 998aa1516eda02973525d5af4247f131972b0243[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 13:23:48 2023 -0300
+
+    agregue un espaciado a la derecha de cda celda asi no se me juntaba visualmente todo
+
+[33mcommit 485af4d53f7c47d4237f04f8e0f585557d1c3a1e[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Wed Dec 13 12:07:33 2023 -0300
+
+    se agrego un span para poder preguntarle si quiere eliminar ... y luego poner la descripcion de esa op que se le dio delete
+
+[33mcommit 0b6446c4ab5ad0e89bfae69a61f1a0817adec5e7[m
+Merge: 7360a54 1f02025
+Author: María Sol González <102563745+GonzalezMariaSol@users.noreply.github.com>
+Date:   Tue Dec 12 19:42:37 2023 -0300
+
+    Merge pull request #16 from GonzalezMariaSol/production-Sol
+    
+    Production sol
+
+[33mcommit 1f02025f382e693fb34e50568752a14b65a2c187[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 19:40:19 2023 -0300
+
+    finalizado la seccion operaciones con respecto a su totalfinalidad -- le falta emprolijamiento--
+
+[33mcommit b4051d4fe97b745130deaa72755532d651ed768b[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 18:59:29 2023 -0300
+
+    creacion de section pregunta seguro de eliminar -- js se creo la funcion de cambiar las pantallas
+
+[33mcommit e26de6d3a008b29ce6f1ab7c0eda4c76a3648ee3[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 18:40:07 2023 -0300
+
+    se agrego seccion para preguntar por una confirmacion si se quiere eliminar lo que se pidio
+
+[33mcommit 7360a5420321f15679d5bd29b61bbc3891ebf103[m
+Merge: 6367774 e0fe402
+Author: María Sol González <102563745+GonzalezMariaSol@users.noreply.github.com>
+Date:   Tue Dec 12 17:49:18 2023 -0300
+
+    Merge pull request #15 from GonzalezMariaSol/production-Sol
+    
+    Production sol
+
+[33mcommit e0fe402d63c8691ad806596335f6ab6b16eb885e[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 17:47:05 2023 -0300
+
+    registro de operaciones ok --falta btn eliminar-- arreglo de espacio entre operacion y operacion
+
+[33mcommit e6eb4f7c16ab2d23946a4e0f50eb775f3ec67668[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 15:46:00 2023 -0300
+
+    fin de funcionalidad de editar operacion y nueva operacion --  falta eliminar op--
+
+[33mcommit 1a4fdcd21d49ef0f0d9e15499e913354b6763bc0[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 14:46:42 2023 -0300
+
+    elimine la hilera de prueba q estaba harcodeada sobre mi table de operaciones 'cargadas'
+
+[33mcommit e95ab246a3703ac96a9f055c2b8c0eda31c953ea[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 14:44:25 2023 -0300
+
+    mejora de tabulaciones y prolijidad
+
+[33mcommit 9d47389c74ef293b63c29a77f4e93de14257bbfd[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 14:40:37 2023 -0300
+
+    resolucion de codigo roto -- a este punto todo mi codigo funciona correctamente --
+
+[33mcommit 9614777430278f18f1f7229cca8ec89c2ce18c6c[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 14:31:02 2023 -0300
+
+    cambie en html y actualice en js el id de un btn por un nombre mejor y mas descriptivo btn-confirm-edit
+
+[33mcommit 853483d13a1631379fb63a15efd6023e04e6125d[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 14:13:13 2023 -0300
+
+    se modifico el nombre del id de los botones y se actualizo en el js para cda vista de agregar o editar op
+
+[33mcommit c9e19e5dee861dd5eb2a5f469916eb8981b8c89e[m
+Merge: 737f88e 6367774
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Tue Dec 12 12:53:53 2023 -0300
+
+    Merge branch 'main' of github.com:GonzalezMariaSol/Colaboracion-ProjectoAhorradas into production-Sol
+
+[33mcommit 63677742313462ec3329aecb4dd16b5e5400780b[m
+Merge: 8f7cf57 c32c0c5
+Author: taty3385 <111539025+taty3385@users.noreply.github.com>
+Date:   Tue Dec 12 12:24:46 2023 -0300
+
+    Merge pull request #14 from GonzalezMariaSol/production-tamara
+    
+    Production tamara
+
+[33mcommit c32c0c5d2d527e7e28ff224aa763ed03b1172949[m
+Merge: 03fc798 8f7cf57
+Author: taty3385 <tatyy661@gmail.com>
+Date:   Tue Dec 12 12:21:58 2023 -0300
+
+    resolucion de connflicto meging
+
+[33mcommit 03fc798998a7fa606193efcee71b1cc02ecac5e9[m
+Author: taty3385 <tatyy661@gmail.com>
+Date:   Mon Dec 11 22:06:33 2023 -0300
+
+    pinto la pantalla
+
+[33mcommit 737f88e3e47d45b59952e2833cb32943c21e718c[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Mon Dec 11 20:53:56 2023 -0300
+
+    me cortaste toda la loz mamaaaa, me odio
+
+[33mcommit 603a723bd3c50f3fd5c9c5f5cf24df017833aa47[m
+Author: MariaSolGonzalez <solgonzalez24@hotmail.com>
+Date:   Mon Dec 11 20:53:30 2023 -0300
+
+    porque le quise cambiar el id a un btn y ahora se me rompio todoo diozzz

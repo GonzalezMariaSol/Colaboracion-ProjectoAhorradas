@@ -198,26 +198,15 @@ const runBtnConfirm = (e) => {
   window.location.reload();
 };
 
-// GENERAR CATEGORIAS EN LA TABLA Y EN FILTROS
-
-const printCategoriasInSelectOpt = () => {
-  for (const categoria of getInfo("categories")) {
-    just(".form-select-category").innerHTML += `
-<option>${categoria.category}</option>`;
-    just("#select-category").innerHTML += `
-<option>${categoria.category}</option>`;
-  }
-};
-printCategoriasInSelectOpt();
 
 // PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
-// CALCULO TOTAL DE GANANCIAS
+// CALCULOGANANCIAS
 const getEarningsBalance = () => {
   let totalEarnings = 0
   for(const operacion of getInfo("Operations")){
-    if(operacion.tipo === "Ganancia"){
+    if(operacion.tipo === "ganancia"){
       totalEarnings += Number(operacion.monto)
       just(".full-earnings").innerHTML = `${totalEarnings}`
     }
@@ -226,11 +215,10 @@ const getEarningsBalance = () => {
 }
 getEarningsBalance()
 
-// CALCULO TOTAL DE GASTOS
 const getExpensesBalance = () => {
   let totalExpenses = 0
   for(const operacion of getInfo("Operations")){
-    if(operacion.tipo === "Gasto"){
+   if(operacion.tipo === "gasto"){
       totalExpenses += Number(operacion.monto)
       just(".full-expenses").innerHTML = `${totalExpenses}`
     }
@@ -239,7 +227,6 @@ const getExpensesBalance = () => {
 }
 getExpensesBalance()
 
-// CALCULO TOTAL DE BALANCE
 const getNetBalance = () => {
   const totalBalance = getEarningsBalance() - getExpensesBalance()
   just(".full-balance-num").innerHTML = `${totalBalance}`
@@ -251,25 +238,29 @@ const getNetBalance = () => {
 }
 getNetBalance()
 
+
 // FUNCIONALIDAD DE FILTROS *****************************************************************************************
 // OCULTAR-MOSRAR FILTROS
 just("#btn-hide-show-filters").addEventListener("click", () => hideFilters())
 const hideFilters = () => {
-  if(!just(".form-filters-ul").classList.contains('hidden')){
-    just(".form-filters-ul").classList.add("hidden")
+  if(!just(".form-filters").classList.contains('hidden')){
+    just(".form-filters").classList.add("hidden")
     just("#btn-hide-show-filters").textContent = 'Mostrar filtros'
   }else {
-    just(".form-filters-ul").classList.remove("hidden")
+    just(".form-filters").classList.remove("hidden")
     just("#btn-hide-show-filters").textContent = 'Ocultar filtros'
   }
 }
 
 
 
+
+// FUNCIONALIDAD DE FILTROS *****************************************************************************************
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
 
-// // LOCAL STORAGE **************************************************************************************************
+//!tengo que ver como fucionar los 2 initialize app de cada una
 
+//!porque el shapeDate no funciona si lo pongo dentro del innerhtml table
 // const shapeDate = (objOperation) => {//hago una funcion la cual va a estar dando la forma de dd/mm/aa a la fecha
 //   const separateDate = objOperation.fecha
 //     const day = separateDate.getDate() //capturo el numero del dia
@@ -278,6 +269,15 @@ const hideFilters = () => {
 //     return `${day}/${month}/${year}` //y retorno la fecha en el orden que yo quiera mostrar
 // }
 // console.log(shapeDate(prueba))
+
+
+
+
+
+//*************************************************************************************************** */
+//*************************************************************************************************** */
+//*************************************************************************************************** */
+//*************************************************************************************************** */
 
 //................................ SECCION CATEGORIA .......................................................
 
@@ -324,6 +324,12 @@ const renderCategory = (arrayCategorys) => {
         <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${item.id}')" >Editar</button>
         <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
     </div> `;
+
+    // AGREGO ESTO A TU CODIGO :)
+    just(".form-select-category").innerHTML += `
+    <option>${item.category}</option>`;
+    just("#select-category").innerHTML += `
+    <option>${item.category}</option>`;
   }
 };
 
