@@ -46,7 +46,7 @@ const showOperations = (arrOperations) => {
             <button class="bg-[#ebfffc] text-emerald-500 text-center border-r-6 border-transparent rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
         </td>
       </tr>
-      <tr class="m-28 border-[1vh] border-[#ffffff92] rounded-full"></tr>
+      <tr class="m-28 border-[1vh] border-[#ffffff92]"></tr> 
       `;
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
@@ -66,7 +66,7 @@ const ejecutionDeleteBtn = (opId, opDescription) => {
   just(".btn-confirm-delete").addEventListener("click", () => {
     const userId = just(".btn-confirm-delete").getAttribute("id"); //NOS GUARDAMOS EL ID CORRESPONDIENTE QUE TRAE EL BTN
     runBtnConfirmDelete(userId); //Y SE LO PASAMOS A NUESTRA FUNCION
-    window.location.reload(); //!porque luego del reload se me rompe la estructura del table?
+    window.location.reload();
   });
 };
 // NUNCA MEZCLAR LA FUNCION Q MANIPULA EL DOM ↑↑ CON LA FUNCION Q MANIPULA EL LS ↓↓ PORQUE DE ESTA MANERA SE PUEDEN REUTILIZAR
@@ -213,6 +213,52 @@ printCategoriasInSelectOpt();
 // PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
+// CALCULO TOTAL DE GANANCIAS
+const getEarningsBalance = () => {
+  let totalEarnings = 0
+  for(const operacion of getInfo("Operations")){
+    console.log(operacion.tipo, operacion.monto)
+    if(operacion.tipo === "Ganancia"){
+      totalEarnings += Number(operacion.monto)
+      just(".full-earnings").innerHTML = `${totalEarnings}`
+    }
+  }
+  return totalEarnings
+}
+getEarningsBalance()
+
+// CALCULO TOTAL DE GASTOS
+const getExpensesBalance = () => {
+  let totalExpenses = 0
+  for(const operacion of getInfo("Operations")){
+    console.log(operacion.tipo, operacion.monto)
+    if(operacion.tipo === "Gasto"){
+      totalExpenses += Number(operacion.monto)
+      just(".full-expenses").innerHTML = `${totalExpenses}`
+    }
+  }
+  return totalExpenses
+}
+getExpensesBalance()
+
+// CALCULO TOTAL DE BALANCE
+const getNetBalance = () => {
+  const totalBalance = getEarningsBalance() - getExpensesBalance()
+  console.log(`MI TOTAL ES DE ${totalBalance}`)
+  just(".full-balance-num").innerHTML = `${totalBalance}`
+  if(totalBalance < 0){
+    just(".full-balance").classList.add("text-red-600")
+  }else if(totalBalance > 0){
+    just(".full-balance").classList.add("text-lime-500")
+  }
+}
+getNetBalance()
+
+
+
+
+
+
 
 // FUNCIONALIDAD DE FILTROS *****************************************************************************************
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
