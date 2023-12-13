@@ -33,7 +33,7 @@ const showOperations = (arrOperations) => {
       //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
       `
       <tr class="border-b-8 border-transparent">
-      <td class="text-center border-r-6 border-transparent">${operation.descripcion}</td>
+      <td class="text-center border-r-6 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
       <td class="text-center border-r-6 border-transparent">${operation.categoria}</td>
       <td class="text-center border-r-6 border-transparent">${operation.fecha}</td>
       <td class="text-center border-r-6 border-transparent break-all">${operation.monto}</td>
