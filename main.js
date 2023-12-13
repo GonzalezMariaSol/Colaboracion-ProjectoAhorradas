@@ -42,7 +42,6 @@ const showOperations = (arrOperations) => {
           <button class="text-center border-r-6 border-transparent" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
       </td>
   </tr>
-  
     `;
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
@@ -57,7 +56,7 @@ const ejecutionDeleteBtn = (opId, opDescription) => {
   showViews("section-confirm-delete");
   // LE PASO EL ID DE LA OP Q SE QUIERE ELIMINAR AL BOTON EN EL HTML Q CONFIRMARIA EL ELIMINAR (el q dice "ELIMINAR") por esto es q luego podemos hacer la accion de eliminar
   just(".btn-confirm-delete").setAttribute("id", opId);
-  just(".operation-description").innerText = `${opDescription}`; //le agregamos al texto de "estas seguro q querer eliminar y le ponemos la descripcion que se puso asi se asegura que estamos borrando el que queremos borrar "
+  just(".operation-description").innerText = `'' ${opDescription} ''?`; //le agregamos al texto de "estas seguro q querer eliminar y le ponemos la descripcion que se puso asi se asegura que estamos borrando el que queremos borrar "
   //CUANDO ESCUCHE EL CLIK EL BTN ELIMINAR
   just(".btn-confirm-delete").addEventListener("click", () => {
     const userId = just(".btn-confirm-delete").getAttribute("id"); //NOS GUARDAMOS EL ID CORRESPONDIENTE QUE TRAE EL BTN

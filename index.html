@@ -134,8 +134,10 @@
                     <table class="table-userOperation">
                         <thead> <!-- HILERA ⇄ 1 - titulos -->
                             <tr> <!-- COLUMNA ⇅  -->
-                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th> <!-- ⇅ COLUMNA 1 -->
-                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Categoria</th> <!-- ⇅ COLUMNA 2 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
+                                <!-- ⇅ COLUMNA 1 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Categoria</th>
+                                <!-- ⇅ COLUMNA 2 -->
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
                                 <th class="w-1/5 pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
@@ -326,10 +328,9 @@
     </section>
     <section class="section-confirm-delete flex items-center justify-center h-screen hidden">
         <div class="div-container-confirm-delete bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
-            <p class="text-are-u-sure text-center font-bold text-xl">
-                ¿Estás seguro que quieres borrar la operación 
-                <span class="operation-description bg-lime-500 whitespace-pre-wrap block max-w-full overflow-hidden">
-                </span>?
+            <p class="text-are-u-sure font-bold text-xl">
+                ¿Estás seguro que quieres borrar la operación:
+                <span class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
             </p>
             <div class="div-btn mt-4 w-64 flex justify-between">
                 <button class="btn-cancel-delete bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
@@ -337,9 +338,9 @@
             </div>
         </div>
     </section>
-    
-    
-    
+
+
+
 
 
     <script src="main.js"></script>
