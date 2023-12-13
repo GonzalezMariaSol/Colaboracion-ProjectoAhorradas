@@ -217,7 +217,6 @@ printCategoriasInSelectOpt();
 const getEarningsBalance = () => {
   let totalEarnings = 0
   for(const operacion of getInfo("Operations")){
-    console.log(operacion.tipo, operacion.monto)
     if(operacion.tipo === "Ganancia"){
       totalEarnings += Number(operacion.monto)
       just(".full-earnings").innerHTML = `${totalEarnings}`
@@ -231,7 +230,6 @@ getEarningsBalance()
 const getExpensesBalance = () => {
   let totalExpenses = 0
   for(const operacion of getInfo("Operations")){
-    console.log(operacion.tipo, operacion.monto)
     if(operacion.tipo === "Gasto"){
       totalExpenses += Number(operacion.monto)
       just(".full-expenses").innerHTML = `${totalExpenses}`
@@ -244,7 +242,6 @@ getExpensesBalance()
 // CALCULO TOTAL DE BALANCE
 const getNetBalance = () => {
   const totalBalance = getEarningsBalance() - getExpensesBalance()
-  console.log(`MI TOTAL ES DE ${totalBalance}`)
   just(".full-balance-num").innerHTML = `${totalBalance}`
   if(totalBalance < 0){
     just(".full-balance").classList.add("text-red-600")
@@ -254,13 +251,21 @@ const getNetBalance = () => {
 }
 getNetBalance()
 
-
-
-
-
-
-
 // FUNCIONALIDAD DE FILTROS *****************************************************************************************
+// OCULTAR-MOSRAR FILTROS
+just("#btn-hide-show-filters").addEventListener("click", () => hideFilters())
+const hideFilters = () => {
+  if(!just(".form-filters-ul").classList.contains('hidden')){
+    just(".form-filters-ul").classList.add("hidden")
+    just("#btn-hide-show-filters").textContent = 'Mostrar filtros'
+  }else {
+    just(".form-filters-ul").classList.remove("hidden")
+    just("#btn-hide-show-filters").textContent = 'Ocultar filtros'
+  }
+}
+
+
+
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
 
 // // LOCAL STORAGE **************************************************************************************************
