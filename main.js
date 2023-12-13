@@ -38,8 +38,8 @@ const showOperations = (arrOperations) => {
       <td class="text-center border-r-6 border-transparent">${operation.fecha}</td>
       <td class="text-center border-r-6 border-transparent break-all">${operation.monto}</td>
       <td class="flex flex-col">
-          <button class="text-center border-r-6 border-transparent" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
-          <button class="text-center border-r-6 border-transparent" onclick="ejecutionOfNewOp('${operation.id}')">EditarRRRR</button>
+          <button class="text-center mb-1 border-r-6 border-transparent bg-[#ebfffc] text-emerald-500 rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
+          <button class="text-center border-r-6 border-transparent bg-[#ebfffc] text-emerald-500 rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
       </td>
   </tr>
     `;
