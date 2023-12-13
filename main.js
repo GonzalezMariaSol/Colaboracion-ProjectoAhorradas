@@ -298,7 +298,7 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
         ${categorie.category}</p>
     <div class="flex">
         <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
-        <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
+        <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}')">Eliminar</button>
     </div> `
 
 
@@ -308,7 +308,7 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
 
 
 
-const savecategory = () => {   //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
+const saveAddcategory = () => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
     id: randomId(),
     category: just("#input-add").value,
@@ -316,25 +316,61 @@ const savecategory = () => {   //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
   }
 }
 
+const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT 
+  return {
+    id: randomId(),
+    category: just("#input-edit").value,
+
+  }
+
+}
+// PASE POR PARAMETRO EL ID DE MI OBJETO
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
   showElement(".section-edit-category")
   hideElement(".section-category")
+  just("#btn-edit-categorie").setAttribute("id-categori", categoryId)
   const datoActual = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
-  just("#input-edit").value= datoActual.category
+  just("#input-edit").value = datoActual.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
 
-  // PASE POR PARAMETRO EL ID DE MI OBJETO
+
 }
 
 const addCategory = () => {
   const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
-  datoActual.push(savecategory())  // MODIFICO  EL DATO 
+  datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
   setInfo("categories", datoActual)   // ENVIOO LA INFO AL LOCAL STORE  
-  renderCategory(datoActual)  // CUANDO  LIMPIO ACTUALIZO CON EL DATO ACTUAL
+
 }
 
+const editBtnCategory = () => {
+  const dataId = just("#btn-edit-categorie").getAttribute("id-categori")
 
+  const datoActual = getInfo("categories").map(categorie => {
+    if (categorie.id === dataId) {
+      return saveEditCategory()
+    }
+    return categorie
+  })
+  setInfo("categories", datoActual);
+}
 
+const viewChangeRemove = (categoryId) => {
+  showElement(".container-eliminar")
+  hideElement(".section-category")
+  just("#btn-remove-categories").setAttribute("id-categori", categoryId)
+  just("#btn-remove-categories").addEventListener("click", () => {
+    const IdCategoria =  just("#btn-remove-categories").getAttribute("id-categori")
+    deleteCategory(IdCategoria);
+    window.location.reload()
 
+  })
+
+}
+
+const deleteCategory=(categoryId)=>{
+  const datoActual=getInfo("categories").filter(category=>categoryId !== category.id)
+  setInfo("categories", datoActual)
+}
 
 
 // -----------------------------------EVENTS---------------------------------------------------
@@ -346,9 +382,21 @@ const inicializeApp = () => {
   just("#btn-add-categories").addEventListener("click", (e) => {
     e.preventDefault()
     addCategory()
-
-
+    window.location.reload()
   })
-}
 
+
+
+  just("#btn-edit-categorie").addEventListener("click", (e) => {
+    e.preventDefault()
+    hideElement(".section-edit-category")
+    showElement(".section-category")
+    editBtnCategory()
+    window.location.reload()
+  })
+
+
+
+}
 window.addEventListener("load", inicializeApp())
+
