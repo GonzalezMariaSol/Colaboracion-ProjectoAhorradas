@@ -4,8 +4,9 @@ const all = (selector) => document.querySelectorAll(selector);
 
 const randomId = () => self.crypto.randomUUID();
 
-const showElement = (selector) => just(selector).classList.remove("hidden");
-const hideElement = (selector) => just(selector).classList.add("hidden");
+const showElement = (selector) => just(selector).classList.remove("hidden") // MUESTRA LA VENTANA
+const hideElement = (selector) => just(selector).classList.add("hidden") // OCULTA LA VENTANA
+const clear = (selector) => just(selector).innerText = "" // LIMPIA EL CONTENEDOR
 
 // LOCAL STORAGE ******************************************************************************************
 const getInfo = (key) => JSON.parse(localStorage.getItem(key)); //pedimos la info al LS. Se pasa una key, y la busca en el LS y con el parse la transformamos a obj asi podemos manipularla
@@ -324,23 +325,25 @@ const category = [
   {
     id: randomId(),
     category: "Trabajo",
-  },
-];
+
+  }
+]
+
+const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL Y SI NO TIENE LO BUSCA EN EL ARRAY DE CATEGORIAS QUE TENGO
 
 //------------------------------------ RENDER------------------------------------------------
 
-const renderCategory = (arrayCategorys) => {
-  // PINTO LA LISTA CON LAS CATEGORIAS
-  for (const item of arrayCategorys) {
-    just(
-      "#container-category"
-    ).innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
+const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+  clear("#container-category")
+  for (const categorie of arrayCategorys) {
+
+    just("#container-category").innerHTML += `<li class=" flex  justify-between mb-[1rem]">
     <p
-        class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
-        ${item.category}</p>
+        class=" w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
+        ${categorie.category}</p>
     <div class="flex">
-        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${item.id}')" >Editar</button>
-        <button  class=" w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]">Eliminar</button>
+        <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
+        <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
     </div> `;
 
     // AGREGO ESTO A TU CODIGO :)
@@ -348,40 +351,104 @@ const renderCategory = (arrayCategorys) => {
     <option>${item.category}</option>`;
     just("#select-category").innerHTML += `
     <option>${item.category}</option>`;
-  }
-};
 
-const savecategory = () => {
-  //GUARDO EL VALOR DE MI IMPUT  Y AGREGO ID
+  }
+}
+
+
+
+
+
+
+
+const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
-    id: randomId(),
+    id: idCategori ? idCategori : randomId(),
     category: just("#input-add").value,
   };
 };
 
-const editCategory = (categoryId) => {
-  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
-  showElement(".section-edit-category");
-  hideElement("#section-category");
+const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT 
+  return {
+    id: randomId(),
+    category: just("#input-edit").value,
 
-  // PASE POR PARAMETRO EL ID DE MI OBJETO
-};
+  }
+
+}
+// PASE POR PARAMETRO EL ID DE MI OBJETO
+const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
+  showElement(".section-edit-category")
+  hideElement(".section-category")
+  just("#btn-edit-categorie").setAttribute("id-categori", categoryId) //AGREGA EL ATRIBUTO Y PASA POR PARAMETRO ID
+  const datoActual = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
+  just("#input-edit").value = datoActual.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
+
+
+}
+
+const addCategory = () => {
+  const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
+  datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
+  setInfo("categories", datoActual)   // ENVIOO LA INFO AL LOCAL STORE  
+
+}
+
+const editBtnCategory = () => {
+  const dataId = just("#btn-edit-categorie").getAttribute("id-categori") //
+  const datoActual = getInfo("categories").map(categorie => {
+    if (categorie.id === dataId) {
+      return saveEditCategory(dataId)
+    }
+    return categorie
+  })
+  setInfo("categories", datoActual);
+}
+
+const viewChangeRemove = (categoryId, categori) => {
+  showElement(".container-eliminar")
+  hideElement(".section-category")
+  just("#name").innerText = `${categori}`
+  just("#btn-remove-categories").setAttribute("id-categori", categoryId)
+  just("#btn-remove-categories").addEventListener("click", () => {
+    const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
+    deleteCategory(IdCategoria);
+    window.location.reload()
+
+  })
+
+}
+
+const deleteCategory = (categoryId) => {
+  const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
+  setInfo("categories", datoActual)
+}
+
 
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
-  setInfo("categories", category); // ENVIO INFORMACION AL LOCAL STORAGE
-  const traigoInfo = getInfo("categories"); // TRAIGO LA INFO DEL LOCAL STORAGE
-  renderCategory(traigoInfo); // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
-
+  setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
+  renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
+  renderOptionCategory(allCategories) // LLAMO A LA FUNCION Y PINTS LA OPTION CON LAS CATEGORIAS
   just("#btn-add-categories").addEventListener("click", (e) => {
-    e.preventDefault();
-    const datoActual = getInfo("categories"); // ME TRAIGO LA INFO QUE TIENE EL LOCAL
-    datoActual.push(savecategory()); // MODIFICO  EL DATO
-    just("#container-category").innerText = " "; // LIMPIO LA PANTALLA
-    renderCategory(datoActual); // CUANDO  LIMPIO ACTUALIZO CON EL DATO ACTUAL
-    setInfo("categories", datoActual); // ENVIOO LA INFO AL LOCAL STORE
-  });
-};
+    addCategory()
+    window.location.reload()
 
-window.addEventListener("load", inicializeApp());
+  })
+
+
+
+  just("#btn-edit-categorie").addEventListener("click", (e) => {
+    e.preventDefault()
+    hideElement(".section-edit-category")
+    showElement(".section-category")
+    editBtnCategory()
+    window.location.reload()
+  })
+
+
+
+}
+window.addEventListener("load", inicializeApp())
+
