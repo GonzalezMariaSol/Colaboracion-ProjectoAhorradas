@@ -292,13 +292,13 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
   clear("#container-category")
   for (const categorie of arrayCategorys) {
 
-    just("#container-category").innerHTML += `<li class="h-[2rem] flex  justify-between mb-[1rem]">
+    just("#container-category").innerHTML += `<li class=" flex  justify-between mb-[1rem]">
     <p
-        class="h-[2rem] w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
+        class=" w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
         ${categorie.category}</p>
     <div class="flex">
         <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
-        <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}')">Eliminar</button>
+        <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
     </div> `
 
 
@@ -328,7 +328,7 @@ const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
   showElement(".section-edit-category")
   hideElement(".section-category")
-  just("#btn-edit-categorie").setAttribute("id-categori", categoryId)
+  just("#btn-edit-categorie").setAttribute("id-categori", categoryId) //AGREGA EL ATRIBUTO Y PASA POR PARAMETRO ID
   const datoActual = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
   just("#input-edit").value = datoActual.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
 
@@ -343,7 +343,7 @@ const addCategory = () => {
 }
 
 const editBtnCategory = () => {
-  const dataId = just("#btn-edit-categorie").getAttribute("id-categori")
+  const dataId = just("#btn-edit-categorie").getAttribute("id-categori") //
 
   const datoActual = getInfo("categories").map(categorie => {
     if (categorie.id === dataId) {
@@ -354,9 +354,10 @@ const editBtnCategory = () => {
   setInfo("categories", datoActual);
 }
 
-const viewChangeRemove = (categoryId) => {
+const viewChangeRemove = (categoryId, categori) => {
   showElement(".container-eliminar")
   hideElement(".section-category")
+  just("#name").innerText=`${categori}`
   just("#btn-remove-categories").setAttribute("id-categori", categoryId)
   just("#btn-remove-categories").addEventListener("click", () => {
     const IdCategoria =  just("#btn-remove-categories").getAttribute("id-categori")
@@ -378,11 +379,10 @@ const deleteCategory=(categoryId)=>{
 const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
-
-  just("#btn-add-categories").addEventListener("click", (e) => {
-    e.preventDefault()
-    addCategory()
-    window.location.reload()
+just("#btn-add-categories").addEventListener("click", (e) => {
+  addCategory()
+  window.location.reload()
+   
   })
 
 
