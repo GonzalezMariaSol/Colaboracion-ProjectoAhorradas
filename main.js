@@ -34,22 +34,23 @@ const showOperations = (arrOperations) => {
   for (const operation of arrOperations) {
     //por cda operacion(me trae cda hilera) del array operations
     just(".table-userOperation").innerHTML +=
-      //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
-      `
-      <tr>
-        <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
-        <td class="text-center border-r-6 p-3 border-transparent">${operation.categoria}</td>
-        <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
-        <td class="text-center border-r-6 p-3 border-transparent break-all">${operation.monto}</td>
-        <td class="p-3 flex flex-col">
-            <button class="bg-[#ebfffc] text-emerald-500 text-center mb-1 border-r-6 border-transparent rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
-            <button class="bg-[#ebfffc] text-emerald-500 text-center border-r-6 border-transparent rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
-        </td>
-      </tr>
-      <tr class="m-28 border-[1vh] border-[#ffffff92]"></tr> 
-      `;
+    //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
+    `
+    <tr>
+    <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
+    <td class="text-center border-r-6 p-3 border-transparent">${operation.categoria}</td>
+    <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
+    <td class="text-center border-r-6 p-3 border-transparent break-all" id="num-amount">${operation.monto}</td>
+    <td class="p-3 flex flex-col">
+    <button class="bg-[#ebfffc] text-emerald-500 text-center mb-1 border-r-6 border-transparent rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
+    <button class="bg-[#ebfffc] text-emerald-500 text-center border-r-6 border-transparent rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
+    </td>
+    </tr>
+    <tr class="m-28 border-[1vh] border-[#ffffff92]"></tr> 
+    `
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
+
 
 //?ejecutionDeleteBtn FUNCIONA BIEN
 //SE OCUPA DE HACER EL CAMBIO DE PANTALLAS MAS TAMBIEN GUARDAR LA INFO DE EL ID DE CUAL DE TODAS LAS OP SE QUIERE ELIMINAR
@@ -214,6 +215,7 @@ const getEarningsBalance = () => {
   return totalEarnings
 }
 getEarningsBalance()
+
 
 const getExpensesBalance = () => {
   let totalExpenses = 0
