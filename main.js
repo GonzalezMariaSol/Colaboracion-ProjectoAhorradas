@@ -27,13 +27,14 @@ const showViews = (view) => {
 //SHOWOPERATIONS ES QUIEN IMPRIME EN PANTALLA LAS CASILLAS CON LA INFO QUE CARGO EL USUARIO
 const showOperations = (arrOperations) => {
   //arrOperations va a ser lo que obtengamos del local storage q ya viene con forma de arr
-  if (!(arrOperations && arrOperations.length > 0)) {
+  just(".tbody-info-loaded").innerHTML = "" 
+  if (!(arrOperations.length > 0)) {
     just(".view-no-operations").classList.remove("hidden");
     just(".div-table-container").classList.add("hidden");
   }
   for (const operation of arrOperations) {
     //por cda operacion(me trae cda hilera) del array operations
-    just(".table-userOperation").innerHTML +=
+    just(".tbody-info-loaded").innerHTML +=
     //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
     `
     <tr>
@@ -117,7 +118,7 @@ const saveUserOperation = (opId) => {
     fecha: just("#input-date").value,
   };
 };
-console.log(saveUserOperation());
+// console.log(saveUserOperation());
 
 // LOCAL STORAGE **************************************************************************************************
 //?TOTALOperations FUNCIONA BIEN - muestra un arr vacio al principio y luego si recargo me muestra si cargue o no algo al arr
@@ -169,6 +170,10 @@ const initializeApp = () => {
     showViews("main-page");
     window.location.reload();
   });
+
+  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
+
+
 };
 window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
@@ -198,6 +203,20 @@ const runBtnConfirm = (e) => {
   setInfo("Operations", currentOperations);
   window.location.reload();
 };
+
+const showSelectedCategory = (e) => {
+  console.log(e)
+  const categoriesValue = e.target.value //esto me devuelve el nombre de la categoria NO el ID
+  const currentOperations = getInfo("Operations")
+  
+  const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
+  // console.log(filterOperations)
+  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
+}
+
+
+
+
 
 
 // PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
