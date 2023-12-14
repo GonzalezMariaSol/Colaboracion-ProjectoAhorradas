@@ -304,13 +304,20 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
 
   }
 }
+const renderOptionCategory = () => {
+  for (const categorie of category) {
+    just("#select-category").innerHTML += `<option value"${categorie.id}">${categorie.category}</option>`
+    just(".form-select-category").innerHTML += `<option value"${categorie.id}">${categorie.category}</option>`
+  }
+}
 
 
 
 
-const saveAddcategory = () => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
+
+const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
-    id: randomId(),
+    id: idCategori ? idCategori : randomId(),
     category: just("#input-add").value,
 
   }
@@ -344,10 +351,9 @@ const addCategory = () => {
 
 const editBtnCategory = () => {
   const dataId = just("#btn-edit-categorie").getAttribute("id-categori") //
-
   const datoActual = getInfo("categories").map(categorie => {
     if (categorie.id === dataId) {
-      return saveEditCategory()
+      return saveEditCategory(dataId)
     }
     return categorie
   })
@@ -357,10 +363,10 @@ const editBtnCategory = () => {
 const viewChangeRemove = (categoryId, categori) => {
   showElement(".container-eliminar")
   hideElement(".section-category")
-  just("#name").innerText=`${categori}`
+  just("#name").innerText = `${categori}`
   just("#btn-remove-categories").setAttribute("id-categori", categoryId)
   just("#btn-remove-categories").addEventListener("click", () => {
-    const IdCategoria =  just("#btn-remove-categories").getAttribute("id-categori")
+    const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
     window.location.reload()
 
@@ -368,8 +374,8 @@ const viewChangeRemove = (categoryId, categori) => {
 
 }
 
-const deleteCategory=(categoryId)=>{
-  const datoActual=getInfo("categories").filter(category=>categoryId !== category.id)
+const deleteCategory = (categoryId) => {
+  const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
   setInfo("categories", datoActual)
 }
 
@@ -379,10 +385,11 @@ const deleteCategory=(categoryId)=>{
 const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
-just("#btn-add-categories").addEventListener("click", (e) => {
-  addCategory()
-  window.location.reload()
-   
+  renderOptionCategory(allCategories) // LLAMO A LA FUNCION Y PINTS LA OPTION CON LAS CATEGORIAS
+  just("#btn-add-categories").addEventListener("click", (e) => {
+    addCategory()
+    window.location.reload()
+
   })
 
 
