@@ -21,7 +21,7 @@
 </head>
 
 <body class="font-['Raleway']">
-    <header class="header bg-[#aeff8e88] text-black flex justify-between items-center">
+    <header class="header bg-[#aeff8e88] flex justify-between items-center">
         <div class="header-tittle w-44 h-44 left-12 relative" style="background-image: url(img/blobanimation.svg);">
             <a class="font-bold text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                 href="index.html">
@@ -60,15 +60,15 @@
                     <ul class="balance-ul">
                         <li class="section-balance-li-1 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Ganancias</p>
-                            <p class="text-lime-500 font-bold">+ $0</p>
+                            <p class="text-lime-500 font-bold">+ $ <span class="full-earnings"></span></p>
                         </li>
                         <li class="section-balance-li-2 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Gastos</p>
-                            <p class="text-red-600 font-bold">- $0</p>
+                            <p class="text-red-600 font-bold">- $ <span class="full-expenses"></span></p>
                         </li>
                         <li class="section-balance-li-3 flex flex-row items-center justify-between mb-2 md:mb-4">
                             <p>Total</p>
-                            <p class="text-blue-500	font-bold">$0</p>
+                            <p class="full-balance text-blue-500 font-bold">$ <span class="full-balance-num"></span></p>
                         </li>
                     </ul>
                 </section>
@@ -78,40 +78,44 @@
                         <!-- clase del 11-03 se ve buscador q va mostrando resultados similares -->
                         <p class="title-section-filters text-xl text-left font-bold">Filtros</p>
                         <!-- clase del 11-17 que se ve filtrar por fecha con new date() -->
-                        <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-filters">Ocultar
+                        <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-show-filters">Ocultar
                             Filtros</button>
                     </div>
-                    <form>
+                    <form class="form-filters">
                         <ul class="form-filters-ul">
                             <li class="section-filters-li-1 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-type">Tipo</label>
                                 <select class="form-select-type p-2 rounded-md">
-                                    <option>Gasto</option>
-                                    <option>Ganancia</option>
+                                    <option value="todos" selected>Todos</option>
+                                    <option value="gasto">Gasto</option>
+                                    <option value="ganancia">Ganancia</option>
                                 </select>
                             </li>
                             <li class="section-filters-li-2 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-category">Category</label>
-                                <select class="form-select-category p-2 rounded-md ">
-                                    <option></option>
+                                <select class="form-select-category p-2 rounded-md" id="categorias">
+                                    <option value="todos" selected>Todos</option>
                                 </select>
                             </li>
                             <li class="section-filters-li-3 mb-2 md:mb-4 flex flex-col flex-col ">
-                                <label for="">Desde</label>
-                                <input type="date" class="input-date p-2 rounded-md ">
+                                <label for="input-date">Desde</label>
+                                <input type="date" class="input-date p-2 rounded-md" id="input-date">
                             </li>
                             <li class="section-filters-li-4 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="">Ordenar por</label>
-                                <select class="p-2rounded-md ">
-                                    <option>Mas reciente</option>
-                                    <option>Menos reciente</option>
-                                    <option>Mayo monto</option>
-                                    <option>Menor monto</option>
-                                    <option>A-Z</option>
-                                    <option>Z-A</option>
+                                <select class="p-2 rounded-md ">
+                                    <option value="masReciente">Mas reciente</option>
+                                    <option value="menosReciente">Menos reciente</option>
+                                    <option value="menorMonto">Menor monto</option>
+                                    <option value="mayorMonto">Mayor monto</option>
+                                    <option value="AZ">A-Z</option>
+                                    <option value="ZA">Z-A</option>
                                 </select>
                             </li>
                         </ul>
+                        <div class="flex items-center">
+                        <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button" onclick="resetearFormulario()">Resetear</button>
+                        </div>
                     </form>
                 </section>
             </div>
@@ -134,26 +138,18 @@
                     <table class="table-userOperation">
                         <thead> <!-- HILERA ⇄ 1 - titulos -->
                             <tr> <!-- COLUMNA ⇅  -->
-                                <th class="w-1/5 text-center pb-3">Descripcion</th> <!-- ⇅ COLUMNA 1 -->
-                                <th class="w-1/5 text-center pb-3">Categoria</th> <!-- ⇅ COLUMNA 2 -->
-                                <th class="w-1/5 text-center pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
-                                <th class="w-1/5 text-center pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
-                                <th class="w-1/5 text-center pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
+                                <!-- ⇅ COLUMNA 1 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Categoria</th>
+                                <!-- ⇅ COLUMNA 2 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
+                                <th class="w-1/5 pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
                             </tr>
                         </thead>
 
-                        <tbody class="tbody-info-loaded"> <!-- EL CUERPO DE LA TABLA DONDE VA A ESTAR LA INFO -->
-                            <tr> <!-- ⇄ HILERA 2 - contenido -->
-                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="text-center">estoy harcodeado</td> <!-- aca iria lo que el usuario cargo -->
-                                <td class="flex flex-col">
-                                    <button class="text-center">Eliminar</button>
-                                    <button class="text-center" id="btn-edit-operation"
-                                        onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
-                                </td> <!-- aca iria lo que el usuario cargo -->
-                            </tr>
+                        <tbody class="tbody-info-loaded">
+                            <!-- EL CUERPO DE LA TABLA DONDE VA A ESTAR LA INFO -->
                         </tbody>
                     </table>
                 </div>
@@ -164,7 +160,7 @@
 
     <!-- VISTA NUEVA OPERACION // EDITAR OPERACION-->
     <section
-        class="section-newOperation section-editOperation view h-screen my-14 flex items-center justify-center flex-col hidden">
+        class="section-newOperation hidden section-editOperation view h-screen my-14 flex items-center justify-center flex-col hidden">
         <div class="bg-[#ffffff92] w-3/5 p-8 rounded-md">
             <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8"
                 id="newOp-tittle">Nueva Operacion</p>
@@ -185,15 +181,14 @@
 
                 <label for="select-type" class="font-bold">Tipo</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
-                    <option>Ganancia</option>
-                    <option>Gasto</option>
+                    <option value="ganancia">Ganancia</option>
+                    <option value="gasto">Gasto</option>
                 </select>
                 <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
                         style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="select-category" class="font-bold">Categoria</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
-                    <option></option>
                 </select>
                 <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
                         style="color: #ff0000;"></i>Este campo es obligatorio</p>
@@ -207,9 +202,9 @@
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
-                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2" id="btn-add-newOp">Agregar</button>
-                    <button class="text-white bg-lime-500 p-2 ml-7 rounded-md ml-2 hidden"
-                        id="btn-edit-newOp">Editar</button>
+                    <button class="text-black bg-[#a3fc9b] p-2 ml-7 rounded-md" id="btn-add-newOp">Agregar</button>
+                    <button
+                        class="btn-confirm-edit text-black bg-[#a3fc9b] p-2 ml-7 rounded-md ml-2 hidden">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -231,6 +226,7 @@
                 </div>
             </form>
             <ul class="mt-[2rem]" id="container-category">
+
 
             </ul>
         </div>
@@ -348,7 +344,18 @@
                 </tr>
             </table>
     </section>
-
+    <section class="section-confirm-delete flex items-center justify-center h-screen hidden">
+        <div class="div-container-confirm-delete bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
+            <p class="text-are-u-sure font-bold text-xl">
+                ¿Estás seguro que quieres borrar la operación:
+                <span class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
+            </p>
+            <div class="div-btn mt-4 w-64 flex justify-between">
+                <button class="btn-cancel-delete bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
+                <button class="btn-confirm-delete bg-[#ff0000] font-bold h-10 w-24 mr-2 rounded-md">ELIMINAR</button>
+            </div>
+        </div>
+    </section>
     <script src="main.js"></script>
 </body>
 
