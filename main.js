@@ -315,8 +315,10 @@ const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL 
 
 //------------------------------------ RENDER------------------------------------------------
 
-const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS y OPTIONS //! PREGUNTAR SI ESTA BIEN  O DEBO HACERLO EN UNA FUNCION APARTE
   clear("#container-category")
+  clear(".form-select-category")
+  clear("#select-category")
   for (const categorie of arrayCategorys) {
 
     just("#container-category").innerHTML += `<li class=" flex  justify-between mb-[1rem]">
@@ -328,14 +330,22 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
         <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
     </div> `;
 
-    // AGREGO ESTO A TU CODIGO :)
+  
     just(".form-select-category").innerHTML += `
-    <option>${categorie.category}</option>`;
+      <option value=${categorie.id}>${categorie.category}</option>`;
     just("#select-category").innerHTML += `
-    <option>${categorie.category}</option>`;
+      <option value=${categorie.id}>${categorie.category}</option>`;
+    
 
   }
 }
+
+
+
+
+
+
+
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
@@ -352,6 +362,8 @@ const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT
   }
 
 }
+
+
 // PASE POR PARAMETRO EL ID DE MI OBJETO
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
 
@@ -367,8 +379,9 @@ const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CA
 const addCategory = () => {
   const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
   datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", datoActual) 
-  renderCategory(datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
+  setInfo("categories", datoActual)
+  renderCategory(datoActual) 
+ 
 
 }
 
@@ -403,6 +416,12 @@ const deleteCategory = (categoryId) => {
   setInfo("categories", datoActual)
 }
 
+// ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
+
+
+
+
+
 
 // -----------------------------------EVENTS---------------------------------------------------
 
@@ -423,7 +442,7 @@ const inicializeApp = () => {
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-   
+
 
   })
 
