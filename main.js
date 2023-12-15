@@ -206,7 +206,6 @@ const runBtnConfirm = (e) => {
 };
 
 const showSelectedCategory = (e) => {
-  console.log(e)
   const categoriesValue = e.target.value //esto me devuelve el nombre de la categoria NO el ID
   const currentOperations = getInfo("Operations")
   
@@ -293,6 +292,19 @@ const hideFilters = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 //*************************************************************************************************** */
 //*************************************************************************************************** */
 //*************************************************************************************************** */
@@ -334,6 +346,7 @@ const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL 
 //------------------------------------ RENDER------------------------------------------------
 
 const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+  console.log(arrayCategorys)
   clear("#container-category")
   for (const categorie of arrayCategorys) {
 
@@ -344,14 +357,13 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
     <div class="flex">
         <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
         <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
-    </div> `;
+    </div> `
 
     // AGREGO ESTO A TU CODIGO :)
     just(".form-select-category").innerHTML += `
-    <option>${item.category}</option>`;
+    <option>${categorie.category}</option>`;
     just("#select-category").innerHTML += `
-    <option>${item.category}</option>`;
-
+    <option>${categorie.category}</option>`;
   }
 }
 
@@ -418,11 +430,38 @@ const viewChangeRemove = (categoryId, categori) => {
   })
 
 }
-
+//                       dflakjsdflakdsjfalk
 const deleteCategory = (categoryId) => {
   const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
   setInfo("categories", datoActual)
 }
+
+
+
+
+//ESTE CODIGO FUNCIONA PERO NO SE COMO HACERLE DEPENDIENTE DE CATEGORIAS DIRECTAMENTE 
+const opWithoutCategory = () => {
+console.log(getInfo('Operations')) //arranco con arr de 6 
+// Obtén los datos del Local Storage
+const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
+
+// Filtra los datos para excluir el objeto con la categoría "Salidas"
+const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
+
+// Actualiza el Local Storage con los datos filtrados
+localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
+
+console.log(getInfo('Operations'))//me voy con arr de 5
+console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
+}
+opWithoutCategory()
+
+
+
+
+
+
+
 
 
 // -----------------------------------EVENTS---------------------------------------------------
@@ -430,7 +469,6 @@ const deleteCategory = (categoryId) => {
 const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
-  renderOptionCategory(allCategories) // LLAMO A LA FUNCION Y PINTS LA OPTION CON LAS CATEGORIAS
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
     window.location.reload()
