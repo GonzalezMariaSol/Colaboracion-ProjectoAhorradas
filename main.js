@@ -364,14 +364,9 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
     <option>${categorie.category}</option>`;
     just("#select-category").innerHTML += `
     <option>${categorie.category}</option>`;
+
   }
 }
-
-
-
-
-
-
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
@@ -475,9 +470,7 @@ const inicializeApp = () => {
 
   })
 
-
-
-  just("#btn-edit-categorie").addEventListener("click", (e) => {
+just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
