@@ -330,18 +330,12 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
 
     // AGREGO ESTO A TU CODIGO :)
     just(".form-select-category").innerHTML += `
-    <option>${item.category}</option>`;
+    <option>${categorie.category}</option>`;
     just("#select-category").innerHTML += `
-    <option>${item.category}</option>`;
+    <option>${categorie.category}</option>`;
 
   }
 }
-
-
-
-
-
-
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
@@ -412,16 +406,13 @@ const deleteCategory = (categoryId) => {
 const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
-  renderOptionCategory(allCategories) // LLAMO A LA FUNCION Y PINTS LA OPTION CON LAS CATEGORIAS
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
     window.location.reload()
 
   })
 
-
-
-  just("#btn-edit-categorie").addEventListener("click", (e) => {
+just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
