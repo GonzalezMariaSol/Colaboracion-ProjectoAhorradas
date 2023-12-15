@@ -28,29 +28,31 @@ const showViews = (view) => {
 //SHOWOPERATIONS ES QUIEN IMPRIME EN PANTALLA LAS CASILLAS CON LA INFO QUE CARGO EL USUARIO
 const showOperations = (arrOperations) => {
   //arrOperations va a ser lo que obtengamos del local storage q ya viene con forma de arr
-  if (!(arrOperations && arrOperations.length > 0)) {
+  just(".tbody-info-loaded").innerHTML = "" 
+  if (!(arrOperations.length > 0)) {
     just(".view-no-operations").classList.remove("hidden");
     just(".div-table-container").classList.add("hidden");
   }
   for (const operation of arrOperations) {
     //por cda operacion(me trae cda hilera) del array operations
-    just(".table-userOperation").innerHTML +=
-      //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
-      `
-      <tr>
-        <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
-        <td class="text-center border-r-6 p-3 border-transparent">${operation.categoria}</td>
-        <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
-        <td class="text-center border-r-6 p-3 border-transparent break-all">${operation.monto}</td>
-        <td class="p-3 flex flex-col">
-            <button class="bg-[#ebfffc] text-emerald-500 text-center mb-1 border-r-6 border-transparent rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
-            <button class="bg-[#ebfffc] text-emerald-500 text-center border-r-6 border-transparent rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
-        </td>
-      </tr>
-      <tr class="m-28 border-[1vh] border-[#ffffff92]"></tr> 
-      `;
+    just(".tbody-info-loaded").innerHTML +=
+    //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
+    `
+    <tr>
+    <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
+    <td class="text-center border-r-6 p-3 border-transparent">${operation.categoria}</td>
+    <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
+    <td class="text-center border-r-6 p-3 border-transparent break-all" id="num-amount">${operation.monto}</td>
+    <td class="p-3 flex flex-col">
+    <button class="bg-[#ebfffc] text-emerald-500 text-center mb-1 border-r-6 border-transparent rounded-md" onclick="ejecutionOfNewOp('${operation.id}')">Editar</button>
+    <button class="bg-[#ebfffc] text-emerald-500 text-center border-r-6 border-transparent rounded-md" onclick="ejecutionDeleteBtn('${operation.id}', '${operation.descripcion}')">Eliminar</button>
+    </td>
+    </tr>
+    <tr class="m-28 border-[1vh] border-[#ffffff92]"></tr> 
+    `
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
+
 
 //?ejecutionDeleteBtn FUNCIONA BIEN
 //SE OCUPA DE HACER EL CAMBIO DE PANTALLAS MAS TAMBIEN GUARDAR LA INFO DE EL ID DE CUAL DE TODAS LAS OP SE QUIERE ELIMINAR
@@ -117,7 +119,7 @@ const saveUserOperation = (opId) => {
     fecha: just("#input-date").value,
   };
 };
-console.log(saveUserOperation());
+// console.log(saveUserOperation());
 
 // LOCAL STORAGE **************************************************************************************************
 //?TOTALOperations FUNCIONA BIEN - muestra un arr vacio al principio y luego si recargo me muestra si cargue o no algo al arr
@@ -169,6 +171,10 @@ const initializeApp = () => {
     showViews("main-page");
     window.location.reload();
   });
+
+  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
+
+
 };
 window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
@@ -199,6 +205,19 @@ const runBtnConfirm = (e) => {
   window.location.reload();
 };
 
+const showSelectedCategory = (e) => {
+  const categoriesValue = e.target.value //esto me devuelve el nombre de la categoria NO el ID
+  const currentOperations = getInfo("Operations")
+  
+  const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
+  // console.log(filterOperations)
+  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
+}
+
+
+
+
+
 
 // PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
 
@@ -215,6 +234,7 @@ const getEarningsBalance = () => {
   return totalEarnings
 }
 getEarningsBalance()
+
 
 const getExpensesBalance = () => {
   let totalExpenses = 0
@@ -254,9 +274,6 @@ const hideFilters = () => {
 }
 
 
-
-
-// FUNCIONALIDAD DE FILTROS *****************************************************************************************
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
 
 //!tengo que ver como fucionar los 2 initialize app de cada una
@@ -270,6 +287,19 @@ const hideFilters = () => {
 //     return `${day}/${month}/${year}` //y retorno la fecha en el orden que yo quiera mostrar
 // }
 // console.log(shapeDate(prueba))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -316,6 +346,7 @@ const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL 
 //------------------------------------ RENDER------------------------------------------------
 
 const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+  console.log(arrayCategorys)
   clear("#container-category")
   for (const categorie of arrayCategorys) {
 
@@ -326,7 +357,7 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
     <div class="flex">
         <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
         <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
-    </div> `;
+    </div> `
 
     // AGREGO ESTO A TU CODIGO :)
     just(".form-select-category").innerHTML += `
@@ -394,11 +425,38 @@ const viewChangeRemove = (categoryId, categori) => {
   })
 
 }
-
+//                       dflakjsdflakdsjfalk
 const deleteCategory = (categoryId) => {
   const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
   setInfo("categories", datoActual)
 }
+
+
+
+
+//ESTE CODIGO FUNCIONA PERO NO SE COMO HACERLE DEPENDIENTE DE CATEGORIAS DIRECTAMENTE 
+const opWithoutCategory = () => {
+console.log(getInfo('Operations')) //arranco con arr de 6 
+// Obtén los datos del Local Storage
+const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
+
+// Filtra los datos para excluir el objeto con la categoría "Salidas"
+const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
+
+// Actualiza el Local Storage con los datos filtrados
+localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
+
+console.log(getInfo('Operations'))//me voy con arr de 5
+console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
+}
+opWithoutCategory()
+
+
+
+
+
+
+
 
 
 // -----------------------------------EVENTS---------------------------------------------------
