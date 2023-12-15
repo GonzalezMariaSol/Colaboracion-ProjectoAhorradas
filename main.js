@@ -127,56 +127,56 @@ const saveUserOperation = (opId) => {
 const totalOperations = getInfo("Operations") || []; //totalOperations va a guardar primero la info que hay bajo el nombre de operations O si no hay info, entonces un array vacio
 
 //NI BIEN ABRIMOS LA WEB QUIERO ... ***************************************************************************************
-const initializeApp = () => {
+// const initializeApp = () => {
   //?setInfo funciona bien
-  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
+  // setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
-  //?showOperations funciona bien
-  showOperations(totalOperations);
+  // //?showOperations funciona bien
+  // showOperations(totalOperations);
 
-  //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
-  just("#btn-balance-navb").addEventListener("click", () =>
-    showViews("main-page")
-  ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
-  just("#btn-category-navb").addEventListener("click", () =>
-    showViews("section-category")
-  ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
-  just("#btn-reports-navb").addEventListener("click", () =>
-    showViews("section-reports")
-  ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+  // //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
+  // just("#btn-balance-navb").addEventListener("click", () =>
+  //   showViews("main-page")
+  // ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
+  // just("#btn-category-navb").addEventListener("click", () =>
+  //   showViews("section-category")
+  // ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
+  // just("#btn-reports-navb").addEventListener("click", () =>
+  //   showViews("section-reports")
+  // ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
-  // BTN + NUEVA OPERACION //?funciona bien
-  just("#btn-newOp").addEventListener("click", () => {
-    showViews("section-editOperation");
-    just(".btn-confirm-edit").classList.add("hidden");
-    just("#editOp-tittle").classList.add("hidden");
-    just("#btn-add-newOp").classList.remove("hidden");
-    just("#newOp-tittle").classList.remove("hidden");
-  });
+  // // BTN + NUEVA OPERACION //?funciona bien
+  // just("#btn-newOp").addEventListener("click", () => {
+  //   showViews("section-editOperation");
+  //   just(".btn-confirm-edit").classList.add("hidden");
+  //   just("#editOp-tittle").classList.add("hidden");
+  //   just("#btn-add-newOp").classList.remove("hidden");
+  //   just("#newOp-tittle").classList.remove("hidden");
+  // });
 
-  // BTN AGREGAR - NUEVA OPERACION //?funciona bien
-  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+  // // BTN AGREGAR - NUEVA OPERACION //?funciona bien
+  // just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
-  // -----------BOTON CANCELAR OPERACION //?funciona bien
-  just("#btn-cancel-newOp").addEventListener("click", () => {
-    //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
-    showViews("main-page");
-    window.location.reload();
-  });
+  // // -----------BOTON CANCELAR OPERACION //?funciona bien
+  // just("#btn-cancel-newOp").addEventListener("click", () => {
+  //   //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+  //   showViews("main-page");
+  //   window.location.reload();
+  // });
 
-  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
+  // just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
 
-  just(".btn-cancel-delete").addEventListener("click", () => {
-    //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
-    showViews("main-page");
-    window.location.reload();
-  });
+  // just(".btn-cancel-delete").addEventListener("click", () => {
+  //   //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
+  //   showViews("main-page");
+  //   window.location.reload();
+  // });
 
-  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
+  // just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
 
 
-};
-window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
+// };
+// window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
 //?runBtnAddNewOp FUNCIONA BIEN
 //runBtnAddNewOp SE EJECUTA DENTRO DE initializeApp, Y SE ENCARGA DE PEDIR INFO EN FORMATO OBJ, LO TRANSFORMA A ARR Y LO DEVUELVE MODIFICADO
@@ -274,9 +274,44 @@ const hideFilters = () => {
 }
 
 
+// VALIDATIONS
+
+// const validateForm = () => {
+//   const reqEmail = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}') //guardamos una expresion regular la cual diga q contenga esto
+// }
+
+
+console.log(just("#input-description-text"))
+
+  function validarFormulario() {
+    // Obtener los valores de los campos
+    const campoTexto = just('#input-description-text').value;
+    const campoNumero = just('#input-amount-numb').value;
+    const select1 = just('#select-type').value;
+    const select2 = just('#select-category').value;
+    const campoFecha = just('#input-date').value;
+    // Validar que todos los campos estén llenos
+    if (campoTexto === '' || campoNumero === '' || select1 === '' || select2 === '' || campoFecha === '') {
+      return console.log("false") // Evitar que se envíe el formulario
+    }
+
+    // Si todos los campos están llenos, puedes realizar otras validaciones si es necesario
+
+    // El formulario se enviará si la función retorna true
+    return console.log("true") // Evitar que se envíe el formulario
+  }
+  validarFormulario()
+
+
+
+
+
+
+
+
+
 //me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
 
-//!tengo que ver como fucionar los 2 initialize app de cada una
 
 //!porque el shapeDate no funciona si lo pongo dentro del innerhtml table
 // const shapeDate = (objOperation) => {//hago una funcion la cual va a estar dando la forma de dd/mm/aa a la fecha
@@ -479,6 +514,52 @@ just("#btn-edit-categorie").addEventListener("click", (e) => {
   })
 
 
+
+
+  //?setInfo funciona bien
+  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
+  //?showOperations funciona bien
+  showOperations(totalOperations);
+
+  //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
+  just("#btn-balance-navb").addEventListener("click", () =>
+    showViews("main-page")
+  ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
+  just("#btn-category-navb").addEventListener("click", () =>
+    showViews("section-category")
+  ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
+  just("#btn-reports-navb").addEventListener("click", () =>
+    showViews("section-reports")
+  ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+
+  // BTN + NUEVA OPERACION //?funciona bien
+  just("#btn-newOp").addEventListener("click", () => {
+    showViews("section-editOperation");
+    just(".btn-confirm-edit").classList.add("hidden");
+    just("#editOp-tittle").classList.add("hidden");
+    just("#btn-add-newOp").classList.remove("hidden");
+    just("#newOp-tittle").classList.remove("hidden");
+  });
+
+  // BTN AGREGAR - NUEVA OPERACION //?funciona bien
+  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+
+  // -----------BOTON CANCELAR OPERACION //?funciona bien
+  just("#btn-cancel-newOp").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
+
+  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
+
+  just(".btn-cancel-delete").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
+
+  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
 
 }
 window.addEventListener("load", inicializeApp())
