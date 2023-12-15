@@ -206,8 +206,8 @@ const runBtnConfirm = (e) => {
 // CALCULOGANANCIAS
 const getEarningsBalance = () => {
   let totalEarnings = 0
-  for(const operacion of getInfo("Operations")){
-    if(operacion.tipo === "ganancia"){
+  for (const operacion of getInfo("Operations")) {
+    if (operacion.tipo === "ganancia") {
       totalEarnings += Number(operacion.monto)
       just(".full-earnings").innerHTML = `${totalEarnings}`
     }
@@ -218,8 +218,8 @@ getEarningsBalance()
 
 const getExpensesBalance = () => {
   let totalExpenses = 0
-  for(const operacion of getInfo("Operations")){
-   if(operacion.tipo === "gasto"){
+  for (const operacion of getInfo("Operations")) {
+    if (operacion.tipo === "gasto") {
       totalExpenses += Number(operacion.monto)
       just(".full-expenses").innerHTML = `${totalExpenses}`
     }
@@ -231,9 +231,9 @@ getExpensesBalance()
 const getNetBalance = () => {
   const totalBalance = getEarningsBalance() - getExpensesBalance()
   just(".full-balance-num").innerHTML = `${totalBalance}`
-  if(totalBalance < 0){
+  if (totalBalance < 0) {
     just(".full-balance").classList.add("text-red-600")
-  }else if(totalBalance > 0){
+  } else if (totalBalance > 0) {
     just(".full-balance").classList.add("text-lime-500")
   }
 }
@@ -244,10 +244,10 @@ getNetBalance()
 // OCULTAR-MOSRAR FILTROS
 just("#btn-hide-show-filters").addEventListener("click", () => hideFilters())
 const hideFilters = () => {
-  if(!just(".form-filters").classList.contains('hidden')){
+  if (!just(".form-filters").classList.contains('hidden')) {
     just(".form-filters").classList.add("hidden")
     just("#btn-hide-show-filters").textContent = 'Mostrar filtros'
-  }else {
+  } else {
     just(".form-filters").classList.remove("hidden")
     just("#btn-hide-show-filters").textContent = 'Ocultar filtros'
   }
@@ -354,6 +354,7 @@ const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT
 }
 // PASE POR PARAMETRO EL ID DE MI OBJETO
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
+
   showElement(".section-edit-category")
   hideElement(".section-category")
   just("#btn-edit-categorie").setAttribute("id-categori", categoryId) //AGREGA EL ATRIBUTO Y PASA POR PARAMETRO ID
@@ -366,7 +367,8 @@ const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CA
 const addCategory = () => {
   const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
   datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", datoActual)   // ENVIOO LA INFO AL LOCAL STORE  
+  setInfo("categories", datoActual) 
+  renderCategory(datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
 
 }
 
@@ -379,6 +381,7 @@ const editBtnCategory = () => {
     return categorie
   })
   setInfo("categories", datoActual);
+  renderCategory(datoActual)
 }
 
 const viewChangeRemove = (categoryId, categori) => {
@@ -406,18 +409,22 @@ const deleteCategory = (categoryId) => {
 const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
+
+
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
-    window.location.reload()
+
+
 
   })
 
-just("#btn-edit-categorie").addEventListener("click", (e) => {
+  just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-    window.location.reload()
+   
+
   })
 
 
