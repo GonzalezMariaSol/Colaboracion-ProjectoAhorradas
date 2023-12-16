@@ -330,21 +330,15 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
         <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
     </div> `;
 
-  
+
     just(".form-select-category").innerHTML += `
       <option value=${categorie.id}>${categorie.category}</option>`;
     just("#select-category").innerHTML += `
       <option value=${categorie.id}>${categorie.category}</option>`;
-    
+
 
   }
 }
-
-
-
-
-
-
 
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
@@ -380,8 +374,8 @@ const addCategory = () => {
   const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
   datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
   setInfo("categories", datoActual)
-  renderCategory(datoActual) 
- 
+  renderCategory(datoActual)
+
 
 }
 
@@ -405,7 +399,7 @@ const viewChangeRemove = (categoryId, categori) => {
   just("#btn-remove-categories").addEventListener("click", () => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
-    window.location.reload()
+
 
   })
 
@@ -418,6 +412,82 @@ const deleteCategory = (categoryId) => {
 
 // ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
 
+const renderReporte = (arrayOperation) => { //!   NO FUNCIONA
+  if (arrayOperation.length >= 3) {
+    showElement(".section-edit-reports")
+    hideElement(".section-reports")
+  
+    for (const operation of arrayOperation) {
+    just("#reportes").innerHTML += `<tbody >
+   <tr class="mb-[1rem]  h-[20%] w-[50%]"> 
+      <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
+          <td></td>
+          <td></td>
+  </tr>
+  <tr>
+      <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
+          <td></td>
+          <td></td>
+
+  </tr>
+  <tr>
+      <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
+          <td></td>
+          <td></td>
+
+  </tr>
+  <tr>
+      <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
+          <td></td>
+          <td></td>
+
+  </tr>
+  <tr>
+      <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
+          <td></td>
+          <td></td>
+
+  </tr>
+</tbody> 
+ `
+
+  }
+}
+else{
+showElementElement(".section-reports")
+}
+}
+
+
+renderReporte(totalOperations)
+
+
+
+
+
+const renderTotalCategory = (arrayCategorys) => {
+  for (const category of arrayCategorys) {
+    just("#total-category").innerHTML = `<tr>
+    <td class="text-left"></td>
+    <td class="text-left"></td>
+    <td class="text-left"></td>
+    <td class="text-left"></td>
+</tr>`
+  }
+
+}
+
+
+const rendertotalMonth = (arrayCategorys) => {
+  for (const category of arrayCategorys) {
+    just("#totalMonth").innerHTML = ` 
+    <td></td>
+    <td> </td>
+    <td></td>
+    <td></td>`
+  }
+
+}
 
 
 
@@ -446,6 +516,10 @@ const inicializeApp = () => {
 
   })
 
+  just("#btn-remove-categories").addEventListener("click", (e) => {
+    showElement(".section-category")
+    hideElement(".container-eliminar")
+  })
 
 
 }
