@@ -34,7 +34,6 @@ const showOperations = (arrOperations) => {
     just(".div-table-container").classList.add("hidden");
   }
   for (const operation of arrOperations) {
-    console.log(operation.categoria, operation.descripcion)
     //por cda operacion(me trae cda hilera) del array operations
     const buscoAlCategoria = (idCategoria) => {
     for(const category of getInfo("categories")){
@@ -115,7 +114,7 @@ const ejecutionOfNewOp = (opId) => {
   just("#input-amount-numb").value = choosenOperation.monto; //al precargar va a mostrar el value de la op que selecciono
   just("#select-type").value = choosenOperation.tipo; //al precargar va a mostrar el value de la op que selecciono
   just("#select-category").value = choosenOperation.categoria; //al precargar va a mostrar el value de la op que selecciono
-  just("#input-date").value = choosenOperation.fecha; //
+  just("#op-input-date").value = choosenOperation.fecha; //
 };
 
 //?SAVEUSEROPERATION FUNCIONA BIEN
@@ -129,9 +128,10 @@ const saveUserOperation = (opId) => {
     monto: just("#input-amount-numb").value,
     tipo: just("#select-type").value,
     categoria: just("#select-category").value,
-    fecha: just("#input-date").value,
+    fecha: just("#op-input-date").value,
   };
 };
+
 
 // LOCAL STORAGE **************************************************************************************************
 //?TOTALOperations FUNCIONA BIEN - muestra un arr vacio al principio y luego si recargo me muestra si cargue o no algo al arr
@@ -231,7 +231,8 @@ const hideFilters = () => {
 
 //FILTRAR POR CATEGORIA 
 const showSelectedCategory = (e) => {
-  const categoriesValue = e.target.value //esto me devuelve el nombre de la categoria NO el ID
+  console.log(e) //vale a toda la informacion que trae el option seleccionado de categorias
+  const categoriesValue = e.target.value //esto me devuelve el ID de la categoria 
   const currentOperations = getInfo("Operations")
   
   const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
@@ -240,12 +241,34 @@ const showSelectedCategory = (e) => {
 }
 
 // FILTRAR POR FECHA 
+just("#input-date").addEventListener("input", (e) => showSelectedDate(e)) //2023-12-18
+const showSelectedDate = (e) => {
+  const choosenDate = e.target.value
+  console.log(choosenDate) //bien 
+  const loadedOperations = getInfo("Operations")
+
+  return  loadedOperations.filter(op => console.log(op))
+}
+
 
 // FILTRAR POR MAYOR-RECIENTE O ABC
 
 
 
-
+// const opWithoutCategory = () => {
+//   // Obtén los datos del Local Storage
+//   const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
+  
+//   // Filtra los datos para excluir el objeto con la categoría "Salidas"
+//   const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
+  
+//   // Actualiza el Local Storage con los datos filtrados
+//   localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
+  
+//   console.log(getInfo('Operations'))//me voy con arr de 5
+//   console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
+//   }
+//   opWithoutCategory()
 
 
 
