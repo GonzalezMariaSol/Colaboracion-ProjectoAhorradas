@@ -34,13 +34,22 @@ const showOperations = (arrOperations) => {
     just(".div-table-container").classList.add("hidden");
   }
   for (const operation of arrOperations) {
+    console.log(operation.categoria, operation.descripcion)
     //por cda operacion(me trae cda hilera) del array operations
+    const buscoAlCategoria = (idCategoria) => {
+    for(const category of getInfo("categories")){
+      if(idCategoria === category.id){
+        return(category.category)
+    
+      }
+    }}
     just(".tbody-info-loaded").innerHTML +=
     //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
     `
     <tr>
     <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
-    <td class="text-center border-r-6 p-3 border-transparent">${operation.categoria}</td>
+    <td class="text-center border-r-6 p-3 border-transparent">${buscoAlCategoria(operation.categoria)
+    }</td>
     <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
     <td class="text-center border-r-6 p-3 border-transparent break-all" id="num-amount">${operation.monto}</td>
     <td class="p-3 flex flex-col">
@@ -52,6 +61,10 @@ const showOperations = (arrOperations) => {
     `
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
 };
+
+
+
+
 
 
 //?ejecutionDeleteBtn FUNCIONA BIEN
@@ -119,64 +132,11 @@ const saveUserOperation = (opId) => {
     fecha: just("#input-date").value,
   };
 };
-// console.log(saveUserOperation());
 
 // LOCAL STORAGE **************************************************************************************************
 //?TOTALOperations FUNCIONA BIEN - muestra un arr vacio al principio y luego si recargo me muestra si cargue o no algo al arr
 //TOTALOperations VALE LO Q LA KEY TENGA O SINO UN ARR VACIO
 const totalOperations = getInfo("Operations") || []; //totalOperations va a guardar primero la info que hay bajo el nombre de operations O si no hay info, entonces un array vacio
-
-//NI BIEN ABRIMOS LA WEB QUIERO ... ***************************************************************************************
-const initializeApp = () => {
-  //?setInfo funciona bien
-  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
-
-  //?showOperations funciona bien
-  showOperations(totalOperations);
-
-  //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
-  just("#btn-balance-navb").addEventListener("click", () =>
-    showViews("main-page")
-  ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
-  just("#btn-category-navb").addEventListener("click", () =>
-    showViews("section-category")
-  ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
-  just("#btn-reports-navb").addEventListener("click", () =>
-    showViews("section-reports")
-  ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
-
-  // BTN + NUEVA OPERACION //?funciona bien
-  just("#btn-newOp").addEventListener("click", () => {
-    showViews("section-editOperation");
-    just(".btn-confirm-edit").classList.add("hidden");
-    just("#editOp-tittle").classList.add("hidden");
-    just("#btn-add-newOp").classList.remove("hidden");
-    just("#newOp-tittle").classList.remove("hidden");
-  });
-
-  // BTN AGREGAR - NUEVA OPERACION //?funciona bien
-  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
-
-  // -----------BOTON CANCELAR OPERACION //?funciona bien
-  just("#btn-cancel-newOp").addEventListener("click", () => {
-    //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
-    showViews("main-page");
-    window.location.reload();
-  });
-
-  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
-
-  just(".btn-cancel-delete").addEventListener("click", () => {
-    //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
-    showViews("main-page");
-    window.location.reload();
-  });
-
-  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
-
-
-};
-window.addEventListener("load", initializeApp); // esto va a esperar a que toda la página se cargue antes de ejecutar el evento clic
 
 //?runBtnAddNewOp FUNCIONA BIEN
 //runBtnAddNewOp SE EJECUTA DENTRO DE initializeApp, Y SE ENCARGA DE PEDIR INFO EN FORMATO OBJ, LO TRANSFORMA A ARR Y LO DEVUELVE MODIFICADO
@@ -205,14 +165,6 @@ const runBtnConfirm = (e) => {
   window.location.reload();
 };
 
-const showSelectedCategory = (e) => {
-  const categoriesValue = e.target.value //esto me devuelve el nombre de la categoria NO el ID
-  const currentOperations = getInfo("Operations")
-  
-  const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
-  // console.log(filterOperations)
-  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
-}
 
 
 
@@ -223,30 +175,31 @@ const showSelectedCategory = (e) => {
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 // CALCULOGANANCIAS
+
 const getEarningsBalance = () => {
   let totalEarnings = 0
-  for (const operacion of getInfo("Operations")) {
-    if (operacion.tipo === "ganancia") {
+  if(getInfo("Operations")){
+  for(const operacion of getInfo("Operations")){
+    if(operacion.tipo === "ganancia"){
       totalEarnings += Number(operacion.monto)
       just(".full-earnings").innerHTML = `${totalEarnings}`
     }
   }
   return totalEarnings
-}
-getEarningsBalance()
+}}
 
 
 const getExpensesBalance = () => {
   let totalExpenses = 0
-  for (const operacion of getInfo("Operations")) {
-    if (operacion.tipo === "gasto") {
+  if(getInfo("Operations")){
+  for(const operacion of getInfo("Operations")){
+   if(operacion.tipo === "gasto"){
       totalExpenses += Number(operacion.monto)
       just(".full-expenses").innerHTML = `${totalExpenses}`
     }
   }
   return totalExpenses
-}
-getExpensesBalance()
+}}
 
 const getNetBalance = () => {
   const totalBalance = getEarningsBalance() - getExpensesBalance()
@@ -261,7 +214,7 @@ getNetBalance()
 
 
 // FUNCIONALIDAD DE FILTROS *****************************************************************************************
-// OCULTAR-MOSRAR FILTROS
+// OCULTAR-MOSTRAR FILTROS
 just("#btn-hide-show-filters").addEventListener("click", () => hideFilters())
 const hideFilters = () => {
   if (!just(".form-filters").classList.contains('hidden')) {
@@ -273,20 +226,23 @@ const hideFilters = () => {
   }
 }
 
+// FILTRAR POT TIPO GANANCIA - GASTO
 
-//me tendria que traer lo que hay en el LS de categorias y meter cda categoria dentro de un option-select
 
-//!tengo que ver como fucionar los 2 initialize app de cada una
+//FILTRAR POR CATEGORIA 
+const showSelectedCategory = (e) => {
+  const categoriesValue = e.target.value //esto me devuelve el nombre de la categoria NO el ID
+  const currentOperations = getInfo("Operations")
+  
+  const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
+  // console.log(filterOperations)
+  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
+}
 
-//!porque el shapeDate no funciona si lo pongo dentro del innerhtml table
-// const shapeDate = (objOperation) => {//hago una funcion la cual va a estar dando la forma de dd/mm/aa a la fecha
-//   const separateDate = objOperation.fecha
-//     const day = separateDate.getDate() //capturo el numero del dia
-//     const month = separateDate.getMonth() + 1; //capturo el numero del mes +1 porque los meses van de 0 a 11
-//     const year = separateDate.getFullYear()// capturo el numero de anio
-//     return `${day}/${month}/${year}` //y retorno la fecha en el orden que yo quiera mostrar
-// }
-// console.log(shapeDate(prueba))
+// FILTRAR POR FECHA 
+
+// FILTRAR POR MAYOR-RECIENTE O ABC
+
 
 
 
@@ -349,7 +305,6 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
   console.log(arrayCategorys)
   clear("#container-category")
   for (const categorie of arrayCategorys) {
-
     just("#container-category").innerHTML += `<li class=" flex  justify-between mb-[1rem]">
     <p
         class=" w-[4rem] bg-[#ebfffc] pt-[3px] rounded-[0.3rem] text-[0.8rem]  text-center text-emerald-500">
@@ -359,14 +314,16 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
         <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
     </div> `
 
-    // AGREGO ESTO A TU CODIGO :)
-    just(".form-select-category").innerHTML += `
-    <option>${categorie.category}</option>`;
-    just("#select-category").innerHTML += `
-    <option>${categorie.category}</option>`;
-
+    just("#form-select-category").innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`
+    just("#select-category").innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`
   }
 }
+
+
+
+
+
+
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
@@ -428,31 +385,25 @@ const viewChangeRemove = (categoryId, categori) => {
   })
 
 }
-//                       dflakjsdflakdsjfalk
 const deleteCategory = (categoryId) => {
   const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
   setInfo("categories", datoActual)
 }
 
 
+// FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
+// const opWithoutCategory = () => {
+// console.log(getInfo('Operations')) //arranco con arr de 6 
 
-
-//ESTE CODIGO FUNCIONA PERO NO SE COMO HACERLE DEPENDIENTE DE CATEGORIAS DIRECTAMENTE 
-const opWithoutCategory = () => {
-console.log(getInfo('Operations')) //arranco con arr de 6 
-// Obtén los datos del Local Storage
-const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
-
-// Filtra los datos para excluir el objeto con la categoría "Salidas"
-const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
-
-// Actualiza el Local Storage con los datos filtrados
-localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
-
-console.log(getInfo('Operations'))//me voy con arr de 5
-console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
-}
-opWithoutCategory()
+// for(const operation of getInfo('Operations')){
+//   console.log(operation.categoria)
+//   for(const category of getInfo("categories")){
+//     console.log(category.category)
+//     const OpActual = getInfo("Operations").filter(operation => operation.categoria !== category.category);
+//     console.log(OpActual)
+//   }
+// }
+// }
 
 
 
@@ -476,15 +427,64 @@ const inicializeApp = () => {
 
   })
 
+  
+
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-   
-
+    window.location.reload()
   })
 
+
+
+
+  //?setInfo funciona bien
+  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
+
+  //?showOperations funciona bien
+  showOperations(totalOperations);
+
+  //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
+  just("#btn-balance-navb").addEventListener("click", () =>
+    showViews("main-page")
+  ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
+  just("#btn-category-navb").addEventListener("click", () =>
+    showViews("section-category")
+  ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
+  just("#btn-reports-navb").addEventListener("click", () =>
+    showViews("section-reports")
+  ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+
+  // BTN + NUEVA OPERACION //?funciona bien
+  just("#btn-newOp").addEventListener("click", () => {
+    showViews("section-editOperation");
+    just(".btn-confirm-edit").classList.add("hidden");
+    just("#editOp-tittle").classList.add("hidden");
+    just("#btn-add-newOp").classList.remove("hidden");
+    just("#newOp-tittle").classList.remove("hidden");
+  });
+
+  // BTN AGREGAR - NUEVA OPERACION //?funciona bien
+  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+
+  // -----------BOTON CANCELAR OPERACION //?funciona bien
+  just("#btn-cancel-newOp").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
+
+  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
+
+  just(".btn-cancel-delete").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
+
+  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
 
 
 }
