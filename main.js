@@ -254,29 +254,14 @@ const showSelectedCategory = (e) => {
 
 // FILTRAR POR FECHA //a partir de la fecha seleccionada para atras hay que mostrar
 const showSelectedDate = (e) => {
-  console.log(e.target.value)
   const choosenDate = new Date(e.target.value)
   const selectedMonth = choosenDate.getMonth() + 1 //me trae el mes SELECCIONADO
   const selectedYear = choosenDate.getFullYear() //el anio SELECCIONADO
-  const loadedOperations = getInfo("Operations")
-  
-  console.log("soy mes seleccionado", selectedMonth)
-  console.log("soy anio seleccionado", selectedYear)
 
+  const loadedOperation = getInfo("Operations")
 
-  const filterOperations = loadedOperations.filter(op => {
-    const operationsDates = op.fecha.split("-")
-    // const operationsYear = Number(operationsDates[0])
-    // const operationsMonth = Number(operationsDates[1])
-//     console.log("soy el anio de operaciones", operationsYear)
-// console.log("soy el mes de operaciones", operationsMonth)
-
-console.log("soy el op", Number(operationsDates[0]))
-
-    if(selectedMonth < Number(operationsDates[1]) && selectedYear < Number(operationsDates[0])){
-      console.log("hols")
-    }
-  })
+  const filterOperations = loadedOperation.filter(op => selectedYear >= op.fecha.split("-")[0] && selectedMonth >= op.fecha.split("-")[1])
+  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
 }
 
 
