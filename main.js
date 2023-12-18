@@ -226,7 +226,19 @@ const hideFilters = () => {
   }
 }
 
-// FILTRAR POT TIPO GANANCIA - GASTO
+// FILTRAR POR TIPO GANANCIA - GASTO
+const showSelectedType = (e) => {
+  console.log(e.target.value)
+  const loadedOperation = getInfo("Operations")
+  console.log(loadedOperation)
+  const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
+  if(filterOperations){
+    showOperations(filterOperations)
+  }
+  //!!TENGO QUE RESOLVER COMO MOSTRAR TODOS Y FUNCIONA UNA VEZ Y LUEGO SE ROMPE
+}
+
+
 
 
 //FILTRAR POR CATEGORIA 
@@ -241,9 +253,8 @@ const showSelectedCategory = (e) => {
 }
 
 // FILTRAR POR FECHA 
-just("#input-date").addEventListener("input", (e) => showSelectedDate(e)) //2023-12-18
 const showSelectedDate = (e) => {
-  const choosenDate = e.target.value
+  const choosenDate = e.target.value //2023-12-18
   console.log(choosenDate) //bien 
   const loadedOperations = getInfo("Operations")
 
@@ -252,7 +263,9 @@ const showSelectedDate = (e) => {
 
 
 // FILTRAR POR MAYOR-RECIENTE O ABC
+const showSelectedOrder = (e) => {
 
+}
 
 
 // const opWithoutCategory = () => {
@@ -507,7 +520,10 @@ const inicializeApp = () => {
     window.location.reload();
   });
 
+  just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
   just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
+  // just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
+  // just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
 
 
 }
