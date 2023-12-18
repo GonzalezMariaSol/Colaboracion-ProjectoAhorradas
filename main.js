@@ -252,13 +252,31 @@ const showSelectedCategory = (e) => {
   showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
 }
 
-// FILTRAR POR FECHA 
+// FILTRAR POR FECHA //a partir de la fecha seleccionada para atras hay que mostrar
 const showSelectedDate = (e) => {
-  const choosenDate = e.target.value //2023-12-18
-  console.log(choosenDate) //bien 
+  console.log(e.target.value)
+  const choosenDate = new Date(e.target.value)
+  const selectedMonth = choosenDate.getMonth() + 1 //me trae el mes SELECCIONADO
+  const selectedYear = choosenDate.getFullYear() //el anio SELECCIONADO
   const loadedOperations = getInfo("Operations")
+  
+  console.log("soy mes seleccionado", selectedMonth)
+  console.log("soy anio seleccionado", selectedYear)
 
-  return  loadedOperations.filter(op => console.log(op))
+
+  const filterOperations = loadedOperations.filter(op => {
+    const operationsDates = op.fecha.split("-")
+    // const operationsYear = Number(operationsDates[0])
+    // const operationsMonth = Number(operationsDates[1])
+//     console.log("soy el anio de operaciones", operationsYear)
+// console.log("soy el mes de operaciones", operationsMonth)
+
+console.log("soy el op", Number(operationsDates[0]))
+
+    if(selectedMonth < Number(operationsDates[1]) && selectedYear < Number(operationsDates[0])){
+      console.log("hols")
+    }
+  })
 }
 
 
@@ -522,7 +540,7 @@ const inicializeApp = () => {
 
   just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
   just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
-  // just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
+  just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
   // just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
 
 
