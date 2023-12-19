@@ -236,11 +236,9 @@ const hideFilters = () => {
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
   const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
-  if(filterOperations){
     showOperations(filterOperations)
-  }
-  //!!TENGO QUE RESOLVER COMO MOSTRAR TODOS Y FUNCIONA UNA VEZ Y LUEGO SE ROMPE
 }
+//!!TENGO QUE RESOLVER COMO MOSTRAR TODOS Y FUNCIONA UNA VEZ Y LUEGO SE ROMPE
 
 
 //FILTRAR POR CATEGORIA 
