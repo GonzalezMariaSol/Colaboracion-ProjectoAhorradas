@@ -387,10 +387,9 @@ const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL 
 
 //------------------------------------ RENDER------------------------------------------------
 
-const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS y OPTIONS //! PREGUNTAR SI ESTA BIEN  O DEBO HACERLO EN UNA FUNCION APARTE
+const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+  console.log(arrayCategorys)
   clear("#container-category")
-  clear(".form-select-category")
-  clear("#select-category")
   for (const categorie of arrayCategorys) {
     just("#container-category").innerHTML += `<li class=" flex  justify-between mb-[1rem]">
     <p
@@ -399,17 +398,17 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
     <div class="flex">
         <button class="edit  w-[4rem] pt-[4px] text-[0.8rem] text-cente text-[#3273df]"onclick="editCategory('${categorie.id}')" >Editar</button>
         <button  class="btn-remove w-[4rem] pt-[4px]  text-[0.8rem] text-cente text-[#3273df]" onclick="viewChangeRemove('${categorie.id}'  , '${categorie.category}')">Eliminar</button>
-    </div> `;
+    </div> `
 
-
-    just(".form-select-category").innerHTML += `
-      <option value=${categorie.id}>${categorie.category}</option>`;
-    just("#select-category").innerHTML += `
-      <option value=${categorie.id}>${categorie.category}</option>`;
-
-
+    just("#form-select-category").innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`
+    just("#select-category").innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`
   }
 }
+
+
+
+
+
 
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
@@ -427,8 +426,6 @@ const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT
   }
 
 }
-
-
 // PASE POR PARAMETRO EL ID DE MI OBJETO
 const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
 
@@ -444,9 +441,8 @@ const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CA
 const addCategory = () => {
   const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
   datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", datoActual)
-  renderCategory(datoActual)
-
+  setInfo("categories", datoActual) 
+  renderCategory(datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
 
 }
 
@@ -470,7 +466,7 @@ const viewChangeRemove = (categoryId, categori) => {
   just("#btn-remove-categories").addEventListener("click", () => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
-
+    window.location.reload()
 
   })
 
@@ -480,84 +476,24 @@ const deleteCategory = (categoryId) => {
   setInfo("categories", datoActual)
 }
 
-// ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
 
-const renderReporte = (arrayOperation) => { //!   NO FUNCIONA
-  if (arrayOperation.length >= 3) {
-    showElement(".section-edit-reports")
-    hideElement(".section-reports")
-  
-    for (const operation of arrayOperation) {
-    just("#reportes").innerHTML += `<tbody >
-   <tr class="mb-[1rem]  h-[20%] w-[50%]"> 
-      <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
-          <td></td>
-          <td></td>
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
-          <td></td>
-          <td></td>
+// FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
+// const opWithoutCategory = () => {
+// console.log(getInfo('Operations')) //arranco con arr de 6 
 
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
-          <td></td>
-          <td></td>
-
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
-          <td></td>
-          <td></td>
-
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
-          <td></td>
-          <td></td>
-
-  </tr>
-</tbody> 
- `
-
-  }
-}
-else{
-showElementElement(".section-reports")
-}
-}
-
-
-renderReporte(totalOperations)
+// for(const operation of getInfo('Operations')){
+//   console.log(operation.categoria)
+//   for(const category of getInfo("categories")){
+//     console.log(category.category)
+//     const OpActual = getInfo("Operations").filter(operation => operation.categoria !== category.category);
+//     console.log(OpActual)
+//   }
+// }
+// }
 
 
 
 
-
-const renderTotalCategory = (arrayCategorys) => {
-  for (const category of arrayCategorys) {
-    just("#total-category").innerHTML = `<tr>
-    <td class="text-left"></td>
-    <td class="text-left"></td>
-    <td class="text-left"></td>
-    <td class="text-left"></td>
-</tr>`
-  }
-
-}
-
-
-const rendertotalMonth = (arrayCategorys) => {
-  for (const category of arrayCategorys) {
-    just("#totalMonth").innerHTML = ` 
-    <td></td>
-    <td> </td>
-    <td></td>
-    <td></td>`
-  }
-
-}
 
 
 
@@ -572,21 +508,72 @@ const inicializeApp = () => {
 
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
-})
+
+
+
+  })
+
+  
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-
-
+    window.location.reload()
   })
 
-  just("#btn-remove-categories").addEventListener("click", (e) => {
-    showElement(".section-category")
-    hideElement(".container-eliminar")
-  })
+
+
+
+  //?setInfo funciona bien
+  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
+
+  //?showOperations funciona bien
+  showOperations(totalOperations);
+
+  //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
+  just("#btn-balance-navb").addEventListener("click", () =>
+    showViews("main-page")
+  ); //escucha el click sobre btn de balance y esconde todas las vistas excepto la de balance
+  just("#btn-category-navb").addEventListener("click", () =>
+    showViews("section-category")
+  ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
+  just("#btn-reports-navb").addEventListener("click", () =>
+    showViews("section-reports")
+  ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
+
+  // BTN + NUEVA OPERACION //?funciona bien
+  just("#btn-newOp").addEventListener("click", () => {
+    showViews("section-editOperation");
+    just(".btn-confirm-edit").classList.add("hidden");
+    just("#editOp-tittle").classList.add("hidden");
+    just("#btn-add-newOp").classList.remove("hidden");
+    just("#newOp-tittle").classList.remove("hidden");
+  });
+
+  // BTN AGREGAR - NUEVA OPERACION //?funciona bien
+  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+
+  // -----------BOTON CANCELAR OPERACION //?funciona bien
+  just("#btn-cancel-newOp").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en nueva op y devuelve solo la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
+
+  just(".btn-confirm-edit").addEventListener("click", (e) => runBtnConfirm(e)); //che btn confirmar cuando escuches un click ejecuta la funcion runBtnConfirm
+
+  just(".btn-cancel-delete").addEventListener("click", () => {
+    //escucha el click sobre btn cancelar en eliminar y  te devuelve la vista principal
+    showViews("main-page");
+    window.location.reload();
+  });
+
+  just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
+  just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
+  just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
+  just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
 
 
 }
