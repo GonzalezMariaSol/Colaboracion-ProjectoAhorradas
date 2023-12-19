@@ -29,26 +29,30 @@ const showViews = (view) => {
 const showOperations = (arrOperations) => {
   //arrOperations va a ser lo que obtengamos del local storage q ya viene con forma de arr
   just(".tbody-info-loaded").innerHTML = "" 
+  
   if (!(arrOperations.length > 0)) {
     just(".view-no-operations").classList.remove("hidden");
     just(".div-table-container").classList.add("hidden");
   }
-  for (const operation of arrOperations) {
+  
+  const categoryName = (idCategoria) => {
+  for(const category of getInfo("categories")){
+    if(idCategoria === category.id){
+      return(category.category)
+    }
+  }
+}
+
+  for (const operation of arrOperations) {    
     //por cda operacion(me trae cda hilera) del array operations
-    const buscoAlCategoria = (idCategoria) => {
-    for(const category of getInfo("categories")){
-      if(idCategoria === category.id){
-        return(category.category)
-    
-      }
-    }}
+
     just(".tbody-info-loaded").innerHTML +=
     //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
     `
     <tr>
     <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
-    <td class="text-center border-r-6 p-3 border-transparent">${buscoAlCategoria(operation.categoria)
-    }</td>
+    <td class="text-center border-r-6 p-3 border-transparent"><p class="bg-[#ebfffc] text-emerald-500 text-center rounded-md">${categoryName(operation.categoria)
+    }</p></td>
     <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
     <td class="text-center border-r-6 p-3 border-transparent break-all" id="num-amount">${operation.monto}</td>
     <td class="p-3 flex flex-col">
@@ -59,7 +63,9 @@ const showOperations = (arrOperations) => {
     <tr class="m-28 border-[1vh] border-[#ffffff92]"></tr> 
     `
   } //el btn eliminar coloca como parametros de nuestra funcion ejecutionDeleteBtn (al id y la descripcion que esta entrando como info)
-};
+}
+
+
 
 
 
@@ -307,10 +313,6 @@ console.log(operationsCopy)
     
   }}
 
-
-
-
-  
   
 
 
