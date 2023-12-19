@@ -263,46 +263,55 @@ const showSelectedDate = (e) => {
 // FILTRAR POR MAYOR-RECIENTE O ABC
 const showSelectedOrder = (e) => {  
   const operationsCopy = [...getInfo("Operations")]; //se hace una copia superficil del array con obj del LS
-
+console.log(operationsCopy)
   
   if(e.target.value === "masReciente"){ 
-    
     operationsCopy.sort((a, b) => {
-      const dateA = new Date(a.fecha);
-      const dateB = new Date(b.fecha);
-      return dateB - dateA;
-    });
-    
-    showOperations(operationsCopy);
-    
+      const dateA = new Date(a.fecha)
+      const dateB = new Date(b.fecha)
+      return dateB - dateA
+    })
+    showOperations(operationsCopy)
+
   }else if(e.target.value === "menosReciente"){
-    
     operationsCopy.sort((a, b) => {
-      const dateA = new Date(a.fecha);
-      const dateB = new Date(b.fecha);
-      return dateA - dateB;
-    });
-    
-    showOperations(operationsCopy);
+      const dateA = new Date(a.fecha)
+      const dateB = new Date(b.fecha)
+      return dateA - dateB
+    })
+    showOperations(operationsCopy)
 
   }else if(e.target.value === "menorMonto"){
-
+    operationsCopy.sort((a, b) => a.monto - b.monto);
+    showOperations(operationsCopy)
 
   }else if(e.target.value === "mayorMonto"){
-
+    operationsCopy.sort((a, b) => b.monto - a.monto);
+    showOperations(operationsCopy)
 
   }else if(e.target.value === "AZ"){
-
-
+    operationsCopy.sort((a, b) => {
+      const descripcionA = a.descripcion.toLowerCase();
+      const descripcionB = b.descripcion.toLowerCase();
+      return descripcionA.localeCompare(descripcionB);
+    });
+    showOperations(operationsCopy)
+    
   }else if(e.target.value === "ZA"){
-
-
+    operationsCopy.sort((a, b) => {
+      const descripcionA = a.descripcion.toLowerCase();
+      const descripcionB = b.descripcion.toLowerCase();
+      return descripcionB.localeCompare(descripcionA);
+    });
+    showOperations(operationsCopy)
+    
   }}
 
 
 
 
-
+  
+  
 
 
 
