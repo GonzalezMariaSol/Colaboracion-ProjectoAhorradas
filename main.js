@@ -228,9 +228,7 @@ const hideFilters = () => {
 
 // FILTRAR POR TIPO GANANCIA - GASTO
 const showSelectedType = (e) => {
-  console.log(e.target.value)
   const loadedOperation = getInfo("Operations")
-  console.log(loadedOperation)
   const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
   if(filterOperations){
     showOperations(filterOperations)
@@ -239,18 +237,15 @@ const showSelectedType = (e) => {
 }
 
 
-
-
 //FILTRAR POR CATEGORIA 
 const showSelectedCategory = (e) => {
-  console.log(e) //vale a toda la informacion que trae el option seleccionado de categorias
   const categoriesValue = e.target.value //esto me devuelve el ID de la categoria 
   const currentOperations = getInfo("Operations")
   
   const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
-  // console.log(filterOperations)
   showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
 }
+
 
 // FILTRAR POR FECHA //a partir de la fecha seleccionada para atras hay que mostrar
 const showSelectedDate = (e) => {
@@ -266,9 +261,61 @@ const showSelectedDate = (e) => {
 
 
 // FILTRAR POR MAYOR-RECIENTE O ABC
-const showSelectedOrder = (e) => {
+const showSelectedOrder = (e) => {  
+  const operationsCopy = [...getInfo("Operations")]; //se hace una copia superficil del array con obj del LS
+console.log(operationsCopy)
+  
+  if(e.target.value === "masReciente"){ 
+    operationsCopy.sort((a, b) => {
+      const dateA = new Date(a.fecha)
+      const dateB = new Date(b.fecha)
+      return dateB - dateA
+    })
+    showOperations(operationsCopy)
 
-}
+  }else if(e.target.value === "menosReciente"){
+    operationsCopy.sort((a, b) => {
+      const dateA = new Date(a.fecha)
+      const dateB = new Date(b.fecha)
+      return dateA - dateB
+    })
+    showOperations(operationsCopy)
+
+  }else if(e.target.value === "menorMonto"){
+    operationsCopy.sort((a, b) => a.monto - b.monto);
+    showOperations(operationsCopy)
+
+  }else if(e.target.value === "mayorMonto"){
+    operationsCopy.sort((a, b) => b.monto - a.monto);
+    showOperations(operationsCopy)
+
+  }else if(e.target.value === "AZ"){
+    operationsCopy.sort((a, b) => {
+      const descripcionA = a.descripcion.toLowerCase();
+      const descripcionB = b.descripcion.toLowerCase();
+      return descripcionA.localeCompare(descripcionB);
+    });
+    showOperations(operationsCopy)
+    
+  }else if(e.target.value === "ZA"){
+    operationsCopy.sort((a, b) => {
+      const descripcionA = a.descripcion.toLowerCase();
+      const descripcionB = b.descripcion.toLowerCase();
+      return descripcionB.localeCompare(descripcionA);
+    });
+    showOperations(operationsCopy)
+    
+  }}
+
+
+
+
+  
+  
+
+
+
+
 
 
 // const opWithoutCategory = () => {
@@ -526,7 +573,7 @@ const inicializeApp = () => {
   just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
   just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
   just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
-  // just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
+  just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
 
 
 }
