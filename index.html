@@ -93,17 +93,17 @@
                             </li>
                             <li class="section-filters-li-2 mb-2 md:mb-4 flex flex-col flex-col ">
                                 <label for="form-select-category">Category</label>
-                                <select class="form-select-category p-2 rounded-md" id="categorias">
+                                <select class="form-select-category p-2 rounded-md" id="form-select-category">
                                     <option value="todos" selected>Todos</option>
                                 </select>
                             </li>
                             <li class="section-filters-li-3 mb-2 md:mb-4 flex flex-col flex-col ">
-                                <label for="input-date">Desde</label>
-                                <input type="date" class="input-date p-2 rounded-md" id="input-date">
+                                <label for="form-input-date">Desde</label>
+                                <input type="date" class="input-date p-2 rounded-md" id="form-input-date">
                             </li>
                             <li class="section-filters-li-4 mb-2 md:mb-4 flex flex-col flex-col ">
-                                <label for="">Ordenar por</label>
-                                <select class="p-2 rounded-md ">
+                                <label for="form-select-order">Ordenar por</label>
+                                <select class="p-2 rounded-md" id="form-select-order">
                                     <option value="masReciente">Mas reciente</option>
                                     <option value="menosReciente">Menos reciente</option>
                                     <option value="menorMonto">Menor monto</option>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="div-table-container mt-10">
                     <table class="table-userOperation">
-                        <thead> <!-- HILERA ⇄ 1 - titulos -->
+                        <thead> 
                             <tr> <!-- COLUMNA ⇅  -->
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
                                 <!-- ⇅ COLUMNA 1 -->
@@ -171,34 +171,24 @@
                 <label for="input-description-text" class="font-bold">Descripcion</label>
                 <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description"
                     placeholder="Descripcion" required>
-                <p class="warning-text description mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
-                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="input-amount-numb" class="font-bold">Monto</label>
                 <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount"
                     placeholder="Monto" required>
-                <p class="warning-text amount mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
-                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="select-type" class="font-bold">Tipo</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
-                    <option value="ganancia">Ganancia</option>
                     <option value="gasto">Gasto</option>
+                    <option value="ganancia">Ganancia</option>
                 </select>
-                <p class="warning-text type mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
-                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
                 <label for="select-category" class="font-bold">Categoria</label>
                 <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
                 </select>
-                <p class="warning-text category mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
-                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
 
-                <label for="input-date" class="font-bold">Fecha</label>
-                <input type="date" id="input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha"
+                <label for="op-input-date" class="font-bold">Fecha</label>
+                <input type="date" id="op-input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha"
                     required>
-                <p class="warning-text date mb-4 md:mb-4 hidden"><i class="fa-solid fa-triangle-exclamation"
-                        style="color: #ff0000;"></i>Este campo es obligatorio</p>
             </form>
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
