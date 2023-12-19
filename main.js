@@ -494,78 +494,78 @@ const deleteCategory = (categoryId) => {
 
 // ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
 
-const renderReporte = (arrayOperation) => { //!   NO FUNCIONA
-  if (arrayOperation.length >= 3) {
-    showElement(".section-edit-reports")
-    hideElement(".section-reports")
+// const renderReporte = (arrayOperation) => { //!   NO FUNCIONA
+//   if (arrayOperation.length >= 3) {
+//     showElement(".section-edit-reports")
+//     hideElement(".section-reports")
 
-    for (const operation of arrayOperation) {
-    just("#reportes").innerHTML += `<tbody >
-   <tr class="mb-[1rem]  h-[20%] w-[50%]"> 
-      <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
-          <td></td>
-          <td></td>
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
-          <td></td>
-          <td></td>
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
-          <td></td>
-          <td></td>
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
-          <td></td>
-          <td></td>
-  </tr>
-  <tr>
-      <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
-          <td></td>
-          <td></td>
-  </tr>
-</tbody> 
- `
+//     for (const operation of arrayOperation) {
+//     just("#reportes").innerHTML += `<tbody >
+//    <tr class="mb-[1rem]  h-[20%] w-[50%]"> 
+//       <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
+//           <td></td>
+//           <td></td>
+//   </tr>
+//   <tr>
+//       <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
+//           <td></td>
+//           <td></td>
+//   </tr>
+//   <tr>
+//       <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
+//           <td></td>
+//           <td></td>
+//   </tr>
+//   <tr>
+//       <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
+//           <td></td>
+//           <td></td>
+//   </tr>
+//   <tr>
+//       <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
+//           <td></td>
+//           <td></td>
+//   </tr>
+// </tbody> 
+//  `
 
-  }
-}
-else{
-showElementElement(".section-reports")
-}
-}
-
-
-renderReporte(totalOperations)
+//   }
+// }
+// else{
+// showElementElement(".section-reports")
+// }
+// }
 
 
+// renderReporte(totalOperations)
 
 
 
-const renderTotalCategory = (arrayCategorys) => {
-  for (const category of arrayCategorys) {
-    just("#total-category").innerHTML = `<tr>
-    <td class="text-left"></td>
-    <td class="text-left"></td>
-    <td class="text-left"></td>
-    <td class="text-left"></td>
-</tr>`
-  }
-
-}
 
 
-const rendertotalMonth = (arrayCategorys) => {
-  for (const category of arrayCategorys) {
-    just("#totalMonth").innerHTML = ` 
-    <td></td>
-    <td> </td>
-    <td></td>
-    <td></td>`
-  }
+// const renderTotalCategory = (arrayCategorys) => {
+//   for (const category of arrayCategorys) {
+//     just("#total-category").innerHTML = `<tr>
+//     <td class="text-left"></td>
+//     <td class="text-left"></td>
+//     <td class="text-left"></td>
+//     <td class="text-left"></td>
+// </tr>`
+//   }
 
-}
+// }
+
+
+// const rendertotalMonth = (arrayCategorys) => {
+//   for (const category of arrayCategorys) {
+//     just("#totalMonth").innerHTML = ` 
+//     <td></td>
+//     <td> </td>
+//     <td></td>
+//     <td></td>`
+//   }
+
+// }
 
 
 
@@ -651,4 +651,3 @@ const inicializeApp = () => {
 
 }
 window.addEventListener("load", inicializeApp())
-
