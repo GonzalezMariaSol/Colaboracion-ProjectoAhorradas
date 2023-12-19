@@ -572,12 +572,7 @@ const inicializeApp = () => {
 
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
-
-
-
-  })
-
-  
+})
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
