@@ -494,6 +494,8 @@ const deleteCategory = (categoryId) => {
 
 // ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
 
+
+
 // const renderReporte = (arrayOperation) => { //!   NO FUNCIONA
 //   if (arrayOperation.length >= 3) {
 //     showElement(".section-edit-reports")
