@@ -232,11 +232,9 @@ const hideFilters = () => {
   }
 }
 
-// FILTRAR POR TIPO GANANCIA - GASTO
+// // FILTRAR POR TIPO GANANCIA - GASTO
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
-  // const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
-  // showOperations(filterOperations)
   for(const operation of getInfo("Operations")){
     if(operation.tipo === e.target.value){
       showOperations(loadedOperation.filter(op => op.tipo === e.target.value))
@@ -251,7 +249,6 @@ const showSelectedType = (e) => {
 const showSelectedCategory = (e) => {
 
   const categoryFound = getInfo("Operations").some(operation => operation.categoria === e.target.value) //hago un filtro para saber si al menos una categoria coincide con la categoria que entra por el btn
-
   if (categoryFound) { //si hay al menos una coincidencia entonces
     just(".view-no-operations").classList.add("hidden") //saco el letrero de que no hay operaciones cargadas
     showOperations(getInfo("Operations").filter(op => op.categoria === e.target.value)) //y muestro todas las operaciones q tengan esa categoria seleccionada
@@ -274,8 +271,9 @@ const showSelectedDate = (e) => {
   const loadedOperation = getInfo("Operations")
 
   const filterOperations = loadedOperation.filter(op => selectedYear >= op.fecha.split("-")[0] && selectedMonth >= op.fecha.split("-")[1])
-  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
+  showOperations(filterOperations)
 }
+//!si le doy clear, se me rompe el codigou
 
 
 // FILTRAR POR MAYOR-RECIENTE O ABC
@@ -325,7 +323,35 @@ console.log(operationsCopy)
     
   }}
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -480,8 +506,8 @@ const viewChangeRemove = (categoryId, categori) => {
   just("#btn-remove-categories").addEventListener("click", () => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
+    deleteOperationWCategoryDeleted(IdCategoria)
     window.location.reload()
-
   })
 
 }
@@ -491,19 +517,11 @@ const deleteCategory = (categoryId) => {
 }
 
 
-// FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
-// const opWithoutCategory = () => {
-// console.log(getInfo('Operations')) //arranco con arr de 6 
-
-// for(const operation of getInfo('Operations')){
-//   console.log(operation.categoria)
-//   for(const category of getInfo("categories")){
-//     console.log(category.category)
-//     const OpActual = getInfo("Operations").filter(operation => operation.categoria !== category.category);
-//     console.log(OpActual)
-//   }
-// }
-// }
+const deleteOperationWCategoryDeleted = (categoriaId) => {
+  const nuevasOperacionesSol = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
+  setInfo("Operations", nuevasOperacionesSol);
+  console.log(nuevasOperacionesSol)
+}
 
 
 // ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
@@ -657,7 +675,7 @@ const inicializeApp = () => {
     window.location.reload();
   });
 
-  just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
+  just(".form-select-type").addEventListener("input", (e) => showSelectedType(e))
   just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
   just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
   just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
