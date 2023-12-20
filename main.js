@@ -326,67 +326,6 @@ console.log(operationsCopy)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const opWithoutCategory = () => {
-//   // Obtén los datos del Local Storage
-//   const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
-  
-//   // Filtra los datos para excluir el objeto con la categoría "Salidas"
-//   const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
-  
-//   // Actualiza el Local Storage con los datos filtrados
-//   localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
-  
-//   console.log(getInfo('Operations'))//me voy con arr de 5
-//   console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
-//   }
-//   opWithoutCategory()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //*************************************************************************************************** */
 //*************************************************************************************************** */
 //*************************************************************************************************** */
