@@ -235,20 +235,34 @@ const hideFilters = () => {
 // FILTRAR POR TIPO GANANCIA - GASTO
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
-  const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
-    showOperations(filterOperations)
+  // const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
+  // showOperations(filterOperations)
+  for(const operation of getInfo("Operations")){
+    if(operation.tipo === e.target.value){
+      showOperations(loadedOperation.filter(op => op.tipo === e.target.value))
+    }else if(e.target.value === "todos"){
+      showOperations(totalOperations)
+    }
+  }
 }
-//!!TENGO QUE RESOLVER COMO MOSTRAR TODOS Y FUNCIONA UNA VEZ Y LUEGO SE ROMPE
 
 
 //FILTRAR POR CATEGORIA 
 const showSelectedCategory = (e) => {
-  const categoriesValue = e.target.value //esto me devuelve el ID de la categoria 
-  const currentOperations = getInfo("Operations")
-  
-  const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
-  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
-}
+
+  const categoryFound = getInfo("Operations").some(operation => operation.categoria === e.target.value) //hago un filtro para saber si al menos una categoria coincide con la categoria que entra por el btn
+
+  if (categoryFound) { //si hay al menos una coincidencia entonces
+    just(".view-no-operations").classList.add("hidden") //saco el letrero de que no hay operaciones cargadas
+    showOperations(getInfo("Operations").filter(op => op.categoria === e.target.value)) //y muestro todas las operaciones q tengan esa categoria seleccionada
+  } else if (e.target.value === "todos") { //si es q se selecciono a todos
+    showOperations(totalOperations); //muestro todo mi LS
+  } else {//si no coincide con nada
+    just(".view-no-operations").classList.remove("hidden") //mostrar letrero que no hay operaciones con esa categoria
+  }
+};
+
+
 
 
 // FILTRAR POR FECHA //a partir de la fecha seleccionada para atras hay que mostrar
@@ -600,10 +614,10 @@ const inicializeApp = () => {
 
 
   //?setInfo funciona bien
-  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
+  setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
   //?showOperations funciona bien
-  showOperations(totalOperations);
+  showOperations(totalOperations)
 
   //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
   just("#btn-balance-navb").addEventListener("click", () =>
