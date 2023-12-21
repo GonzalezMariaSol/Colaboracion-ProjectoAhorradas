@@ -28,31 +28,31 @@ const showViews = (view) => {
 //SHOWOPERATIONS ES QUIEN IMPRIME EN PANTALLA LAS CASILLAS CON LA INFO QUE CARGO EL USUARIO
 const showOperations = (arrOperations) => {
   //arrOperations va a ser lo que obtengamos del local storage q ya viene con forma de arr
-  just(".tbody-info-loaded").innerHTML = "" 
-  
+  just(".tbody-info-loaded").innerHTML = ""
+
   if (!(arrOperations.length > 0)) {
     just(".view-no-operations").classList.remove("hidden");
     just(".div-table-container").classList.add("hidden");
   }
-  
+
   const categoryName = (idCategoria) => {
-  for(const category of getInfo("categories")){
-    if(idCategoria === category.id){
-      return(category.category)
+    for (const category of getInfo("categories")) {
+      if (idCategoria === category.id) {
+        return (category.category)
+      }
     }
   }
-}
 
-  for (const operation of arrOperations) {    
+  for (const operation of arrOperations) {
     //por cda operacion(me trae cda hilera) del array operations
 
     just(".tbody-info-loaded").innerHTML +=
-    //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
-    `
+      //crear los td (casilleros) para cada una de mis columnas dentro de la tabla q llamamos
+      `
     <tr>
     <td class="text-center border-r-6 p-3 border-transparent max-w-[150px] whitespace-normal break-words">${operation.descripcion}</td>
     <td class="text-center border-r-6 p-3 border-transparent"><p class="bg-[#ebfffc] text-emerald-500 text-center rounded-md">${categoryName(operation.categoria)
-    }</p></td>
+      }</p></td>
     <td class="text-center border-r-6 p-3 border-transparent">${operation.fecha}</td>
     <td class="text-center border-r-6 p-3 border-transparent break-all" id="num-amount">${operation.monto}</td>
     <td class="p-3 flex flex-col">
@@ -184,28 +184,30 @@ const runBtnConfirm = (e) => {
 
 const getEarningsBalance = () => {
   let totalEarnings = 0
-  if(getInfo("Operations")){
-  for(const operacion of getInfo("Operations")){
-    if(operacion.tipo === "ganancia"){
-      totalEarnings += Number(operacion.monto)
-      just(".full-earnings").innerHTML = `${totalEarnings}`
+  if (getInfo("Operations")) {
+    for (const operacion of getInfo("Operations")) {
+      if (operacion.tipo === "ganancia") {
+        totalEarnings += Number(operacion.monto)
+        just(".full-earnings").innerHTML = `${totalEarnings}`
+      }
     }
+    return totalEarnings
   }
-  return totalEarnings
-}}
+}
 
 
 const getExpensesBalance = () => {
   let totalExpenses = 0
-  if(getInfo("Operations")){
-  for(const operacion of getInfo("Operations")){
-   if(operacion.tipo === "gasto"){
-      totalExpenses += Number(operacion.monto)
-      just(".full-expenses").innerHTML = `${totalExpenses}`
+  if (getInfo("Operations")) {
+    for (const operacion of getInfo("Operations")) {
+      if (operacion.tipo === "gasto") {
+        totalExpenses += Number(operacion.monto)
+        just(".full-expenses").innerHTML = `${totalExpenses}`
+      }
     }
+    return totalExpenses
   }
-  return totalExpenses
-}}
+}
 
 const getNetBalance = () => {
   const totalBalance = getEarningsBalance() - getExpensesBalance()
@@ -236,7 +238,7 @@ const hideFilters = () => {
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
   const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
-    showOperations(filterOperations)
+  showOperations(filterOperations)
 }
 //!!TENGO QUE RESOLVER COMO MOSTRAR TODOS Y FUNCIONA UNA VEZ Y LUEGO SE ROMPE
 
@@ -245,7 +247,7 @@ const showSelectedType = (e) => {
 const showSelectedCategory = (e) => {
   const categoriesValue = e.target.value //esto me devuelve el ID de la categoria 
   const currentOperations = getInfo("Operations")
-  
+
   const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
   showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
 }
@@ -265,11 +267,11 @@ const showSelectedDate = (e) => {
 
 
 // FILTRAR POR MAYOR-RECIENTE O ABC
-const showSelectedOrder = (e) => {  
+const showSelectedOrder = (e) => {
   const operationsCopy = [...getInfo("Operations")]; //se hace una copia superficil del array con obj del LS
-console.log(operationsCopy)
-  
-  if(e.target.value === "masReciente"){ 
+  console.log(operationsCopy)
+
+  if (e.target.value === "masReciente") {
     operationsCopy.sort((a, b) => {
       const dateA = new Date(a.fecha)
       const dateB = new Date(b.fecha)
@@ -277,7 +279,7 @@ console.log(operationsCopy)
     })
     showOperations(operationsCopy)
 
-  }else if(e.target.value === "menosReciente"){
+  } else if (e.target.value === "menosReciente") {
     operationsCopy.sort((a, b) => {
       const dateA = new Date(a.fecha)
       const dateB = new Date(b.fecha)
@@ -285,33 +287,34 @@ console.log(operationsCopy)
     })
     showOperations(operationsCopy)
 
-  }else if(e.target.value === "menorMonto"){
+  } else if (e.target.value === "menorMonto") {
     operationsCopy.sort((a, b) => a.monto - b.monto);
     showOperations(operationsCopy)
 
-  }else if(e.target.value === "mayorMonto"){
+  } else if (e.target.value === "mayorMonto") {
     operationsCopy.sort((a, b) => b.monto - a.monto);
     showOperations(operationsCopy)
 
-  }else if(e.target.value === "AZ"){
+  } else if (e.target.value === "AZ") {
     operationsCopy.sort((a, b) => {
       const descripcionA = a.descripcion.toLowerCase();
       const descripcionB = b.descripcion.toLowerCase();
       return descripcionA.localeCompare(descripcionB);
     });
     showOperations(operationsCopy)
-    
-  }else if(e.target.value === "ZA"){
+
+  } else if (e.target.value === "ZA") {
     operationsCopy.sort((a, b) => {
       const descripcionA = a.descripcion.toLowerCase();
       const descripcionB = b.descripcion.toLowerCase();
       return descripcionB.localeCompare(descripcionA);
     });
     showOperations(operationsCopy)
-    
-  }}
 
-  
+  }
+}
+
+
 
 
 
@@ -321,13 +324,13 @@ console.log(operationsCopy)
 // const opWithoutCategory = () => {
 //   // Obtén los datos del Local Storage
 //   const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
-  
+
 //   // Filtra los datos para excluir el objeto con la categoría "Salidas"
 //   const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
-  
+
 //   // Actualiza el Local Storage con los datos filtrados
 //   localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
-  
+
 //   console.log(getInfo('Operations'))//me voy con arr de 5
 //   console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
 //   }
@@ -388,7 +391,7 @@ const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL 
 //------------------------------------ RENDER------------------------------------------------
 
 const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
-  console.log(arrayCategorys)
+
   clear("#container-category")
   for (const categorie of arrayCategorys) {
     just("#container-category").innerHTML += `<li class=" flex  justify-between mb-[1rem]">
@@ -441,7 +444,7 @@ const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CA
 const addCategory = () => {
   const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
   datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", datoActual) 
+  setInfo("categories", datoActual)
   renderCategory(datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
 
 }
@@ -496,55 +499,43 @@ const deleteCategory = (categoryId) => {
 
 
 
-// const renderReporte = (arrayOperation) => { //!   NO FUNCIONA
-//   if (arrayOperation.length >= 3) {
-//     showElement(".section-edit-reports")
-//     hideElement(".section-reports")
+const renderReporte = (arrayOperation) => { //!  NO FUNCIONA
+for (const iterator of arrayOperation) {
+  just("#reportes").innerHTML = `<tbody>
+      <tr class="mb-[1rem] h-[20%] w-[50%]">
+        <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>`;
 
-//     for (const operation of arrayOperation) {
-//     just("#reportes").innerHTML += `<tbody >
-//    <tr class="mb-[1rem]  h-[20%] w-[50%]"> 
-//       <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
-//           <td></td>
-//           <td></td>
-//   </tr>
-//   <tr>
-//       <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
-//           <td></td>
-//           <td></td>
-//   </tr>
-//   <tr>
-//       <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
-//           <td></td>
-//           <td></td>
-//   </tr>
-//   <tr>
-//       <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
-//           <td></td>
-//           <td></td>
-//   </tr>
-//   <tr>
-//       <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
-//           <td></td>
-//           <td></td>
-//   </tr>
-// </tbody> 
-//  `
+  
+  } 
+  
+  }
+  
 
-//   }
-// }
-// else{
-// showElementElement(".section-reports")
-// }
-// }
-
-
-// renderReporte(totalOperations)
-
-
-
-
-
+ 
 // const renderTotalCategory = (arrayCategorys) => {
 //   for (const category of arrayCategorys) {
 //     just("#total-category").innerHTML = `<tr>
@@ -584,13 +575,9 @@ const inicializeApp = () => {
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
 
+})
 
-
-  })
-
-  
-
-  just("#btn-edit-categorie").addEventListener("click", (e) => {
+just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
@@ -598,7 +585,7 @@ const inicializeApp = () => {
     window.location.reload()
   })
 
-
+  
 
 
   //?setInfo funciona bien
@@ -615,7 +602,7 @@ const inicializeApp = () => {
     showViews("section-category")
   ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
   just("#btn-reports-navb").addEventListener("click", () =>
-    showViews("section-reports")
+showViews("section-reports")
   ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
   // BTN + NUEVA OPERACION //?funciona bien
@@ -645,11 +632,18 @@ const inicializeApp = () => {
     window.location.reload();
   });
 
-  just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
+  just(".form-select-type").addEventListener("input", (e) => { showSelectedType(e) })
   just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
   just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
   just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
 
 
 }
+
+just("#btn-reports-navb").addEventListener("click",(e)=>{
+  getInfo(totalOperations)
+  renderReporte(totalOperations)
+})
+
+
 window.addEventListener("load", inicializeApp())
