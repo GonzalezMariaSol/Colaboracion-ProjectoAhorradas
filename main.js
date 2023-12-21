@@ -237,10 +237,10 @@ const hideFilters = () => {
 // FILTRAR POR TIPO GANANCIA - GASTO
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
-  for(const operation of getInfo("Operations")){
-    if(operation.tipo === e.target.value){
+  for (const operation of getInfo("Operations")) {
+    if (operation.tipo === e.target.value) {
       showOperations(loadedOperation.filter(op => op.tipo === e.target.value))
-    }else if(e.target.value === "todos"){
+    } else if (e.target.value === "todos") {
       showOperations(totalOperations)
     }
   }
@@ -474,7 +474,7 @@ const editBtnCategory = () => {
 }
 
 const viewChangeRemove = (categoryId, categori) => {
-  showElement(".container-eliminar")
+  showElement(".container-eliminar");
   hideElement(".section-category")
   just("#name").innerText = `${categori}`
   just("#btn-remove-categories").setAttribute("id-categori", categoryId)
@@ -521,43 +521,53 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 
 
-const renderReporte = (arrayOperation) => { //!  NO FUNCIONA
-for (const iterator of arrayOperation) {
-  just("#reportes").innerHTML = `<tbody>
-      <tr class="mb-[1rem] h-[20%] w-[50%]">
-        <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
-        <td></td>
-        <td></td>
-      </tr>
-    </tbody>`;
-
-  
-  } 
-  
-  }
-  
-
+const renderReporte = (array) => {//!  NO FUNCION
+console.log(array);
+  if (array.length >= 3) {
+   console.log("entre en el if");
+   showElement("#section-reports")
+   hideElement("#section-edit-reports");
  
+
+
+    for (const iterator of array) {
+      just("#reportes").innerHTML += `<tbody>
+        <tr class="mb-[1rem] h-[20%] w-[50%]">
+          <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>`;
+    }
+  } else {
+    console.log("else");
+    showElement("#section-reports");
+  }
+};
+
+
+
+
 // const renderTotalCategory = (arrayCategorys) => {
 //   for (const category of arrayCategorys) {
 //     just("#total-category").innerHTML = `<tr>
@@ -586,6 +596,24 @@ for (const iterator of arrayOperation) {
 
 
 
+const highestEarninCategory = (arrayCategory) => {
+
+  for (const operation of getInfo("Operations")) {
+    const { categoria, tipo } = operation
+    const categoriafiltrada = getInfo("Operations").filter(operation => operation.tipo === "ganancia")
+    console.log(categoriafiltrada);
+    let acc = 0
+    for (const categoria of categoriafiltrada) {
+      acc += Number(categoria.monto)
+    }
+    console.log(acc);
+  }
+
+
+}
+
+
+highestEarninCategory(allCategories);
 
 // -----------------------------------EVENTS---------------------------------------------------
 
@@ -597,17 +625,22 @@ const inicializeApp = () => {
   just("#btn-add-categories").addEventListener("click", (e) => {
     addCategory()
 
-})
+  })
 
-just("#btn-edit-categorie").addEventListener("click", (e) => {
+  just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
     window.location.reload()
   })
-
+  just("#btn-reports-navb").addEventListener("click", (e) => {
+    renderReporte(totalOperations)  
   
+   
+  })
+
+
 
 
   //?setInfo funciona bien
@@ -624,7 +657,7 @@ just("#btn-edit-categorie").addEventListener("click", (e) => {
     showViews("section-category")
   ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
   just("#btn-reports-navb").addEventListener("click", () =>
-showViews("section-reports")
+    showViews("section-reports")
   ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
   // BTN + NUEVA OPERACION //?funciona bien
@@ -662,10 +695,7 @@ showViews("section-reports")
 
 }
 
-just("#btn-reports-navb").addEventListener("click",(e)=>{
-  getInfo(totalOperations)
-  renderReporte(totalOperations)
-})
 
 
-window.addEventListener("load", inicializeApp())
+
+window.addEventListener("load", inicializeApp)
