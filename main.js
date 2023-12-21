@@ -245,6 +245,7 @@ const showSelectedType = (e) => {
 }
 
 
+
 //FILTRAR POR CATEGORIA 
 const showSelectedCategory = (e) => {
 
