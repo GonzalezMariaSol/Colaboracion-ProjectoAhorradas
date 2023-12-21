@@ -232,7 +232,7 @@ const hideFilters = () => {
   }
 }
 
-// // FILTRAR POR TIPO GANANCIA - GASTO
+// FILTRAR POR TIPO GANANCIA - GASTO
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
   for(const operation of getInfo("Operations")){
@@ -321,10 +321,8 @@ console.log(operationsCopy)
     });
     showOperations(operationsCopy)
     
-  }}
-
-
-
+  }
+}
 
 //*************************************************************************************************** */
 //*************************************************************************************************** */
@@ -447,6 +445,7 @@ const viewChangeRemove = (categoryId, categori) => {
     deleteCategory(IdCategoria);
     deleteOperationWCategoryDeleted(IdCategoria)
     window.location.reload()
+
   })
 
 }
@@ -455,12 +454,29 @@ const deleteCategory = (categoryId) => {
   setInfo("categories", datoActual)
 }
 
-
 const deleteOperationWCategoryDeleted = (categoriaId) => {
-  const nuevasOperacionesSol = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
-  setInfo("Operations", nuevasOperacionesSol);
-  console.log(nuevasOperacionesSol)
+  const currentOperations = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
+  setInfo("Operations", currentOperations);
+  console.log(currentOperations)
 }
+
+
+
+
+
+// FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
+// const opWithoutCategory = () => {
+// console.log(getInfo('Operations')) //arranco con arr de 6 
+
+// for(const operation of getInfo('Operations')){
+//   console.log(operation.categoria)
+//   for(const category of getInfo("categories")){
+//     console.log(category.category)
+//     const OpActual = getInfo("Operations").filter(operation => operation.categoria !== category.category);
+//     console.log(OpActual)
+//   }
+// }
+// }
 
 
 // ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
