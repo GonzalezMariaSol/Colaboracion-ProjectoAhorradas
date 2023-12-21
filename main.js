@@ -235,20 +235,31 @@ const hideFilters = () => {
 // FILTRAR POR TIPO GANANCIA - GASTO
 const showSelectedType = (e) => {
   const loadedOperation = getInfo("Operations")
-  const filterOperations = loadedOperation.filter(op => op.tipo === e.target.value)
-    showOperations(filterOperations)
+  for(const operation of getInfo("Operations")){
+    if(operation.tipo === e.target.value){
+      showOperations(loadedOperation.filter(op => op.tipo === e.target.value))
+    }else if(e.target.value === "todos"){
+      showOperations(totalOperations)
+    }
+  }
 }
-//!!TENGO QUE RESOLVER COMO MOSTRAR TODOS Y FUNCIONA UNA VEZ Y LUEGO SE ROMPE
 
 
 //FILTRAR POR CATEGORIA 
 const showSelectedCategory = (e) => {
-  const categoriesValue = e.target.value //esto me devuelve el ID de la categoria 
-  const currentOperations = getInfo("Operations")
-  
-  const filterOperations = currentOperations.filter(user => user.categoria === categoriesValue)
-  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
-}
+
+  const categoryFound = getInfo("Operations").some(operation => operation.categoria === e.target.value) //hago un filtro para saber si al menos una categoria coincide con la categoria que entra por el btn
+  if (categoryFound) { //si hay al menos una coincidencia entonces
+    just(".view-no-operations").classList.add("hidden") //saco el letrero de que no hay operaciones cargadas
+    showOperations(getInfo("Operations").filter(op => op.categoria === e.target.value)) //y muestro todas las operaciones q tengan esa categoria seleccionada
+  } else if (e.target.value === "todos") { //si es q se selecciono a todos
+    showOperations(totalOperations); //muestro todo mi LS
+  } else {//si no coincide con nada
+    just(".view-no-operations").classList.remove("hidden") //mostrar letrero que no hay operaciones con esa categoria
+  }
+};
+
+
 
 
 // FILTRAR POR FECHA //a partir de la fecha seleccionada para atras hay que mostrar
@@ -260,8 +271,9 @@ const showSelectedDate = (e) => {
   const loadedOperation = getInfo("Operations")
 
   const filterOperations = loadedOperation.filter(op => selectedYear >= op.fecha.split("-")[0] && selectedMonth >= op.fecha.split("-")[1])
-  showOperations(filterOperations) //!FUNCIONA SOLO 1 VEZ Y LUEGO SE ROMPE  
+  showOperations(filterOperations)
 }
+//!si le doy clear, se me rompe el codigou
 
 
 // FILTRAR POR MAYOR-RECIENTE O ABC
@@ -309,43 +321,8 @@ console.log(operationsCopy)
     });
     showOperations(operationsCopy)
     
-  }}
-
-  
-
-
-
-
-
-
-// const opWithoutCategory = () => {
-//   // Obtén los datos del Local Storage
-//   const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
-  
-//   // Filtra los datos para excluir el objeto con la categoría "Salidas"
-//   const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
-  
-//   // Actualiza el Local Storage con los datos filtrados
-//   localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
-  
-//   console.log(getInfo('Operations'))//me voy con arr de 5
-//   console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
-//   }
-//   opWithoutCategory()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
+}
 
 //*************************************************************************************************** */
 //*************************************************************************************************** */
@@ -466,6 +443,7 @@ const viewChangeRemove = (categoryId, categori) => {
   just("#btn-remove-categories").addEventListener("click", () => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
+    deleteOperationWCategoryDeleted(IdCategoria)
     window.location.reload()
 
   })
@@ -475,6 +453,15 @@ const deleteCategory = (categoryId) => {
   const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
   setInfo("categories", datoActual)
 }
+
+const deleteOperationWCategoryDeleted = (categoriaId) => {
+  const currentOperations = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
+  setInfo("Operations", currentOperations);
+  console.log(currentOperations)
+}
+
+
+
 
 
 // FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
@@ -600,10 +587,10 @@ const inicializeApp = () => {
 
 
   //?setInfo funciona bien
-  setInfo("Operations", totalOperations); //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
+  setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
   //?showOperations funciona bien
-  showOperations(totalOperations);
+  showOperations(totalOperations)
 
   //BTNS DEL NAVBAR //?funcionan bien *****************************************************************************************
   just("#btn-balance-navb").addEventListener("click", () =>
@@ -643,7 +630,7 @@ const inicializeApp = () => {
     window.location.reload();
   });
 
-  just(".form-select-type").addEventListener("input", (e) => {showSelectedType(e)})
+  just(".form-select-type").addEventListener("input", (e) => showSelectedType(e))
   just("#form-select-category").addEventListener("input", (e) => showSelectedCategory(e))
   just("#form-input-date").addEventListener("input", (e) => showSelectedDate(e))
   just("#form-select-order").addEventListener("input", (e) => showSelectedOrder(e))
