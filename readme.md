@@ -36,7 +36,7 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
   
   - <kbd>
     <details>
-      <summary>Como terminó Sol luego del proyecto</summary>
+      <summary><h4>Como terminó Sol luego del proyecto</h4></summary>
       - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/miCodigoSeRompioMiCOdigoFUnciona.jpg?raw=true" alt="Imagen Sol">
     </details>
   </kbd>
@@ -51,12 +51,12 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - <kbd>[Vista y funcionalidad de Editar Categorias]</kbd>
 - <kbd>[Vista y funcionalidad Reportes]</kbd>
 - <kbd>[Disenio responsivo del proyecto]</kbd>
-- <kbd>
-        <details>
-            <summary>como termino Tamara luego del proyecto</summary>
-                - <kbd>(https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true)</kbd>
-        </details>
-    </kbd>
+ - <kbd>
+    <details>
+      <summary><h3>Como terminó Tamara luego del proyecto</h3></summary>
+      - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
+    </details>
+  </kbd>
 
 </details>
 
