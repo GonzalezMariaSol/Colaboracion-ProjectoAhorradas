@@ -400,7 +400,7 @@ const category = [
 
 const allCategories = getInfo("categories") || category //TRAIGO INFO DEL LOCAL Y SI NO TIENE LO BUSCA EN EL ARRAY DE CATEGORIAS QUE TENGO
 
-//------------------------------------ RENDER------------------------------------------------
+//------------------------------------ RENDER  CATEGORY------------------------------------------------
 
 const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
 
@@ -521,26 +521,25 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 
 
-const renderReporte = (array) => {//!  NO FUNCION
-console.log(array);
-  if (array.length >= 3) {
-   console.log("entre en el if");
-   showElement("#section-reports")
-   hideElement("#section-edit-reports");
- 
+const renderReporte = (arrayOpertation) => {
+  clear("#reportes")
+  const clase = "value"
+  if (arrayOpertation.length >= 3) {
 
-
-    for (const iterator of array) {
-      just("#reportes").innerHTML += `<tbody>
+    hideElement("#section-reports")
+    showElement("#section-edit-reports");
+     for (const operation of arrayOpertation) {
+      console.log(operation.categoria);
+      just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-          <td></td>
-          <td></td>
+           <td></td>
+          <td ></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
           <td></td>
-          <td></td>
+          <td class="valor"></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
@@ -568,52 +567,64 @@ console.log(array);
 
 
 
-// const renderTotalCategory = (arrayCategorys) => {
-//   for (const category of arrayCategorys) {
-//     just("#total-category").innerHTML = `<tr>
-//     <td class="text-left"></td>
-//     <td class="text-left"></td>
-//     <td class="text-left"></td>
-//     <td class="text-left"></td>
-// </tr>`
-//   }
-
-// }
 
 
-// const rendertotalMonth = (arrayCategorys) => {
-//   for (const category of arrayCategorys) {
-//     just("#totalMonth").innerHTML = ` 
-//     <td></td>
-//     <td> </td>
-//     <td></td>
-//     <td></td>`
-//   }
+const renderTotalCategory = (arrayCategorys) => {
 
-// }
-
-
-
-
-
-const highestEarninCategory = (arrayCategory) => {
-
-  for (const operation of getInfo("Operations")) {
-    const { categoria, tipo } = operation
-    const categoriafiltrada = getInfo("Operations").filter(operation => operation.tipo === "ganancia")
-    console.log(categoriafiltrada);
-    let acc = 0
-    for (const categoria of categoriafiltrada) {
-      acc += Number(categoria.monto)
-    }
-    console.log(acc);
+  for (const category of arrayCategorys) {
+    just("#totalCategory").innerHTML = `<tr>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
+    <th class="text-[#4A4A4A] text-left">Ganancias</th>
+    <th class="text-[#4A4A4A] text-left">Gastos</th>
+    <th class="text-[#4A4A4A] text-left">Balance</th>
+</tr>
+<tr>
+    <td class="text-left">hola</td>
+    <td>hola</td>
+    <td></td>
+    <td></td>
+</tr>`
   }
-
 
 }
 
 
-highestEarninCategory(allCategories);
+const rendertotalMonth = (arrayCategorys) => {
+  for (const category of arrayCategorys) {
+    just("#totalMonth").innerHTML = ` <tr>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Mes</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
+</tr>
+<tr>
+    <td>Enero</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr> `
+  }
+}
+
+
+
+
+
+// const highestEarninCategory = () => {
+//   const categoriafiltrada = getInfo("Operations").filter(operation => operation.tipo === "ganancia");
+
+//   let acc = 0;
+
+//   for (const categoria of categoriafiltrada) {
+//     acc += Number(categoria.monto);
+//   }
+//   console.log(acc);
+
+// };
+
+// highestEarninCategory();
+
+
 
 // -----------------------------------EVENTS---------------------------------------------------
 
@@ -634,13 +645,6 @@ const inicializeApp = () => {
     editBtnCategory()
     window.location.reload()
   })
-  just("#btn-reports-navb").addEventListener("click", (e) => {
-    renderReporte(totalOperations)  
-  
-   
-  })
-
-
 
 
   //?setInfo funciona bien
@@ -656,8 +660,12 @@ const inicializeApp = () => {
   just("#btn-category-navb").addEventListener("click", () =>
     showViews("section-category")
   ); //escucha el click sobre btn de categorias y esconde todas las vistas excepto la de categorias
-  just("#btn-reports-navb").addEventListener("click", () =>
+  just("#btn-reports-navb").addEventListener("click", () => {
     showViews("section-reports")
+    renderReporte(totalOperations)
+    renderTotalCategory(totalOperations)
+  }
+
   ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
 
   // BTN + NUEVA OPERACION //?funciona bien
