@@ -32,6 +32,7 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
   - <kbd>Vista y funcionalidad Operaciones cargadas</kbd>
   - <kbd>Vista y funcionalidad Nuevas Operaciones</kbd>
   - <kbd>Vista y funcionalidad Editar Operacion</kbd>
+  - <kbd>Vista y funcionalidad Eliminar Operacion</kbd>
   - <kbd>Creacion del Readme</kbd>
   
   - <kbd>
@@ -49,6 +50,7 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - <kbd>Vista y funcionalidad de Categorias</kbd>
 - <kbd>Vista y funcionalidad de Nueva Categoria</kbd>
 - <kbd>Vista y funcionalidad de Editar Categorias</kbd>
+- <kbd>Vista y funcionalidad de Eliminar Categorias</kbd>
 - <kbd>Vista y funcionalidad Reportes</kbd>
 - <kbd>Disenio responsivo del proyecto</kbd>
  - <kbd>
