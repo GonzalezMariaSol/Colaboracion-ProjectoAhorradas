@@ -1,12 +1,16 @@
 # Proyecto Ahorradas
-## Proyecto ahorradas para la comision n19 de ADA. Alumnas Tamara Zarate y Maria Sol Gonzalez
+### Proyecto ahorradas para la comision n19 de ADA.
+
+#### Alumnas:
+
+[Tamara Zarate](https://github.com/taty3385)
+[Maria Sol Gonzalez](https://github.com/GonzalezMariaSol)
 
 <h3>Proyecto *Ahorradas* creado para la comision n19 de **ADA ITW** </h3>
 
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/balancePicture.JPG?raw=true)
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/filterPicture.JPG?raw=true)
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/noOperationsPicture.JPG?raw=true)
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/operationsPicture.JPG?raw=true)
+<p align="center">
+<img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/drake-meme.jpg?raw=true" width="100" height="100" border="10"/>
+</p>
 
 En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de Datos
 - Git
@@ -16,6 +20,15 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - Objetos I Y II
 - Metodos Array
 - Array de Objetos
+
+
+![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/operationsPicture.JPG?raw=true)
+
+
+
+
+
+
 
 Proyecto *Ahorradas* es un trabajo personal/grupal, siguiendo instrucciones pedidas. [^.]
 
