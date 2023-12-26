@@ -407,6 +407,7 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
+      
     id: idCategori ? idCategori : randomId(),
     category: just("#input-add").value,
   };
