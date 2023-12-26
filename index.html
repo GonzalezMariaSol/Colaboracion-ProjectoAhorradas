@@ -128,7 +128,6 @@
                     <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md"
                         id="btn-newOp">+ Nueva
                         Operacion</button>
-                    <!-- clase del 11-6 se ve ejecucion de nueva operacion -->
                 </div>
                 <div class="view-no-operations mt-10 flex items-center flex-col hidden">
                     <img class="mr-4" src="img/sinOperaciones.png" alt="Sin Operaciones">
@@ -137,7 +136,7 @@
                 </div>
                 <div class="div-table-container mt-10">
                     <table class="table-userOperation">
-                        <thead> 
+                        <thead>
                             <tr> <!-- COLUMNA ⇅  -->
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
                                 <!-- ⇅ COLUMNA 1 -->
@@ -167,29 +166,54 @@
                 id="newOp-tittle">Nueva Operacion</p>
             <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8 hidden"
                 id="editOp-tittle">Editar Operacion</p>
+
             <form action="" class="flex flex-col">
                 <label for="input-description-text" class="font-bold">Descripcion</label>
-                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description"
-                    placeholder="Descripcion" required>
+                <div class="warning-message-description flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <input type="text" id="input-description-text" class="warning-border-description p-2 mb-4 md:mb-4 rounded-md border"
+                    name="description" placeholder="Descripcion">
 
                 <label for="input-amount-numb" class="font-bold">Monto</label>
-                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount"
-                    placeholder="Monto" required>
+                <div class="warning-message-amount flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <input type="number" id="input-amount-numb" class="warning-border-amount p-2 mb-4 md:mb-4 rounded-md border" name="amount"
+                    placeholder="Monto">
 
                 <label for="select-type" class="font-bold">Tipo</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
+                <div class="warning-message-type flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <select class="warning-border-type p-2 mb-4 md:mb-4 rounded-md border" id="select-type">
+                    <option value="" disabled selected hidden>Selecciona un tipo</option>
                     <option value="gasto">Gasto</option>
                     <option value="ganancia">Ganancia</option>
                 </select>
 
                 <label for="select-category" class="font-bold">Categoria</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
+                <div class="warning-message-category flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <select class="warning-border-category p-2 mb-4 md:mb-4 rounded-md border" id="select-category">
+                    <option value="" disabled selected hidden>Selecciona una categoría</option>
+                    <!-- Agrega opciones para la categoría si es aplicable -->
                 </select>
 
                 <label for="op-input-date" class="font-bold">Fecha</label>
-                <input type="date" id="op-input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha"
-                    required>
+                <div class="warning-message-date flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <input type="date" id="op-input-date" class="warning-border-date p-2 mb-4 md:mb-4 rounded-md border" name="date"
+                    placeholder="Fecha">
             </form>
+
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>

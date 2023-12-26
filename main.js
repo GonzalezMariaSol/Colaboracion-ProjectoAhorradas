@@ -173,6 +173,63 @@ const runBtnConfirm = (e) => {
 
 
 
+// VALIDACION DE FORMULARIO
+const validateForm = (e) => {
+  const description = just("#input-description-text").value.trim() //el trim lo que hace es q el usuario hace 3 espacios, escribe y luego otros 10 espacios, el trim te saca los espacios al peo y te devuelve el valor como tal
+  const amount = just("#input-amount-numb").value
+  const type = just("#select-type").value
+  const category = just("#select-category").value
+  const date = just("#op-input-date").value
+  // const submitAvaible = description !== "" && description !== "" && description !== "" && description !== "" && description !== "" 
+
+
+  if(description === ""){
+    just(".warning-message-description").classList.remove("hidden")
+    just(".warning-border-description").classList.add("border-red-500")
+  }else{
+    just(".warning-message-description").classList.add("hidden")
+    just(".warning-border-description").classList.remove("border-red-500")
+  }
+  
+  if(amount === ""){
+    just(".warning-message-amount").classList.remove("hidden")
+    just(".warning-border-amount").classList.add("border-red-500")
+  }else{
+    just(".warning-message-amount").classList.add("hidden")
+    just(".warning-border-amount").classList.remove("border-red-500")
+  }
+  
+  if(type === ""){
+    just(".warning-message-type").classList.remove("hidden")
+    just(".warning-border-type").classList.add("border-red-500")
+  }else{
+    just(".warning-message-type").classList.add("hidden")
+    just(".warning-border-type").classList.remove("border-red-500")
+  }
+  
+  if(category === ""){
+    just(".warning-message-category").classList.remove("hidden")
+    just(".warning-border-category").classList.add("border-red-500")
+  }else{
+    just(".warning-message-category").classList.add("hidden")
+    just(".warning-border-category").classList.remove("border-red-500")
+  }
+  
+  if(date === ""){
+    just(".warning-message-date").classList.remove("hidden")
+    just(".warning-border-date").classList.add("border-red-500")
+  }else{
+    just(".warning-message-date").classList.add("hidden")
+    just(".warning-border-date").classList.remove("border-red-500")
+  }
+
+if(description !== "" && description !== "" && description !== "" && description !== "" && description !== "" ){
+  console.log("sd;flkajdsf;lk")
+  runBtnAddNewOp(e)
+}
+}//!PORQUE ME FUNCIONA SOLO SI CARGO DE ABAJO PARA ARRIBA PERO SI COMPLETO DE ARRIBA PARA ABAJO, ME LO CARGA IGUAL SIN IMPORTAR LOS FILTROS?
+
+
 
 
 
@@ -279,7 +336,6 @@ const showSelectedDate = (e) => {
 // FILTRAR POR MAYOR-RECIENTE O ABC
 const showSelectedOrder = (e) => {  
   const operationsCopy = [...getInfo("Operations")]; //se hace una copia superficil del array con obj del LS
-console.log(operationsCopy)
   
   if(e.target.value === "masReciente"){ 
     operationsCopy.sort((a, b) => {
@@ -628,7 +684,10 @@ const inicializeApp = () => {
   });
 
   // BTN AGREGAR - NUEVA OPERACION //?funciona bien
-  just("#btn-add-newOp").addEventListener("click", (e) => runBtnAddNewOp(e)); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+  just("#btn-add-newOp").addEventListener("click", (e) => {
+    validateForm(e)
+    // runBtnAddNewOp(e)
+    }); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
   // -----------BOTON CANCELAR OPERACION //?funciona bien
   just("#btn-cancel-newOp").addEventListener("click", () => {
