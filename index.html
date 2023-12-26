@@ -116,6 +116,8 @@
                         <div class="flex items-center">
                             <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button"
                                 onclick="resetearFormulario()">Resetear</button>
+                            <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button"
+                                onclick="resetearFormulario()">Resetear</button>
                         </div>
                     </form>
                 </section>
@@ -206,6 +208,7 @@
                 </select>
 
                 <label for="op-input-date" class="font-bold">Fecha</label>
+
                 <div class="warning-message-date flex items-center hidden">
                     <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
                     <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
@@ -285,7 +288,7 @@
 
 
     <!-- SECCION REPORTES -->
-    <section class="section-reports view flex  justify-center items-center mb-[2rem] my-14 hidden">
+    <section id="section-reports" class="section-reports view flex  justify-center items-center mb-[2rem] my-14 hidden">
         <div class=" reportes w-[60%] h-[50%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem]">Reportes</h2>
             <div class=" flex justify-center">
@@ -298,44 +301,73 @@
 
 
     <!-- SECCION REPORTES FILTRADOS -->
-    <section class="section-edit-reports  view my-14 flex justify-center items-center hidden ">
+    <section id="section-edit-reports" class="section-edit-reports view my-14 flex justify-center items-center hidden">
         <div class=" reportesFiltrados w-[60%] h-[50%]  pl-[1rem] pr-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem]">Reportes</h2>
             <h3 class="text-[2rem]">Resumen</h3>
             <table id="reportes" class="h-[200px] w-[100%]">
+                 <tbody>
+
+                     <!-- <tr class="mb-[1rem]  h-[20%] w-[50%]">
+                        <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
+                            </th>
+                        <td class="valor"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
+                        <td></td>
+                        <td></td>
+                    </tr> -->
+                </tbody> 
             </table>
             <h2 class="totales text-[2rem] mb-[1rem]">Totales por categorías</h2>
-
-            <table id="table-reporte" class="w-[100%]">
-                <thead>
-                    <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
-                    <th class="text-[#4A4A4A] text-left">Ganancias</th>
-                    <th class="text-[#4A4A4A] text-left">Gastos</th>
-                    <th class="text-[#4A4A4A] text-left">Balance</th>
-                </thead>
-                <tbody id="total-category">
+            <table class="w-[100%]">
+                <tbody id="totalCategory">
                     <!-- <tr>
-                        <td class="text-left">holaa</td>
-                        <td class="text-left">holaa</td>
-                        <td class="text-left">holaa</td>
-                        <td class="text-left">holaa</td>
+                        <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
+                        <th class="text-[#4A4A4A] text-left">Ganancias</th>
+                        <th class="text-[#4A4A4A] text-left">Gastos</th>
+                        <th class="text-[#4A4A4A] text-left">Balance</th>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Comida</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr> -->
-
                 </tbody>
             </table>
             <h2 class=" totalesMes text-[2rem] mb-[1rem]">Totales por mes</h2>
             <table class="h-[50px]">
-                <thead>
-                    <th class="w-[30%] text-[#4A4A4A] text-left">Mes</th>
-                    <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
-                    <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
-                    <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
-                </thead>
-                <tbody id="totalMonth">
-                    <!-- <td>Enero</td>
-                    <td></td>
-                    <td></td>
-                    <td></td> -->
+                <tbody id="totalmonth">
+                    <!-- <tr>
+                        <th class="w-[30%] text-[#4A4A4A] text-left">Mes</th>
+                        <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
+                        <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
+                        <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
+                    </tr>
+                    <tr>
+                        <td>Enero</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr> -->
                 </tbody>
             </table>
     </section>
@@ -343,6 +375,8 @@
         <div class="div-container-confirm-delete bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
             <p class="text-are-u-sure font-bold text-xl">
                 ¿Estás seguro que quieres borrar la operación:
+                <span
+                    class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
                 <span
                     class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
             </p>
