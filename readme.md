@@ -9,8 +9,9 @@
 <h3>Proyecto *Ahorradas* creado para la comision n19 de **ADA ITW** </h3>
 
 <p align="center">
-<img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/drake-meme.jpg?raw=true" width="100" height="100" border="10"/>
+  <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/drake-meme.jpg?raw=true" width="200" height="200" border="10"/>
 </p>
+
 
 En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de Datos
 - Git
