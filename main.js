@@ -509,7 +509,7 @@ const renderReporte = (arrayOpertation) => {
     hideElement("#section-reports")
     showElement("#section-edit-reports");
      for (const operation of arrayOpertation) {
-      console.log(operation.categoria);
+    
       just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
@@ -545,9 +545,21 @@ const renderReporte = (arrayOpertation) => {
 };
 
 
+const calcularCategoriaMayorGanancia = (arrayOperation) => {
+  let categoriaGananciaMaxima = "";
+  let montoMaximo = 0;
 
+  for (const operation of arrayOperation) {
+    if (operation.monto > montoMaximo) {
+      montoMaximo = operation.monto;
+      categoriaGananciaMaxima = operation.categoria;
+    }
+  }
 
+ console.log(categoriaGananciaMaxima); 
+};
 
+calcularCategoriaMayorGanancia(totalOperations)
 
 const renderTotalCategory = (arrayCategorys) => {
 
