@@ -177,7 +177,6 @@ const runBtnConfirm = (e) => {
 
 
 
-// PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 // CALCULOGANANCIAS
@@ -245,6 +244,7 @@ const showSelectedType = (e) => {
     }
   }
 }
+
 
 
 //FILTRAR POR CATEGORIA 
@@ -326,37 +326,16 @@ const showSelectedOrder = (e) => {
   }
 }
 
+// UTIBILIDAD BOTON RESET
+const resetearFormulario = () => {
+  just(".form-select-type").value = "todos"
+  just(".form-select-category").value = "todos"
 
+  const fechaFormateada = new Date().toISOString().split('T')[0] //new date y toisostring devuelve YYYY-MM-DDTHH:mm:ss.sssZ con split dividimos donde aparece la T y pasan a ser dos arr ahora, el cual tiene posiciones, y con [0] estamos llamando al primer arr el cual contendria anio, mes y dia, dejando afuera la hora, min y segundos.~
+  just("#form-input-date").value = fechaFormateada
 
-
-
-
-
-
-// const opWithoutCategory = () => {
-//   // Obtén los datos del Local Storage
-//   const datosEnLocalStorage = JSON.parse(localStorage.getItem('Operations')) ;
-
-//   // Filtra los datos para excluir el objeto con la categoría "Salidas"
-//   const datosFiltrados = datosEnLocalStorage.filter(item => item.categoria !== 'Salidas');
-
-//   // Actualiza el Local Storage con los datos filtrados
-//   localStorage.setItem('Operations', JSON.stringify(datosFiltrados));
-
-//   console.log(getInfo('Operations'))//me voy con arr de 5
-//   console.log('Objeto con la categoría "Salidas" eliminado del Local Storage');
-//   }
-//   opWithoutCategory()
-
-
-
-
-
-
-
-
-
-
+  just("#form-select-order").value = "masReciente"
+}
 
 
 
