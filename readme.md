@@ -3,13 +3,13 @@
 
 #### Alumnas:
 
-[Tamara Zarate](https://github.com/taty3385)
+[Tamara Zarate](https://github.com/taty3385) y 
 [Maria Sol Gonzalez](https://github.com/GonzalezMariaSol)
 
-<h3>Proyecto *Ahorradas* creado para la comision n19 de **ADA ITW** </h3>
+### Proyecto **Ahorradas** creado para la comisión n19 de *ADA ITW*
 
 <p align="center">
-  <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/drake-meme.jpg?raw=true" width="200" height="200" border="10"/>
+  <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/drake-meme.jpg?raw=true" width="400" height="400" border="10"/>
 </p>
 
 
