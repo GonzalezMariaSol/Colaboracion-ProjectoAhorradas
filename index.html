@@ -114,7 +114,8 @@
                             </li>
                         </ul>
                         <div class="flex items-center">
-                        <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button" onclick="resetearFormulario()">Resetear</button>
+                            <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button"
+                                onclick="resetearFormulario()">Resetear</button>
                         </div>
                     </form>
                 </section>
@@ -127,7 +128,6 @@
                     <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md"
                         id="btn-newOp">+ Nueva
                         Operacion</button>
-                    <!-- clase del 11-6 se ve ejecucion de nueva operacion -->
                 </div>
                 <div class="view-no-operations mt-10 flex items-center flex-col hidden">
                     <img class="mr-4" src="img/sinOperaciones.png" alt="Sin Operaciones">
@@ -136,7 +136,7 @@
                 </div>
                 <div class="div-table-container mt-10">
                     <table class="table-userOperation">
-                        <thead> 
+                        <thead>
                             <tr> <!-- COLUMNA ⇅  -->
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
                                 <!-- ⇅ COLUMNA 1 -->
@@ -166,29 +166,54 @@
                 id="newOp-tittle">Nueva Operacion</p>
             <p class="title-section-newOperation section-editOperation text-xl font-bold mb-4 md:mb-8 hidden"
                 id="editOp-tittle">Editar Operacion</p>
+
             <form action="" class="flex flex-col">
                 <label for="input-description-text" class="font-bold">Descripcion</label>
-                <input type="text" id="input-description-text" class="p-2 mb-4 md:mb-4 rounded-md" name="description"
-                    placeholder="Descripcion" required>
+                <div class="warning-message-description flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <input type="text" id="input-description-text" class="warning-border-description p-2 mb-4 md:mb-4 rounded-md border"
+                    name="description" placeholder="Descripcion">
 
                 <label for="input-amount-numb" class="font-bold">Monto</label>
-                <input type="number" id="input-amount-numb" class="p-2 mb-4 md:mb-4 rounded-md" name="amount"
-                    placeholder="Monto" required>
+                <div class="warning-message-amount flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <input type="number" id="input-amount-numb" class="warning-border-amount p-2 mb-4 md:mb-4 rounded-md border" name="amount"
+                    placeholder="Monto">
 
                 <label for="select-type" class="font-bold">Tipo</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-type" required>
+                <div class="warning-message-type flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <select class="warning-border-type p-2 mb-4 md:mb-4 rounded-md border" id="select-type">
+                    <option value="" disabled selected hidden>Selecciona un tipo</option>
                     <option value="gasto">Gasto</option>
                     <option value="ganancia">Ganancia</option>
                 </select>
 
                 <label for="select-category" class="font-bold">Categoria</label>
-                <select class="p-2 mb-4 md:mb-4 rounded-md" id="select-category" required>
+                <div class="warning-message-category flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <select class="warning-border-category p-2 mb-4 md:mb-4 rounded-md border" id="select-category">
+                    <option value="" disabled selected hidden>Selecciona una categoría</option>
+                    <!-- Agrega opciones para la categoría si es aplicable -->
                 </select>
 
                 <label for="op-input-date" class="font-bold">Fecha</label>
-                <input type="date" id="op-input-date" class="p-2 mb-4 md:mb-4 rounded-md" name="date" placeholder="Fecha"
-                    required>
+                <div class="warning-message-date flex items-center hidden">
+                    <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
+                    <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
+                </div>
+                <input type="date" id="op-input-date" class="warning-border-date p-2 mb-4 md:mb-4 rounded-md border" name="date"
+                    placeholder="Fecha">
             </form>
+
             <div class="w-full flex justify-end">
                 <div class="options-for-newOperation">
                     <button class="text-black bg-slate-100 p-2 rounded-md" id="btn-cancel-newOp">Cancelar</button>
@@ -204,7 +229,7 @@
     <section class="section-category view flex justify-center items-center mb-[3rem] mt-[3rem] my-14 hidden">
         <div class="categoria w-[60%] h-[20%]  p-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem] ">Categoria</h2>
-            <form  id="form-category">
+            <form id="form-category">
                 <div class="mb-[0.5rem]">
                     <label for="input-add" class="text-[1rem]">Nombre </label>
                 </div>
@@ -226,13 +251,15 @@
         <div class="bg-zinc-500 m-[1rem] p-[1rem] rounded-[0.3rem]">
             <p class="m-[2rem] bg-zinc-500">¿Desea eliminar esta categoria? <span id="name"></span></p>
             <div class="flex justify-end">
-                <button type="button" class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] mr-[1rem] rounded-[0.3rem] text-black">Cancelar
+                <button type="button"
+                    class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] mr-[1rem] rounded-[0.3rem] text-black">Cancelar
                 </button>
                 <button type="button" id="btn-remove-categories"
                     class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black bg-red-700">Eliminar</button>
             </div>
         </div>
     </section>
+
 
     <!-- SECCION EDITAR CATEGORIA -->
     <section class="section-edit-category view flex  justify-center items-center mb-[2rem] my-14 hidden">
@@ -247,8 +274,8 @@
                         class="  w-[100%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
                 </div>
                 <div class="flex mt-[2rem] justify-end mb-[2rem]">
-                    <button
-                      type="button"  class="w-[5rem]  h-[2.5rem] bg-[#f5f5f5] border-slate-50 rounded-[0.3rem] mr-[1rem] ">Cancelar</button>
+                    <button type="button"
+                        class="w-[5rem]  h-[2.5rem] bg-[#f5f5f5] border-slate-50 rounded-[0.3rem] mr-[1rem] ">Cancelar</button>
                     <button type="button" id="btn-edit-categorie"
                         class="w-[5rem]  h-[2.5rem] bg-[#a3fc9b] rounded-[0.3rem] text-black">Editar</button>
                 </div>
@@ -271,73 +298,53 @@
 
 
     <!-- SECCION REPORTES FILTRADOS -->
-    <section class="section-edit-reports view my-14 flex justify-center items-center  hidden">
+    <section class="section-edit-reports  view my-14 flex justify-center items-center hidden ">
         <div class=" reportesFiltrados w-[60%] h-[50%]  pl-[1rem] pr-[1rem]  rounded-[0.5rem] bg-[#ffffff92]">
             <h2 class="text-[3rem] mb-[1rem]">Reportes</h2>
             <h3 class="text-[2rem]">Resumen</h3>
-            <table class="h-[200px] w-[100%]">
-                <tr class="mb-[1rem]  h-[20%] w-[50%]">
-                    <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <table id="reportes" class="h-[200px] w-[100%]">
             </table>
             <h2 class="totales text-[2rem] mb-[1rem]">Totales por categorías</h2>
-            <table class="w-[100%]">
-                <tr>
+
+            <table id="table-reporte" class="w-[100%]">
+                <thead>
                     <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
                     <th class="text-[#4A4A4A] text-left">Ganancias</th>
                     <th class="text-[#4A4A4A] text-left">Gastos</th>
                     <th class="text-[#4A4A4A] text-left">Balance</th>
-                </tr>
-                <tr>
-                    <td class="text-left">Comida</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                </thead>
+                <tbody id="total-category">
+                    <!-- <tr>
+                        <td class="text-left">holaa</td>
+                        <td class="text-left">holaa</td>
+                        <td class="text-left">holaa</td>
+                        <td class="text-left">holaa</td>
+                    </tr> -->
+
+                </tbody>
             </table>
             <h2 class=" totalesMes text-[2rem] mb-[1rem]">Totales por mes</h2>
             <table class="h-[50px]">
-                <tr>
+                <thead>
                     <th class="w-[30%] text-[#4A4A4A] text-left">Mes</th>
                     <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
                     <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
                     <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
-                </tr>
-                <tr>
-                    <td>Enero</td>
+                </thead>
+                <tbody id="totalMonth">
+                    <!-- <td>Enero</td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                </tr>
+                    <td></td> -->
+                </tbody>
             </table>
     </section>
     <section class="section-confirm-delete flex items-center justify-center h-screen hidden">
         <div class="div-container-confirm-delete bg-[#ffffff92] w-[40%] p-5 rounded-md flex flex-col items-center">
             <p class="text-are-u-sure font-bold text-xl">
                 ¿Estás seguro que quieres borrar la operación:
-                <span class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
+                <span
+                    class="operation-description bg-[#cfaeffa9] text-center block max-w-full overflow-hidden rounded-md"></span>
             </p>
             <div class="div-btn mt-4 w-64 flex justify-between">
                 <button class="btn-cancel-delete bg-lime-500 font-bold h-10 w-24 mr-2 rounded-md">Cancelar</button>
