@@ -177,7 +177,6 @@ const runBtnConfirm = (e) => {
 
 
 
-// PARA ACTUALIZAR LA LISTA DE CATEGORIAS EN MIS INPUTS NECESITO Q TAMARA HAGA FUNCIONAL SU BOTON DE "EDITAR" EN LA VISTA DE EDITAR CATEGORIA, UNA VEZ QUE ELLA TENGA ESA FUNCION, YO TENDRIA QUE AGREGAR EL PASO DE QUE SE ACTUALICEN MIS INPUTS... COMO? NIDEA
 
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 // CALCULOGANANCIAS
@@ -324,6 +323,21 @@ console.log(operationsCopy)
     
   }
 }
+
+// UTIBILIDAD BOTON RESET
+const resetearFormulario = () => {
+  just(".form-select-type").value = "todos"
+  just(".form-select-category").value = "todos"
+
+  const fechaFormateada = new Date().toISOString().split('T')[0] //new date y toisostring devuelve YYYY-MM-DDTHH:mm:ss.sssZ con split dividimos donde aparece la T y pasan a ser dos arr ahora, el cual tiene posiciones, y con [0] estamos llamando al primer arr el cual contendria anio, mes y dia, dejando afuera la hora, min y segundos.~
+  just("#form-input-date").value = fechaFormateada
+
+  just("#form-select-order").value = "masReciente"
+}
+
+
+
+
 
 //*************************************************************************************************** */
 //*************************************************************************************************** */
