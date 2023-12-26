@@ -26,22 +26,22 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 <details>
   <summary>Parte hecha por Sol</summary>
 
-- <kbd>[Vista y funcionalidad del Navbar]</kbd>
-- <kbd>[Vista y funcionalidad Balance]</kbd>
-- <kbd>[Vista y funcionalidad Balance]</kbd>
-- <kbd>[Vista y funcionalidad Filtros]</kbd>
-- <kbd>[Vista y funcionalidad Operaciones cargadas]</kbd>
-- <kbd>[Vista y funcionalidad Nuevas Operaciones]</kbd>
-- <kbd>[Vista y funcionalidad Editar Operacion]</kbd>
-- <kbd>[Creacion del Readme]</kbd>
-- <kbd>
-        <details>
-            <summary>como termino Sol luego del proyecto</summary>
-                - <kbd>(https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/miCodigoSeRompioMiCOdigoFUnciona.jpg?raw=true)</kbd>
-        </details>
-    </kbd>
-
+  - <kbd>[Vista y funcionalidad del Navbar]</kbd>
+  - <kbd>[Vista y funcionalidad Balance]</kbd>
+  - <kbd>[Vista y funcionalidad Filtros]</kbd>
+  - <kbd>[Vista y funcionalidad Operaciones cargadas]</kbd>
+  - <kbd>[Vista y funcionalidad Nuevas Operaciones]</kbd>
+  - <kbd>[Vista y funcionalidad Editar Operacion]</kbd>
+  - <kbd>[Creacion del Readme]</kbd>
+  
+  - <kbd>
+    <details>
+      <summary>Como terminó Sol luego del proyecto</summary>
+      - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/miCodigoSeRompioMiCOdigoFUnciona.jpg?raw=true" alt="Imagen Sol">
+    </details>
+  </kbd>
 </details>
+
 
 <details>
   <summary>Parte hecha por Tamara</summary>
