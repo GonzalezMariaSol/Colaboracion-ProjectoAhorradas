@@ -183,50 +183,50 @@ const validateForm = (e) => {
   // const submitAvaible = description !== "" && description !== "" && description !== "" && description !== "" && description !== "" 
 
 
-  if(description === ""){
+  if (description === "") {
     just(".warning-message-description").classList.remove("hidden")
     just(".warning-border-description").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-description").classList.add("hidden")
     just(".warning-border-description").classList.remove("border-red-500")
   }
-  
-  if(amount === ""){
+
+  if (amount === "") {
     just(".warning-message-amount").classList.remove("hidden")
     just(".warning-border-amount").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-amount").classList.add("hidden")
     just(".warning-border-amount").classList.remove("border-red-500")
   }
-  
-  if(type === ""){
+
+  if (type === "") {
     just(".warning-message-type").classList.remove("hidden")
     just(".warning-border-type").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-type").classList.add("hidden")
     just(".warning-border-type").classList.remove("border-red-500")
   }
-  
-  if(category === ""){
+
+  if (category === "") {
     just(".warning-message-category").classList.remove("hidden")
     just(".warning-border-category").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-category").classList.add("hidden")
     just(".warning-border-category").classList.remove("border-red-500")
   }
-  
-  if(date === ""){
+
+  if (date === "") {
     just(".warning-message-date").classList.remove("hidden")
     just(".warning-border-date").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-date").classList.add("hidden")
     just(".warning-border-date").classList.remove("border-red-500")
   }
 
-if(description !== "" && description !== "" && description !== "" && description !== "" && description !== "" ){
-  console.log("sd;flkajdsf;lk")
-  runBtnAddNewOp(e)
-}
+  if (description !== "" && description !== "" && description !== "" && description !== "" && description !== "") {
+    console.log("sd;flkajdsf;lk")
+    runBtnAddNewOp(e)
+  }
 }//!PORQUE ME FUNCIONA SOLO SI CARGO DE ABAJO PARA ARRIBA PERO SI COMPLETO DE ARRIBA PARA ABAJO, ME LO CARGA IGUAL SIN IMPORTAR LOS FILTROS?
 
 
@@ -339,8 +339,8 @@ const showSelectedDate = (e) => {
 const showSelectedOrder = (e) => {
   const operationsCopy = [...getInfo("Operations")]; //se hace una copia superficil del array con obj del LS
 
-  
-  if(e.target.value === "masReciente"){ 
+
+  if (e.target.value === "masReciente") {
     operationsCopy.sort((a, b) => {
       const dateA = new Date(a.fecha)
       const dateB = new Date(b.fecha)
@@ -464,7 +464,7 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
 
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
-      
+
     id: idCategori ? idCategori : randomId(),
     category: just("#input-add").value,
   };
@@ -558,25 +558,45 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 
 
-const renderReporte = (arrayOpertation) => {
+const renderReporte = (arrayOperation) => {
   clear("#reportes")
   const clase = "value"
-  if (arrayOpertation.length >= 3) {
+  if (arrayOperation.length >= 3) {
 
     hideElement("#section-reports")
     showElement("#section-edit-reports");
-     for (const operation of arrayOpertation) {
+    // Inicializamos variables para la categoría con mayor ganancia y mayor gasto
+    let maxGanancia = { categoria: "", monto: 0 };
+    let maxGasto = { categoria: "", monto: 0 };
+    let maxBalance = { categoria: "", balance: 0 };
+    let maxGananciaMes = { mes: just("#form-input-date").value , monto: 0 };
+
+    for (const operation of arrayOperation) {
+      // Actualizamos la tabla con la categoría con mayor ganancia
+      if (operation.tipo === "ganancia" && operation.monto > maxGanancia.monto) {
+        maxGanancia = { categoria: operation.categoria, monto: operation.monto };
+      }
+
+      // Actualizamos la tabla con la categoría con mayor gasto
+      if (operation.tipo === "gasto" && operation.monto > maxGasto.monto) {
+        maxGasto = { categoria: operation.categoria, monto: operation.monto };
+      }
+      
+      
+    }
     
+  
+
       just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-           <td></td>
-          <td ></td>
+           <td>${maxGanancia.categoria}</td>
+          <td >${maxGanancia.monto}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
-          <td></td>
-          <td class="valor"></td>
+          <td>${maxGasto.categoria}</td>
+          <td>${maxGasto.monto}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
@@ -585,8 +605,8 @@ const renderReporte = (arrayOpertation) => {
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
-          <td></td>
-          <td></td>
+          <td>${maxGananciaMes.mes}</td>
+          <td>${maxGananciaMes.monto}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
@@ -594,7 +614,7 @@ const renderReporte = (arrayOpertation) => {
           <td></td>
         </tr>
       </tbody>`;
-    }
+    
   } else {
     console.log("else");
     showElement("#section-reports");
@@ -602,21 +622,10 @@ const renderReporte = (arrayOpertation) => {
 };
 
 
-const calcularCategoriaMayorGanancia = (arrayOperation) => {
-  let categoriaGananciaMaxima = "";
-  let montoMaximo = 0;
 
-  for (const operation of arrayOperation) {
-    if (operation.monto > montoMaximo) {
-      montoMaximo = operation.monto;
-      categoriaGananciaMaxima = operation.categoria;
-    }
-  }
 
- console.log(categoriaGananciaMaxima); 
-};
 
-calcularCategoriaMayorGanancia(totalOperations)
+//--------------------------------------------------Total categoria---------------------------------------------------------------------
 
 const renderTotalCategory = (arrayCategorys) => {
 
@@ -730,7 +739,7 @@ const inicializeApp = () => {
   just("#btn-add-newOp").addEventListener("click", (e) => {
     validateForm(e)
     // runBtnAddNewOp(e)
-    }); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+  }); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
   // -----------BOTON CANCELAR OPERACION //?funciona bien
   just("#btn-cancel-newOp").addEventListener("click", () => {
