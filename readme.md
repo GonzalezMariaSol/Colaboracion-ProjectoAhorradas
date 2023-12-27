@@ -1,14 +1,18 @@
 # Proyecto Ahorradas
-## Proyecto ahorradas para la comision n19 de ADA. Alumnas Tamara Zarate y Maria Sol Gonzalez
 
-<h3>Proyecto *Ahorradas* creado para la comision n19 de **ADA ITW** </h3>
+#### Alumnas:
 
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/balancePicture.JPG?raw=true)
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/filterPicture.JPG?raw=true)
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/noOperationsPicture.JPG?raw=true)
-![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/operationsPicture.JPG?raw=true)
+[Tamara Zarate](https://github.com/taty3385) y
+[Maria Sol Gonzalez](https://github.com/GonzalezMariaSol)
+
+### Proyecto **Ahorradas** creado para la comisión n19 de _ADA ITW_
+
+<p align="center">
+  <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/drake-meme.jpg?raw=true" width="400" height="400" border="10"/>
+</p>
 
 En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de Datos
+
 - Git
 - Arrays
 - Bucles
@@ -17,6 +21,47 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - Metodos Array
 - Array de Objetos
 
-Proyecto *Ahorradas* es un trabajo personal/grupal, siguiendo instrucciones pedidas. [^.]
+![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/operationsPicture.JPG?raw=true)
+
+<details>
+  <summary>Parte hecha por Sol</summary>
+
+  - <kbd>Vista y funcionalidad del Navbar</kbd>
+  - <kbd>Vista y funcionalidad Balance</kbd>
+  - <kbd>Vista y funcionalidad Filtros</kbd>
+  - <kbd>Vista y funcionalidad Operaciones cargadas</kbd>
+  - <kbd>Vista y funcionalidad Nuevas Operaciones</kbd>
+  - <kbd>Vista y funcionalidad Editar Operacion</kbd>
+  - <kbd>Vista y funcionalidad Eliminar Operacion</kbd>
+  - <kbd>Creacion del Readme</kbd>
+  
+  - <kbd>
+    <details>
+      <summary><h4>Como terminó Sol luego del proyecto</h4></summary>
+      - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/miCodigoSeRompioMiCOdigoFUnciona.jpg?raw=true" alt="Imagen Sol">
+    </details>
+  </kbd>
+</details>
+
+
+<details>
+  <summary>Parte hecha por Tamara</summary>
+
+- <kbd>Vista y funcionalidad de Categorias</kbd>
+- <kbd>Vista y funcionalidad de Nueva Categoria</kbd>
+- <kbd>Vista y funcionalidad de Editar Categorias</kbd>
+- <kbd>Vista y funcionalidad de Eliminar Categorias</kbd>
+- <kbd>Vista y funcionalidad Reportes</kbd>
+- <kbd>Disenio responsivo del proyecto</kbd>
+ - <kbd>
+    <details>
+      <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
+      - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
+    </details>
+  </kbd>
+
+</details>
+
+Proyecto _Ahorradas_ es un trabajo personal/grupal, siguiendo instrucciones pedidas. [^.]
 
 [^.]: Cualquier comentario constructivo sentirse libre de contactarme.
