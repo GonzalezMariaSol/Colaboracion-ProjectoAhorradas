@@ -116,7 +116,7 @@
                         <div class="flex items-center">
                             <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button"
                                 onclick="resetearFormulario()">Resetear</button>
-                           
+
 
 
                         </div>
@@ -176,16 +176,17 @@
                     <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
                     <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
                 </div>
-                <input type="text" id="input-description-text" class="warning-border-description p-2 mb-4 md:mb-4 rounded-md border"
-                    name="description" placeholder="Descripcion">
+                <input type="text" id="input-description-text"
+                    class="warning-border-description p-2 mb-4 md:mb-4 rounded-md border" name="description"
+                    placeholder="Descripcion">
 
                 <label for="input-amount-numb" class="font-bold">Monto</label>
                 <div class="warning-message-amount flex items-center hidden">
                     <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
                     <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
                 </div>
-                <input type="number" id="input-amount-numb" class="warning-border-amount p-2 mb-4 md:mb-4 rounded-md border" name="amount"
-                    placeholder="Monto">
+                <input type="number" id="input-amount-numb"
+                    class="warning-border-amount p-2 mb-4 md:mb-4 rounded-md border" name="amount" placeholder="Monto">
 
                 <label for="select-type" class="font-bold">Tipo</label>
                 <div class="warning-message-type flex items-center hidden">
@@ -214,8 +215,8 @@
                     <i class="fa-solid fa-circle-exclamation text-xs text-red-600" style="color: #fa0000;"></i>
                     <p class="text-red-600 ml-2">Este campo es obligatorio *</p>
                 </div>
-                <input type="date" id="op-input-date" class="warning-border-date p-2 mb-4 md:mb-4 rounded-md border" name="date"
-                    placeholder="Fecha">
+                <input type="date" id="op-input-date" class="warning-border-date p-2 mb-4 md:mb-4 rounded-md border"
+                    name="date" placeholder="Fecha">
             </form>
 
             <div class="w-full flex justify-end">
@@ -237,9 +238,11 @@
                 <div class="mb-[0.5rem]">
                     <label for="input-add" class="text-[1rem]">Nombre </label>
                 </div>
-                <div class="w-[100%] flex justify-between">
-                    <input name="input-add" id="input-add" type="text"
-                        class="w-[85%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
+                <div class="hidden validation text-[0.9rem]">empty input fill in the input please</div>
+                <div class="  w-[100%] flex justify-between">
+                    <div class="box-input w-[85%] rounded-[0.3rem]  border-[0.1rem]  ">
+                        <input name="input-add" id="input-add" type="text" class=" w-[100%] p-[0.5rem] rounded-[0.3rem]  border-[0.1rem]">
+                    </div>
                     <button type="button" id="btn-add-categories"
                         class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black">Agregar</button>
                 </div>
@@ -275,7 +278,7 @@
                 </div>
                 <div class="w-[100%]">
                     <input id="input-edit" type="text"
-                        class="  w-[100%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
+                        class="w-[100%] p-[0.5rem] rounded-[0.3rem] border-inherit border-[0.1rem]">
                 </div>
                 <div class="flex mt-[2rem] justify-end mb-[2rem]">
                     <button type="button"
@@ -307,9 +310,9 @@
             <h2 class="text-[3rem] mb-[1rem]">Reportes</h2>
             <h3 class="text-[2rem]">Resumen</h3>
             <table id="reportes" class="h-[200px] w-[100%]">
-                 <tbody>
+                <tbody>
 
-                     <!-- <tr class="mb-[1rem]  h-[20%] w-[50%]">
+                    <!-- <tr class="mb-[1rem]  h-[20%] w-[50%]">
                         <th class="w-[50%]  mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia
                             </th>
                         <td class="valor"></td>
@@ -335,7 +338,7 @@
                         <td></td>
                         <td></td>
                     </tr> -->
-                </tbody> 
+                </tbody>
             </table>
             <h2 class="totales text-[2rem] mb-[1rem]">Totales por categorías</h2>
             <table class="w-[100%]">

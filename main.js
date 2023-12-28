@@ -456,12 +456,6 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
   }
 }
 
-
-
-
-
-
-
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
 
@@ -537,8 +531,24 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 
 
+const validationInput = () => {
+  const input = just("#input-add").value;
+  if (/^\s*$/.test(input)) {
+    just(".validation").classList.remove("hidden");
+    just(".validation").classList.add("red");
+    just(".box-input").classList.add("invalid-input")
+    return false;
 
 
+  } else {
+    just(".validation").classList.remove("red");
+    just(".validation").classList.add("hidden");
+    just(".box-input").classList.remove("invalid-input");
+    return true;
+  }
+
+}
+//
 // FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
 // const opWithoutCategory = () => {
 // console.log(getInfo('Operations')) //arranco con arr de 6 
@@ -605,7 +615,7 @@ const renderReporte = (arrayOperation) => {
 
 
 
-//--------------------------------------------------Total categoria---------------------------------------------------------------------
+//--------------------------------------------------Total categoria reportes---------------------------------------------------------------------
 
 const renderTotalCategory = (arrayCategorys) => {
 
@@ -719,7 +729,7 @@ const getCategoryWithHighestExpenses = () => {
     }
   }
 
-  return {categorias:maxExpensesCategory,value:maxExpenses};
+  return { categorias: maxExpensesCategory, value: maxExpenses };
 };
 
 // -----------------------------------EVENTS---------------------------------------------------
@@ -730,7 +740,11 @@ const inicializeApp = () => {
 
 
   just("#btn-add-categories").addEventListener("click", (e) => {
-    addCategory()
+// Prevenir el envío del formulario si la validación falla
+   addCategory()
+   if (!(validationInput())) {
+    e.preventDefault();
+    }
 
   })
 
@@ -741,6 +755,10 @@ const inicializeApp = () => {
     editBtnCategory()
     window.location.reload()
   })
+
+  // just("form-category").addEventListener("submit", (e) => {
+
+  // });
 
 
   //?setInfo funciona bien
