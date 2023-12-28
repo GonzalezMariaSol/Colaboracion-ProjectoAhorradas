@@ -562,41 +562,20 @@ const renderReporte = (arrayOperation) => {
   clear("#reportes")
   const clase = "value"
   if (arrayOperation.length >= 3) {
-
+    const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
-    // Inicializamos variables para la categoría con mayor ganancia y mayor gasto
-    let maxGanancia = { categoria: "", monto: 0 };
-    let maxGasto = { categoria: "", monto: 0 };
-    let maxBalance = { categoria: "", balance: 0 };
-    let maxGananciaMes = { mes: just("#form-input-date").value , monto: 0 };
 
-    for (const operation of arrayOperation) {
-      // Actualizamos la tabla con la categoría con mayor ganancia
-      if (operation.tipo === "ganancia" && operation.monto > maxGanancia.monto) {
-        maxGanancia = { categoria: operation.categoria, monto: operation.monto };
-      }
-
-      // Actualizamos la tabla con la categoría con mayor gasto
-      if (operation.tipo === "gasto" && operation.monto > maxGasto.monto) {
-        maxGasto = { categoria: operation.categoria, monto: operation.monto };
-      }
-      
-      
-    }
-    
-  
-
-      just("#reportes").innerHTML = `<tbody>
+    just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-           <td>${maxGanancia.categoria}</td>
-          <td >${maxGanancia.monto}</td>
+           <td>${categoryWithHighestEarnings.categoria}</td>
+          <td >${categoryWithHighestEarnings.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
-          <td>${maxGasto.categoria}</td>
-          <td>${maxGasto.monto}</td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
@@ -605,8 +584,8 @@ const renderReporte = (arrayOperation) => {
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
-          <td>${maxGananciaMes.mes}</td>
-          <td>${maxGananciaMes.monto}</td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
@@ -614,7 +593,7 @@ const renderReporte = (arrayOperation) => {
           <td></td>
         </tr>
       </tbody>`;
-    
+
   } else {
     console.log("else");
     showElement("#section-reports");
@@ -668,20 +647,44 @@ const rendertotalMonth = (arrayCategorys) => {
 
 
 
-// const highestEarninCategory = () => {
-//   const categoriafiltrada = getInfo("Operations").filter(operation => operation.tipo === "ganancia");
 
-//   let acc = 0;
+const getCategoryWithHighestEarnings = () => {
+  const operations = getInfo("Operations") || [];
+  const categories = getInfo("categories") || [];
 
-//   for (const categoria of categoriafiltrada) {
-//     acc += Number(categoria.monto);
-//   }
-//   console.log(acc);
+  const earningsByCategory = {};
 
-// };
+  // Calcular las ganancias por categoría
+  operations.forEach((operation) => {
+    if (operation.tipo === "ganancia") {
+      const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
 
-// highestEarninCategory();
+      if (categoryName) {
+        if (!earningsByCategory[categoryName]) {
+          earningsByCategory[categoryName] = 0;
+        }
 
+        earningsByCategory[categoryName] += Number(operation.monto);
+      }
+    }
+  });
+
+  // Encontrar la categoría con la mayor ganancia
+  let maxEarningsCategory = null;
+  let maxEarnings = 0;
+
+  for (const [category, earnings] of Object.entries(earningsByCategory)) {
+    if (earnings > maxEarnings) {
+      maxEarnings = earnings;
+      maxEarningsCategory = category;
+    }
+  }
+
+  return { categoria: maxEarningsCategory, value: maxEarnings };
+
+
+
+};
 
 
 // -----------------------------------EVENTS---------------------------------------------------
