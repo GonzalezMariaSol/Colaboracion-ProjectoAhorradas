@@ -563,19 +563,20 @@ const renderReporte = (arrayOperation) => {
   const clase = "value"
   if (arrayOperation.length >= 3) {
     const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
+    const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
 
     just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-           <td>${categoryWithHighestEarnings.categoria}</td>
-          <td class="green">${categoryWithHighestEarnings.value}</td>
+           <td> ${categoryWithHighestEarnings.categoria}</td>
+          <td class="green"> + ${categoryWithHighestEarnings.value}</td>
         </tr>
         <tr>
           <th class=" text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
-          <td></td>
-          <td class="red"></td>
+          <td>${categoryWithHighestExpenses.categorias}</td>
+          <td class="red"> - ${categoryWithHighestExpenses.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
@@ -686,6 +687,40 @@ const getCategoryWithHighestEarnings = () => {
 
 };
 
+const getCategoryWithHighestExpenses = () => {
+  const operations = getInfo("Operations") || [];
+  const categories = getInfo("categories") || [];
+
+  const expensesByCategory = {};
+
+  // Calcular los gastos por categoría
+  operations.forEach((operation) => {
+    if (operation.tipo === "gasto") {
+      const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+
+      if (categoryName) {
+        if (!expensesByCategory[categoryName]) {
+          expensesByCategory[categoryName] = 0;
+        }
+
+        expensesByCategory[categoryName] += Number(operation.monto);
+      }
+    }
+  });
+
+  // Encontrar la categoría con el mayor gasto
+  let maxExpensesCategory = null;
+  let maxExpenses = 0;
+
+  for (const [category, expenses] of Object.entries(expensesByCategory)) {
+    if (expenses > maxExpenses) {
+      maxExpenses = expenses;
+      maxExpensesCategory = category;
+    }
+  }
+
+  return {categorias:maxExpensesCategory,value:maxExpenses};
+};
 
 // -----------------------------------EVENTS---------------------------------------------------
 
