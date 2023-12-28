@@ -10,6 +10,14 @@ body {
     display: none;
 }
 
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
 @media(max-width:544px) {
     section>.categoria {
         width: 90%;

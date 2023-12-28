@@ -570,27 +570,27 @@ const renderReporte = (arrayOperation) => {
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
            <td>${categoryWithHighestEarnings.categoria}</td>
-          <td >${categoryWithHighestEarnings.value}</td>
+          <td class="green">${categoryWithHighestEarnings.value}</td>
         </tr>
         <tr>
-          <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
+          <th class=" text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
           <td></td>
-          <td></td>
+          <td class="red"></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
           <td></td>
-          <td></td>
+          <td class="red"></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
           <td></td>
-          <td></td>
+          <td class="green"></td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
           <td></td>
-          <td></td>
+          <td class="red"></td>
         </tr>
       </tbody>`;
 
