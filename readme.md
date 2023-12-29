@@ -52,7 +52,9 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - <kbd>Vista y funcionalidad de Editar Categorias</kbd>
 - <kbd>Vista y funcionalidad de Eliminar Categorias</kbd>
 - <kbd>Vista y funcionalidad Reportes</kbd>
-- <kbd>Disenio responsivo del proyecto</kbd>
+ <kbd>Totales por categorías</kbd>
+- <kbd>Totales por mes</kbd>
+- <kbd>Disenio responsivo del proyecto categoria y reportes</kbd>
  - <kbd>
     <details>
       <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
