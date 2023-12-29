@@ -778,9 +778,8 @@ const inicializeApp = () => {
 
 
   just("#btn-add-categories").addEventListener("click", (e) => {
-  
-    addCategory()
-    validationInput()
+  addCategory()
+    
   })
 
 
