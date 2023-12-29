@@ -798,8 +798,17 @@ const inicializeApp = () => {
   
     
   })
+  just(".Cancel").addEventListener("click",(e)=>{
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+  })
 
-
+ 
+  just(".cancel-edit").addEventListener("click",(e)=>{
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+  hideElement(".section-edit-category")
+  })
   
   //?setInfo funciona bien
   setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
