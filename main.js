@@ -663,8 +663,8 @@ const rendertotalMonth = (arrayCategorys) => {
 
 
 const getCategoryWithHighestEarnings = () => {
-  const operations = getInfo("Operations") || [];
-  const categories = getInfo("categories") || [];
+  const operations = getInfo("Operations") ;
+  const categories = getInfo("categories") ;
 
   const earningsByCategory = {};
 
@@ -701,8 +701,8 @@ const getCategoryWithHighestEarnings = () => {
 };
 
 const getCategoryWithHighestExpenses = () => {
-  const operations = getInfo("Operations") || [];
-  const categories = getInfo("categories") || [];
+  const operations = getInfo("Operations") ;
+  const categories = getInfo("categories") ;
 
   const expensesByCategory = {};
 
@@ -736,7 +736,7 @@ const getCategoryWithHighestExpenses = () => {
 };
 
 const getDateWithHighestEarnings = () => {
-  const operations = getInfo("Operations") || [];
+  const operations = getInfo("Operations") ;
 
   const earningsByDate = {};
 
