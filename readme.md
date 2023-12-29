@@ -43,9 +43,9 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
   </kbd>
 </details>
 
-
 <details>
   <summary>Parte hecha por Tamara</summary>
+   - <img src="./img/image.png" 
 
 - <kbd>Vista y funcionalidad de Categorias</kbd>
 - <kbd>Vista y funcionalidad de Nueva Categoria</kbd>
@@ -57,10 +57,10 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - <kbd>Totales por mes</kbd>
 - <kbd>Disenio responsivo del proyecto categoria y reportes</kbd>
    
-    <details>
-      <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
-      - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
-    </details>
+  <details>
+     <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
+     - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
+  </details>
   </kbd>
 
 </details>
