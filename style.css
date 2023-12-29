@@ -17,6 +17,10 @@ body {
 .green{
     color: green;
 }
+ .invalid-input{
+    border: 1px solid red;
+
+ }
 
 @media(max-width:544px) {
     section>.categoria {

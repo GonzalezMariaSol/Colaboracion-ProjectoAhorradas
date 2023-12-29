@@ -456,12 +456,6 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
   }
 }
 
-
-
-
-
-
-
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
 
@@ -519,7 +513,8 @@ const viewChangeRemove = (categoryId, categori) => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
     deleteOperationWCategoryDeleted(IdCategoria)
-    window.location.reload()
+
+
 
   })
 
@@ -532,13 +527,30 @@ const deleteCategory = (categoryId) => {
 const deleteOperationWCategoryDeleted = (categoriaId) => {
   const currentOperations = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
   setInfo("Operations", currentOperations);
-  console.log(currentOperations)
+ 
 }
 
 
 
+const validationInput = () => {
+  const input = just("#input-add").value;
+  if (/^\s*$/.test(input)) {
+    just(".validation").classList.remove("hidden");
+    just(".validation").classList.add("red");
+    just(".box-input").classList.add("invalid-input")
+    e.preventDefault()
 
 
+  } else {
+
+    just(".validation").classList.remove("red");
+    just(".validation").classList.add("hidden");
+    just(".box-input").classList.remove("invalid-input");
+    return true;
+  }
+
+}
+//
 // FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
 // const opWithoutCategory = () => {
 // console.log(getInfo('Operations')) //arranco con arr de 6 
@@ -564,6 +576,7 @@ const renderReporte = (arrayOperation) => {
   if (arrayOperation.length >= 3) {
     const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
     const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
+    const monthWithHighestBalance = getDateWithHighestEarnings();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
 
@@ -585,8 +598,8 @@ const renderReporte = (arrayOperation) => {
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
-          <td></td>
-          <td class="green"></td>
+          <td>${monthWithHighestBalance.mes}</td>
+          <td class="green"> +${monthWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
@@ -605,7 +618,7 @@ const renderReporte = (arrayOperation) => {
 
 
 
-//--------------------------------------------------Total categoria---------------------------------------------------------------------
+//--------------------------------------------------Total categoria reportes---------------------------------------------------------------------
 
 const renderTotalCategory = (arrayCategorys) => {
 
@@ -650,8 +663,8 @@ const rendertotalMonth = (arrayCategorys) => {
 
 
 const getCategoryWithHighestEarnings = () => {
-  const operations = getInfo("Operations") || [];
-  const categories = getInfo("categories") || [];
+  const operations = getInfo("Operations") ;
+  const categories = getInfo("categories") ;
 
   const earningsByCategory = {};
 
@@ -688,8 +701,8 @@ const getCategoryWithHighestEarnings = () => {
 };
 
 const getCategoryWithHighestExpenses = () => {
-  const operations = getInfo("Operations") || [];
-  const categories = getInfo("categories") || [];
+  const operations = getInfo("Operations") ;
+  const categories = getInfo("categories") ;
 
   const expensesByCategory = {};
 
@@ -719,8 +732,43 @@ const getCategoryWithHighestExpenses = () => {
     }
   }
 
-  return {categorias:maxExpensesCategory,value:maxExpenses};
+  return { categorias: maxExpensesCategory, value: maxExpenses };
 };
+
+const getDateWithHighestEarnings = () => {
+  const operations = getInfo("Operations") ;
+
+  const earningsByDate = {};
+
+  // Calcular las ganancias por fecha
+  operations.forEach((operation) => {
+    if (operation.tipo === "ganancia") {
+      const operationDate = new Date(operation.fecha);
+      const formattedDate = operationDate.toLocaleDateString('es-ES'); // Utilizamos el formato local para español
+
+      if (!earningsByDate[formattedDate]) {
+        earningsByDate[formattedDate] = 0;
+      }
+
+      earningsByDate[formattedDate] += Number(operation.monto);
+    }
+  });
+
+  // Encontrar la fecha con la mayor ganancia
+  let maxEarningsDate = null;
+  let maxEarnings = 0;
+
+  for (const [date, earnings] of Object.entries(earningsByDate)) {
+    if (earnings > maxEarnings) {
+      maxEarnings = earnings;
+      maxEarningsDate = date;
+    }
+  }
+
+  return {mes:maxEarningsDate,value:maxEarnings};
+};
+
+
 
 // -----------------------------------EVENTS---------------------------------------------------
 
@@ -730,19 +778,29 @@ const inicializeApp = () => {
 
 
   just("#btn-add-categories").addEventListener("click", (e) => {
-    addCategory()
-
+  addCategory()
+    
   })
+
+
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-    window.location.reload()
+  
+  })
+  just("#btn-remove-categories").addEventListener("click",(e)=>{
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+  location.reload() //! no hace la recarga de la misma pagina
+  
+    
   })
 
 
+  
   //?setInfo funciona bien
   setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
