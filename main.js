@@ -527,29 +527,50 @@ const deleteCategory = (categoryId) => {
 const deleteOperationWCategoryDeleted = (categoriaId) => {
   const currentOperations = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
   setInfo("Operations", currentOperations);
- 
+
 }
 
 
 
-const validationInput = () => {
+// const validationInput = (e) => {
+//   const input = just("#input-add").value;
+//   if (/^\s*$/.test(input)) {
+//     just(".validation").classList.remove("hidden");
+//     just(".validation").classList.add("red");
+//     just(".box-input").classList.add("invalid-input")
+//     e.preventDefault()
+
+
+//   } else {
+
+//     just(".validation").classList.remove("red");
+//     just(".validation").classList.add("hidden");
+//     just(".box-input").classList.remove("invalid-input");
+//     return true;
+//   }
+
+// }
+
+
+const validateInput = () => {
   const input = just("#input-add").value;
+  
   if (/^\s*$/.test(input)) {
     just(".validation").classList.remove("hidden");
     just(".validation").classList.add("red");
-    just(".box-input").classList.add("invalid-input")
-    e.preventDefault()
-
-
+    just(".box-input").classList.add("invalid-input");
+    return false;
   } else {
-
     just(".validation").classList.remove("red");
     just(".validation").classList.add("hidden");
     just(".box-input").classList.remove("invalid-input");
     return true;
   }
+};
 
-}
+
+
+
 //
 // FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
 // const opWithoutCategory = () => {
@@ -663,8 +684,8 @@ const rendertotalMonth = (arrayCategorys) => {
 
 
 const getCategoryWithHighestEarnings = () => {
-  const operations = getInfo("Operations") ;
-  const categories = getInfo("categories") ;
+  const operations = getInfo("Operations");
+  const categories = getInfo("categories");
 
   const earningsByCategory = {};
 
@@ -701,8 +722,8 @@ const getCategoryWithHighestEarnings = () => {
 };
 
 const getCategoryWithHighestExpenses = () => {
-  const operations = getInfo("Operations") ;
-  const categories = getInfo("categories") ;
+  const operations = getInfo("Operations");
+  const categories = getInfo("categories");
 
   const expensesByCategory = {};
 
@@ -736,7 +757,7 @@ const getCategoryWithHighestExpenses = () => {
 };
 
 const getDateWithHighestEarnings = () => {
-  const operations = getInfo("Operations") ;
+  const operations = getInfo("Operations");
 
   const earningsByDate = {};
 
@@ -765,7 +786,7 @@ const getDateWithHighestEarnings = () => {
     }
   }
 
-  return {mes:maxEarningsDate,value:maxEarnings};
+  return { mes: maxEarningsDate, value: maxEarnings };
 };
 
 
@@ -776,40 +797,45 @@ const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
 
-
   just("#btn-add-categories").addEventListener("click", (e) => {
-  addCategory()
+  if (!validateInput()) {
+    e.preventDefault();
     
-  })
+    return;
+  }
 
+ 
+  addCategory();
+});
 
+ 
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-  
+
   })
-  just("#btn-remove-categories").addEventListener("click",(e)=>{
+  just("#btn-remove-categories").addEventListener("click", (e) => {
     hideElement(".container-eliminar")
     showElement(".section-category")
-  location.reload() //! no hace la recarga de la misma pagina
-  
-    
+    location.reload() //! no hace la recarga de la misma pagina
+
+
   })
-  just(".Cancel").addEventListener("click",(e)=>{
+  just(".Cancel").addEventListener("click", (e) => {
     hideElement(".container-eliminar")
     showElement(".section-category")
   })
 
- 
-  just(".cancel-edit").addEventListener("click",(e)=>{
+
+  just(".cancel-edit").addEventListener("click", (e) => {
     hideElement(".container-eliminar")
     showElement(".section-category")
-  hideElement(".section-edit-category")
+    hideElement(".section-edit-category")
   })
-  
+
   //?setInfo funciona bien
   setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
