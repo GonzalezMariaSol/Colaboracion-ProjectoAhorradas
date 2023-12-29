@@ -515,6 +515,7 @@ const viewChangeRemove = (categoryId, categori) => {
     deleteOperationWCategoryDeleted(IdCategoria)
     window.location.reload()
 
+
   })
 
 }
@@ -526,7 +527,7 @@ const deleteCategory = (categoryId) => {
 const deleteOperationWCategoryDeleted = (categoriaId) => {
   const currentOperations = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
   setInfo("Operations", currentOperations);
-  console.log(currentOperations)
+ 
 }
 
 
@@ -537,10 +538,11 @@ const validationInput = () => {
     just(".validation").classList.remove("hidden");
     just(".validation").classList.add("red");
     just(".box-input").classList.add("invalid-input")
-    return false;
+    e.preventDefault()
 
 
   } else {
+
     just(".validation").classList.remove("red");
     just(".validation").classList.add("hidden");
     just(".box-input").classList.remove("invalid-input");
@@ -574,6 +576,7 @@ const renderReporte = (arrayOperation) => {
   if (arrayOperation.length >= 3) {
     const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
     const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
+    const monthWithHighestBalance = getDateWithHighestEarnings();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
 
@@ -595,8 +598,8 @@ const renderReporte = (arrayOperation) => {
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
-          <td></td>
-          <td class="green"></td>
+          <td>${monthWithHighestBalance.mes}</td>
+          <td class="green"> +${monthWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
@@ -732,6 +735,41 @@ const getCategoryWithHighestExpenses = () => {
   return { categorias: maxExpensesCategory, value: maxExpenses };
 };
 
+const getDateWithHighestEarnings = () => {
+  const operations = getInfo("Operations") || [];
+
+  const earningsByDate = {};
+
+  // Calcular las ganancias por fecha
+  operations.forEach((operation) => {
+    if (operation.tipo === "ganancia") {
+      const operationDate = new Date(operation.fecha);
+      const formattedDate = operationDate.toLocaleDateString('es-ES'); // Utilizamos el formato local para español
+
+      if (!earningsByDate[formattedDate]) {
+        earningsByDate[formattedDate] = 0;
+      }
+
+      earningsByDate[formattedDate] += Number(operation.monto);
+    }
+  });
+
+  // Encontrar la fecha con la mayor ganancia
+  let maxEarningsDate = null;
+  let maxEarnings = 0;
+
+  for (const [date, earnings] of Object.entries(earningsByDate)) {
+    if (earnings > maxEarnings) {
+      maxEarnings = earnings;
+      maxEarningsDate = date;
+    }
+  }
+
+  return {mes:maxEarningsDate,value:maxEarnings};
+};
+
+
+
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
@@ -740,13 +778,12 @@ const inicializeApp = () => {
 
 
   just("#btn-add-categories").addEventListener("click", (e) => {
-// Prevenir el envío del formulario si la validación falla
-   addCategory()
-   if (!(validationInput())) {
-    e.preventDefault();
-    }
-
+  
+    addCategory()
+    validationInput()
   })
+
+
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
@@ -756,11 +793,8 @@ const inicializeApp = () => {
     window.location.reload()
   })
 
-  // just("form-category").addEventListener("submit", (e) => {
 
-  // });
-
-
+  
   //?setInfo funciona bien
   setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
 
