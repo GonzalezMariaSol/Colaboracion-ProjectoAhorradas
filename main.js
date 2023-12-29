@@ -598,6 +598,7 @@ const renderReporte = (arrayOperation) => {
     const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
     const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
     const monthWithHighestBalance = getDateWithHighestEarnings();
+    const monthWithHighestgasto =getDateWithHighestExpenses();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
 
@@ -624,8 +625,8 @@ const renderReporte = (arrayOperation) => {
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
-          <td></td>
-          <td class="red"></td>
+          <td> ${monthWithHighestgasto.mes}</td>
+          <td class="red"> -${monthWithHighestgasto.value}</td>
         </tr>
       </tbody>`;
 
@@ -789,6 +790,38 @@ const getDateWithHighestEarnings = () => {
   return { mes: maxEarningsDate, value: maxEarnings };
 };
 
+const getDateWithHighestExpenses = () => {
+  const operations = getInfo("Operations") 
+
+  const expensesByDate = {};
+
+  // Calcular los gastos por fecha
+  operations.forEach((operation) => {
+    if (operation.tipo === "gasto") {
+      const operationDate = new Date(operation.fecha);
+      const formattedDate = operationDate.toLocaleDateString('es-ES'); // Utilizamos el formato local para español
+
+      if (!expensesByDate[formattedDate]) {
+        expensesByDate[formattedDate] = 0;
+      }
+
+      expensesByDate[formattedDate] += Number(operation.monto);
+    }
+  });
+
+  // Encontrar la fecha con el mayor gasto
+  let maxExpensesDate = null;
+  let maxExpenses = 0;
+
+  for (const [date, expenses] of Object.entries(expensesByDate)) {
+    if (expenses > maxExpenses) {
+      maxExpenses = expenses;
+      maxExpensesDate = date;
+    }
+  }
+
+  return {mes:maxExpensesDate,value:maxExpenses};
+};
 
 
 // -----------------------------------EVENTS---------------------------------------------------
