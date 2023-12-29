@@ -43,9 +43,9 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
   </kbd>
 </details>
 
-
 <details>
   <summary>Parte hecha por Tamara</summary>
+   - <img src="./img/image.png" 
 
 - <kbd>Vista y funcionalidad de Categorias</kbd>
 - <kbd>Vista y funcionalidad de Nueva Categoria</kbd>
