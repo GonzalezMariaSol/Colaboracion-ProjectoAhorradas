@@ -513,7 +513,7 @@ const viewChangeRemove = (categoryId, categori) => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
     deleteOperationWCategoryDeleted(IdCategoria)
-    window.location.reload()
+
 
 
   })
@@ -789,7 +789,14 @@ const inicializeApp = () => {
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-    window.location.reload()
+  
+  })
+  just("#btn-remove-categories").addEventListener("click",(e)=>{
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+  location.reload() //! no hace la recarga de la misma pagina
+  
+    
   })
 
 
