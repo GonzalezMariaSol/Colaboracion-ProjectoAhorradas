@@ -46,7 +46,6 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 <details>
   <summary>Parte hecha por Tamara</summary>
    
-
 - <kbd>Vista y funcionalidad de Categorias</kbd>
 - <kbd>Vista y funcionalidad de Nueva Categoria</kbd>
 - <kbd>Vista y funcionalidad de Editar Categorias</kbd>
@@ -57,14 +56,15 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 - <kbd>Totales por mes</kbd>
 - <kbd>Disenio responsivo del proyecto categoria y reportes</kbd>
 
- - <kbd>   
-  <details>
-     <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
-     - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
-  </details>
+  - <kbd>
+    <details>
+      <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
+      - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
+    </details>
   </kbd>
-
 </details>
+
+<details>
 
 Proyecto _Ahorradas_ es un trabajo personal/grupal, siguiendo instrucciones pedidas. [^.]
 
