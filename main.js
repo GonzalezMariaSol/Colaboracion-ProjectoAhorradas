@@ -478,30 +478,30 @@ const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CA
   showElement(".section-edit-category")
   hideElement(".section-category")
   just("#btn-edit-categorie").setAttribute("id-categori", categoryId) //AGREGA EL ATRIBUTO Y PASA POR PARAMETRO ID
-  const datoActual = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
-  just("#input-edit").value = datoActual.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
+  const currentData = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
+  just("#input-edit").value = currentData.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
 
 
 }
 
 const addCategory = () => {
-  const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
-  datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", datoActual)
-  renderCategory(datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
+  const currentData = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
+  currentData.push(saveAddcategory())  // MODIFICO  EL DATO 
+  setInfo("categories", currentData)// ENVIOO LA INFO AL LOCAL STORE  
+  renderCategory(currentData)  // RENDERIZO LA TABLA
 
 }
 
 const editBtnCategory = () => {
   const dataId = just("#btn-edit-categorie").getAttribute("id-categori") //
-  const datoActual = getInfo("categories").map(categorie => {
+  const currentData = getInfo("categories").map(categorie => {
     if (categorie.id === dataId) {
       return saveEditCategory(dataId)
     }
     return categorie
   })
-  setInfo("categories", datoActual);
-  renderCategory(datoActual)
+  setInfo("categories", currentData);
+  renderCategory(currentData)
 }
 
 const viewChangeRemove = (categoryId, categori) => {
@@ -520,8 +520,9 @@ const viewChangeRemove = (categoryId, categori) => {
 
 }
 const deleteCategory = (categoryId) => {
-  const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
-  setInfo("categories", datoActual)
+  const currentData = getInfo("categories").filter(category => categoryId !== category.id)
+  setInfo("categories", currentData)
+  renderCategory(currentData)
 }
 
 const deleteOperationWCategoryDeleted = (categoriaId) => {
@@ -532,29 +533,9 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 
 
-// const validationInput = (e) => {
-//   const input = just("#input-add").value;
-//   if (/^\s*$/.test(input)) {
-//     just(".validation").classList.remove("hidden");
-//     just(".validation").classList.add("red");
-//     just(".box-input").classList.add("invalid-input")
-//     e.preventDefault()
-
-
-//   } else {
-
-//     just(".validation").classList.remove("red");
-//     just(".validation").classList.add("hidden");
-//     just(".box-input").classList.remove("invalid-input");
-//     return true;
-//   }
-
-// }
-
-
-const validateInput = () => {
+const validateInput = () => {   //VALIDACION DE INPUT CATEGORIA
   const input = just("#input-add").value;
-  
+
   if (/^\s*$/.test(input)) {
     just(".validation").classList.remove("hidden");
     just(".validation").classList.add("red");
@@ -567,6 +548,7 @@ const validateInput = () => {
     return true;
   }
 };
+
 
 
 
@@ -598,7 +580,7 @@ const renderReporte = (arrayOperation) => {
     const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
     const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
     const monthWithHighestBalance = getDateWithHighestEarnings();
-    const monthWithHighestgasto =getDateWithHighestExpenses();
+    const monthWithHighestgasto = getDateWithHighestExpenses();
     const categoryWithHighestBalance = getCategoryWithHighestBalance();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
@@ -679,9 +661,6 @@ const rendertotalMonth = (arrayCategorys) => {
 </tr> `
   }
 }
-
-
-
 
 
 
@@ -792,7 +771,7 @@ const getDateWithHighestEarnings = () => {
 };
 
 const getDateWithHighestExpenses = () => {
-  const operations = getInfo("Operations") 
+  const operations = getInfo("Operations")
 
   const expensesByDate = {};
 
@@ -821,46 +800,46 @@ const getDateWithHighestExpenses = () => {
     }
   }
 
-  return {mes:maxExpensesDate,value:maxExpenses};
+  return { mes: maxExpensesDate, value: maxExpenses };
 };
 
-const getCategoryWithHighestBalance = () => { 
-  const operations = getInfo("Operations") ;
- const categories = getInfo("categories") ;
- 
- const balanceByCategory = {};
- 
- // Calcular el balance por categoría
- operations.forEach((operation) => {
-   const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
- //busco la categoria que ctegoria id tiene que ser igual a operation categoria
-   if (categoryName) {
-     if (!balanceByCategory[categoryName]) {
-       balanceByCategory[categoryName] = 0;
-     }
- 
-     if (operation.tipo === "ganancia") {
-       balanceByCategory[categoryName] += Number(operation.monto);
-     } else if (operation.tipo === "gasto") {
-       balanceByCategory[categoryName] -= Number(operation.monto);
-     }//sumo o resto dependiendo si es ganancia o gasto
-   }
- });
- 
- // Encontrar la categoría con el mayor balance
- let maxBalanceCategory = null;
- let maxBalance = 0;
- 
- for (const [category, balance] of Object.entries(balanceByCategory)) {
-   if (balance > maxBalance) {
-     maxBalance = balance;
-     maxBalanceCategory = category;
-   }
- }
- 
- return { category: maxBalanceCategory, value: maxBalance };//retorno objeto con dos valores
- };
- 
+const getCategoryWithHighestBalance = () => {
+  const operations = getInfo("Operations");
+  const categories = getInfo("categories");
+
+  const balanceByCategory = {};
+
+  // Calcular el balance por categoría
+  operations.forEach((operation) => {
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+    //busco la categoria que ctegoria id tiene que ser igual a operation categoria
+    if (categoryName) {
+      if (!balanceByCategory[categoryName]) {
+        balanceByCategory[categoryName] = 0;
+      }
+
+      if (operation.tipo === "ganancia") {
+        balanceByCategory[categoryName] += Number(operation.monto);
+      } else if (operation.tipo === "gasto") {
+        balanceByCategory[categoryName] -= Number(operation.monto);
+      }//sumo o resto dependiendo si es ganancia o gasto
+    }
+  });
+
+  // Encontrar la categoría con el mayor balance
+  let maxBalanceCategory = null;
+  let maxBalance = 0;
+
+  for (const [category, balance] of Object.entries(balanceByCategory)) {
+    if (balance > maxBalance) {
+      maxBalance = balance;
+      maxBalanceCategory = category;
+    }
+  }
+
+  return { category: maxBalanceCategory, value: maxBalance };//retorno objeto con dos valores
+};
+
 
 
 // -----------------------------------EVENTS---------------------------------------------------
@@ -870,17 +849,15 @@ const inicializeApp = () => {
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
 
   just("#btn-add-categories").addEventListener("click", (e) => {
-  if (!validateInput()) {
-    e.preventDefault();
-    
-    return;
-  }
+    if (!validateInput()) {
+      e.preventDefault();
 
- 
-  addCategory();
-});
+      return;
+    }
+    addCategory();
+  });
 
- 
+
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
@@ -889,10 +866,11 @@ const inicializeApp = () => {
     editBtnCategory()
 
   })
-  just("#btn-remove-categories").addEventListener("click", (e) => {
+  just("#btn-remove-categories").addEventListener("click", () => {
     hideElement(".container-eliminar")
     showElement(".section-category")
-    location.reload() //! no hace la recarga de la misma pagina
+
+
 
 
   })
@@ -907,7 +885,7 @@ const inicializeApp = () => {
     showElement(".section-category")
     hideElement(".section-edit-category")
   })
-  
+
 
   //?setInfo funciona bien
   setInfo("Operations", totalOperations) //creamos una key llamada Operations y el array va a ser lo que guarde totalOperations ya sea un array c info o arr vacio
