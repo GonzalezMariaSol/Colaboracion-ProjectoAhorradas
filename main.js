@@ -599,6 +599,7 @@ const renderReporte = (arrayOperation) => {
     const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
     const monthWithHighestBalance = getDateWithHighestEarnings();
     const monthWithHighestgasto =getDateWithHighestExpenses();
+    const categoryWithHighestBalance = getCategoryWithHighestBalance();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
 
@@ -615,8 +616,8 @@ const renderReporte = (arrayOperation) => {
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
-          <td></td>
-          <td class="red"></td>
+          <td>${categoryWithHighestBalance.category}</td>
+          <td class="green">${categoryWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
@@ -822,6 +823,44 @@ const getDateWithHighestExpenses = () => {
 
   return {mes:maxExpensesDate,value:maxExpenses};
 };
+
+const getCategoryWithHighestBalance = () => { 
+  const operations = getInfo("Operations") ;
+ const categories = getInfo("categories") ;
+ 
+ const balanceByCategory = {};
+ 
+ // Calcular el balance por categoría
+ operations.forEach((operation) => {
+   const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+ //busco la categoria que ctegoria id tiene que ser igual a operation categoria
+   if (categoryName) {
+     if (!balanceByCategory[categoryName]) {
+       balanceByCategory[categoryName] = 0;
+     }
+ 
+     if (operation.tipo === "ganancia") {
+       balanceByCategory[categoryName] += Number(operation.monto);
+     } else if (operation.tipo === "gasto") {
+       balanceByCategory[categoryName] -= Number(operation.monto);
+     }//sumo o resto dependiendo si es ganancia o gasto
+   }
+ });
+ 
+ // Encontrar la categoría con el mayor balance
+ let maxBalanceCategory = null;
+ let maxBalance = 0;
+ 
+ for (const [category, balance] of Object.entries(balanceByCategory)) {
+   if (balance > maxBalance) {
+     maxBalance = balance;
+     maxBalanceCategory = category;
+   }
+ }
+ 
+ return { category: maxBalanceCategory, value: maxBalance };//retorno objeto con dos valores
+ };
+ 
 
 
 // -----------------------------------EVENTS---------------------------------------------------
