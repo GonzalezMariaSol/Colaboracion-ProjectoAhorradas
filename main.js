@@ -589,27 +589,27 @@ const renderReporte = (arrayOperation) => {
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
            <td> ${categoryWithHighestEarnings.categoria}</td>
-          <td class="green"> + ${categoryWithHighestEarnings.value}</td>
+          <td class="green"> +$ ${categoryWithHighestEarnings.value}</td>
         </tr>
         <tr>
           <th class=" text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
           <td>${categoryWithHighestExpenses.categorias}</td>
-          <td class="red"> - ${categoryWithHighestExpenses.value}</td>
+          <td class="red"> -$ ${categoryWithHighestExpenses.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
           <td>${categoryWithHighestBalance.category}</td>
-          <td class="green">${categoryWithHighestBalance.value}</td>
+          <td class="green">$ ${categoryWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
           <td>${monthWithHighestBalance.mes}</td>
-          <td class="green"> +${monthWithHighestBalance.value}</td>
+          <td class="green">+ $${monthWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
           <td> ${monthWithHighestgasto.mes}</td>
-          <td class="red"> -${monthWithHighestgasto.value}</td>
+          <td class="red">-$${monthWithHighestgasto.value}</td>
         </tr>
       </tbody>`;
 
@@ -624,25 +624,78 @@ const renderReporte = (arrayOperation) => {
 
 
 //--------------------------------------------------Total categoria reportes---------------------------------------------------------------------
+const getTotalByCategory = () => {
+  const operations = getInfo("Operations") || [];
+  const categories = getInfo("categories") || [];
 
-const renderTotalCategory = (arrayCategorys) => {
+  const totalsByCategory = {};
 
-  for (const category of arrayCategorys) {
-    just("#totalCategory").innerHTML = `<tr>
+  // Inicializar los totales por categoría
+  categories.forEach((category) => {
+    totalsByCategory[category.category] = {
+      gananciaTotal: 0,
+      balanceTotal: 0,
+      gastoTotal: 0,
+    };
+  });
+
+  // Calcular los totales por categoría
+  operations.forEach((operation) => {
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+
+    if (categoryName) {
+      if (operation.tipo === "ganancia") {
+        totalsByCategory[categoryName].gananciaTotal += Number(operation.monto);
+      } else if (operation.tipo === "gasto") {
+        totalsByCategory[categoryName].gastoTotal += Number(operation.monto);
+      }
+
+      // Calcular el balance
+      totalsByCategory[categoryName].balanceTotal = totalsByCategory[categoryName].gananciaTotal - totalsByCategory[categoryName].gastoTotal;
+    }
+  });
+
+  return totalsByCategory;
+};
+
+
+
+const renderTotalCategory1 = (arrayCategorys) => {
+  const totalCategoryElement = just("#totalCategory");
+
+  // Limpiar contenido existente
+  totalCategoryElement.innerHTML = "";
+
+  // Agregar encabezados
+  totalCategoryElement.innerHTML += `<tr>
     <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
     <th class="text-[#4A4A4A] text-left">Ganancias</th>
     <th class="text-[#4A4A4A] text-left">Gastos</th>
     <th class="text-[#4A4A4A] text-left">Balance</th>
-</tr>
-<tr>
-    <td class="text-left">hola</td>
-    <td>hola</td>
-    <td></td>
-    <td></td>
-</tr>`
-  }
+  </tr>`;
 
-}
+  // Agregar filas por cada categoría
+  for (const categorie of arrayCategorys) {
+    // Obtener totales por categoría
+    const totals = getTotalByCategory()[categorie.category];
+
+    // Verificar si el balance total es mayor que 0  o  menor  0 antes de agregar la fila
+    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
+   
+
+      // Agregar fila
+      totalCategoryElement.innerHTML += `<tr>
+        <td class="text-left">${categorie.category}</td>
+        <td class="green">+ ${totals.gananciaTotal}</td>
+        <td class="red">- ${totals.gastoTotal}</td>
+        <td>${totals.balanceTotal}</td>
+      </tr>`;
+    }
+  }
+};
+
+renderTotalCategory1(category);
+
 
 
 const rendertotalMonth = (arrayCategorys) => {
@@ -662,7 +715,7 @@ const rendertotalMonth = (arrayCategorys) => {
   }
 }
 
-
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 const getCategoryWithHighestEarnings = () => {
   const operations = getInfo("Operations");
@@ -842,6 +895,8 @@ const getCategoryWithHighestBalance = () => {
 
 
 
+
+
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
@@ -903,7 +958,7 @@ const inicializeApp = () => {
   just("#btn-reports-navb").addEventListener("click", () => {
     showViews("section-reports")
     renderReporte(totalOperations)
-    renderTotalCategory(totalOperations)
+    // renderTotalCategory1(totalOperations)
   }
 
   ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
