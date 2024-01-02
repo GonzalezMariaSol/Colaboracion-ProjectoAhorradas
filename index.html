@@ -27,27 +27,26 @@
                 href="index.html">
                 AhorrADA$</a>
         </div>
+
         <nav class="header-navbar  flex justify-end w-[50%]"> 
             
             <ul class="nav-ul flex space-x-4 ">
-                <!-- ME GUSTARIA AGREGAR UN BOTON MODO CLARO -  MODO OSCURO -->
+                
+
                 <li
                     class="header-li-1 bg-white bg-opacity-60 text-[1rem] w-32 h-9 flex items-center justify-center rounded-full">
                     <i class="fa-solid fa-chart-line"></i>
                     <button class="text-center" id="btn-balance-navb">Balance</button>
-                    <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
                 </li>
                 <li
                     class="header-li-2 bg-white bg-opacity-60 text-[1rem] w-32 h-9 flex items-center justify-center rounded-full">
                     <i class="fa-solid fa-tags"></i>
                     <button class="text-center" id="btn-category-navb">Categorias</button>
-                    <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
                 </li>
                 <li
                     class="header-li-3 bg-white bg-opacity-60 text-[1rem] w-32 h-9 flex items-center justify-center rounded-full">
                     <i class="fa-solid fa-chart-pie"></i>
                     <button class="text-center" id="btn-reports-navb">Reportes</button>
-                    <!-- HAY QUE AGREGAR LOS LINKS DE REDIRECCION -->
                 </li>
             </ul>
          </nav>
@@ -57,7 +56,6 @@
         <div class="div-father-BalFiltersNewOp w-[96%] my-14 flex justify-center flex-row gap-x-8">
             <div class="columna-balance-filtros flex flex-col gap-y-8">
                 <section class="section-balance bg-[#ffffff92] w-60 p-5 rounded-md ">
-                    <!-- clase del 13-11 se ve balance  -->
                     <p class="title-section-balance text-xl font-bold mb-4 md:mb-8">Balance</p>
                     <ul class="balance-ul">
                         <li class="section-balance-li-1 flex flex-row items-center justify-between mb-2 md:mb-4">
@@ -77,9 +75,7 @@
 
                 <section class="section-filters bg-[#ffffff92] w-60 p-5 rounded-md">
                     <div class="div-filters-header flex flex-row items-center justify-between mb-4 md:mb-8">
-                        <!-- clase del 11-03 se ve buscador q va mostrando resultados similares -->
                         <p class="title-section-filters text-xl text-left font-bold">Filtros</p>
-                        <!-- clase del 11-17 que se ve filtrar por fecha con new date() -->
                         <button class="text-blue-500 text-sm font-medium text-right" id="btn-hide-show-filters">Ocultar
                             Filtros</button>
                     </div>
@@ -118,9 +114,6 @@
                         <div class="flex items-center">
                             <button class="text-black font-bold bg-[#a3fc9b] p-2 rounded-md mx-auto" type="button"
                                 onclick="resetearFormulario()">Resetear</button>
-
-
-
                         </div>
                     </form>
                 </section>
@@ -129,7 +122,6 @@
             <section class="section-operations bg-[#ffffff92] w-3/5 p-5 rounded-md">
                 <div class="div-operations-header flex flex-row items-center justify-between">
                     <p class="title-section-operations text-xl text-left font-bold ">Operaciones</p>
-                    <!-- clase del 13-11 se ve info para crear tabla para cda nueva operacion -->
                     <button class="button-newOperation text-right font-semibold bg-[#a3fc9b] p-2 rounded-md"
                         id="btn-newOp">+ Nueva
                         Operacion</button>
@@ -142,19 +134,17 @@
                 <div class="div-table-container mt-10">
                     <table class="table-userOperation">
                         <thead>
-                            <tr> <!-- COLUMNA ⇅  -->
+                            <tr> 
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Descripcion</th>
-                                <!-- ⇅ COLUMNA 1 -->
+                               
                                 <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Categoria</th>
-                                <!-- ⇅ COLUMNA 2 -->
-                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Fecha</th> <!-- ⇅ COLUMNA 3 -->
-                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Monto</th> <!-- ⇅ COLUMNA 4 -->
-                                <th class="w-1/5 pb-3">Opciones</th> <!-- ⇅ COLUMNA 5 -->
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Fecha</th>
+                                <th class="w-1/5 border-r-[4vw] border-transparent pb-3">Monto</th>
+                                <th class="w-1/5 pb-3">Opciones</th>
                             </tr>
                         </thead>
 
                         <tbody class="tbody-info-loaded">
-                            <!-- EL CUERPO DE LA TABLA DONDE VA A ESTAR LA INFO -->
                         </tbody>
                     </table>
                 </div>
@@ -208,7 +198,6 @@
                 </div>
                 <select class="warning-border-category p-2 mb-4 md:mb-4 rounded-md border" id="select-category">
                     <option value="" disabled selected hidden>Selecciona una categoría</option>
-                    <!-- Agrega opciones para la categoría si es aplicable -->
                 </select>
 
                 <label for="op-input-date" class="font-bold">Fecha</label>
@@ -243,7 +232,8 @@
                 <div class="hidden validation text-[0.9rem]">empty input fill in the input please</div>
                 <div class="  w-[100%] flex justify-between">
                     <div class="box-input w-[85%] rounded-[0.3rem]  border-[0.1rem]  ">
-                        <input name="input-add" id="input-add" type="text" class=" w-[100%] p-[0.5rem] rounded-[0.3rem]  border-[0.1rem]">
+                        <input name="input-add" id="input-add" type="text"
+                            class=" w-[100%] p-[0.5rem] rounded-[0.3rem]  border-[0.1rem]">
                     </div>
                     <button type="button" id="btn-add-categories"
                         class=" h-[2.5rem] bg-[#a3fc9b] p-[0.5rem] rounded-[0.3rem] text-black">Agregar</button>
@@ -319,13 +309,13 @@
             <h2 class="totales text-[2rem] mb-[1rem]">Totales por categorías</h2>
             <table class="w-[100%]">
                 <tbody id="totalCategory">
-                    
+
                 </tbody>
             </table>
             <h2 class=" totalesMes text-[2rem] mb-[1rem]">Totales por mes</h2>
             <table class=" w-[100%] ">
                 <tbody id="totalmonth">
-                    
+
                 </tbody>
             </table>
     </section>

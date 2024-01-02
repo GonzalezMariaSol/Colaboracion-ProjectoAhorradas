@@ -67,7 +67,6 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
   </kbd>
 </details>
 
-<details>
 
 Proyecto _Ahorradas_ es un trabajo personal/grupal, siguiendo instrucciones pedidas. [^.]
 
