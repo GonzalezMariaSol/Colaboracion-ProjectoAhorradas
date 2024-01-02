@@ -338,7 +338,13 @@ const resetearFormulario = () => {
   just("#form-input-date").value = fechaFormateada;
   just("#form-select-order").value = "masReciente";
 };
+// ------------------------------MENU NAVBAR -------------------------------------------------------------
 
+const menuView = () => {
+  just(".menu").classList.toggle("hidden");
+  just(".icon-menu").classList.toggle("hidden");
+  just(".close").classList.toggle("hidden");
+};
 //................................ SECCION CATEGORIA .......................................................
 
 const category = [
@@ -852,6 +858,16 @@ const inicializeApp = () => {
     showElement(".section-category");
     hideElement(".section-edit-category");
   });
+
+  just("#box-icon-menu").addEventListener("click", (e) => {
+    menuView()
+    
+  })
+  // just("#menu-report").addEventListener("click", () => {
+  //   hideElement(".main-page")
+  //   showElement("#section-edit-reports")
+    
+  // })
 
   setInfo("Operations", totalOperations);
 
