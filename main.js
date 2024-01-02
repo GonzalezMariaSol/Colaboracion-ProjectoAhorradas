@@ -438,7 +438,7 @@ const allCategories = getInfo("categories") || category
 
 //------------------------------------ RENDER  CATEGORY------------------------------------------------
 
-const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGORIAS
+const renderCategory = (arrayCategorys) => {   
 
   clear("#container-category")
   for (const categorie of arrayCategorys) {
