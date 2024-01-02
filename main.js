@@ -498,7 +498,7 @@ const validateInput = () => {
 // ------------------------------REPORTES FILTRADOS ---------------------------------------------------------------
 const renderReporte = (arrayOperation) => {
   clear("#reportes");
-  const clase = "value";
+ 
   if (arrayOperation.length >= 3) {
     const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
     const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
@@ -867,14 +867,20 @@ const inicializeApp = () => {
   just("#menu-report").addEventListener("click", () => {
     hideElement(".main-page")
     showElement(".section-edit-reports")
+    hideElement(".section-category")
+    renderReporte(totalOperations);
     
   })
   just("#balance").addEventListener("click", () => {
     showElement(".main-page")
+    hideElement(".section-category")
+    hideElement(".section-edit-reports")
+    
   })
   just("#category").addEventListener("click", () => {
     hideElement(".main-page")
-    showElement(".section-edit-reports")
+    showElement(".section-category")
+    hideElement(".section-edit-reports")
   })
 
   setInfo("Operations", totalOperations);
