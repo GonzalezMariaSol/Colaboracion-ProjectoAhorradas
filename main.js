@@ -724,30 +724,34 @@ if (operation.tipo === "ganancia") {
 
 const renderTotalCategory = (arrayCategorys) => {
   const totalCategoryElement = just("#totalCategory");
+
+  
   totalCategoryElement.innerHTML = "";
-
+  
   totalCategoryElement.innerHTML += `<tr>
-    <th class=" w-[20%] text-[#4A4A4A] text-left ">Categoria</th>
-    <th class=" w-[20%] text-[#4A4A4A] text-left">Ganancias</th>
-    <th class=" w-[20%] text-[#4A4A4A] text-left">Gastos</th>
-    <th class=" w-[20%] text-[#4A4A4A] text-left">Balance</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
+    <th class="text-[#4A4A4A] text-left">Ganancias</th>
+    <th class="text-[#4A4A4A] text-left">Gastos</th>
+    <th class="text-[#4A4A4A] text-left">Balance</th>
   </tr>`;
-
-  for (const categorie of arrayCategorys) {
+   
+   for (const categorie of arrayCategorys) {
+  
     const totals = getTotalByCategory()[categorie.category];
 
-    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
-      totalCategoryElement.innerHTML += `<tr>
-        <td class="w-[20%] text-left">${categorie.category}</td>
-        <td class="green">+$ ${totals.gananciaTotal}</td>
-        <td class="red">-$ ${totals.gastoTotal}</td>
-        <td> $${totals.balanceTotal}</td>
-      </tr>`;
-    }
+    totalCategoryElement.innerHTML += `<tr>
+      <td class="text-left">${categorie.category}</td>
+      <td>${totals.gananciaTotal || 0}</td>
+      <td>${totals.gastoTotal || 0}</td>
+      <td>${totals.balanceTotal || 0}</td>
+    </tr>`;
   }
 };
 
+
+
 renderTotalCategory(category);
+
 
 // ----------------------------------------------TOTAL POR MES--------------------------------------------------------
 
