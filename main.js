@@ -904,4 +904,4 @@ const inicializeApp = () => {
 window.addEventListener("load", inicializeApp);
 
 //SADKFJASD;LFKJASD;FLKAJSDF;LKASJSFALSDKFJHASDLKFJSAHLFKJADF;LKADSJFLKASDJHFLKJADSHFAIDSUFHOQWIEU
-//TEX
+//TEX;lfkjasd;lfka
