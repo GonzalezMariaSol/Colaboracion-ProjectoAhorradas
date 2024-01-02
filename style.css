@@ -22,7 +22,41 @@ body {
 
  }
 
-@media(max-width:544px) {
+ @media(max-width:995px){
+    .header-navbar>ul {
+        width: 100%;
+        
+    }
+    header>.header-navbar{
+        justify-content: center;
+    }
+    main>div {
+        flex-wrap: wrap;
+    }
+    .columna-balance-filtros {
+        width: 90%;
+    }
+    .columna-balance-filtros>.section-balance {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    div>.section-filters {
+        width: 100%;
+    }
+    div>.section-operations {
+        width: 90%;
+    }
+
+ }
+
+ @media(max-width:827px){
+    #section-edit-reports>.reportesFiltrados {
+        width: 90%;
+    }
+ }
+
+@media(max-width:589px) {
     section>.categoria {
         width: 90%;
     }
@@ -38,14 +72,18 @@ body {
     section>.reportesFiltrados{
         width: 90%;
     }
-}
-
-@media(max-width:412px) {
-   tr>th{
-        font-size: 0.8rem;
+    tr>th{
+        font-size: 0.7rem;
+        width: 50%;
+    }
+    tr>td{
+        font-size: 0.7rem;
     }
 
-    div>.totales{
+}
+
+@media(max-width:471px) {
+   div>.totales{
         font-size: 1.5rem;
     }
 
