@@ -745,16 +745,17 @@ const renderTotalCategory = (arrayCategorys) => {
   
     const totals = getTotalByCategory()[categorie.category];
 
-    totalCategoryElement.innerHTML += `<tr>
-      <td class="text-left">${categorie.category}</td>
-      <td>${totals.gananciaTotal || 0}</td>
-      <td>${totals.gastoTotal || 0}</td>
-      <td>${totals.balanceTotal || 0}</td>
-    </tr>`;
+    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
+
+      totalCategoryElement.innerHTML += `<tr>
+        <td class="text-left">${categorie.category}</td>
+        <td class="green">+ ${totals.gananciaTotal}</td>
+        <td class="red">- ${totals.gastoTotal}</td>
+        <td>${totals.balanceTotal}</td>
+      </tr>`;
+    }
   }
 };
-
-
 
 renderTotalCategory(category);
 
@@ -863,11 +864,18 @@ const inicializeApp = () => {
     menuView()
     
   })
-  // just("#menu-report").addEventListener("click", () => {
-  //   hideElement(".main-page")
-  //   showElement("#section-edit-reports")
+  just("#menu-report").addEventListener("click", () => {
+    hideElement(".main-page")
+    showElement(".section-edit-reports")
     
-  // })
+  })
+  just("#balance").addEventListener("click", () => {
+    showElement(".main-page")
+  })
+  just("#category").addEventListener("click", () => {
+    hideElement(".main-page")
+    showElement(".section-edit-reports")
+  })
 
   setInfo("Operations", totalOperations);
 
