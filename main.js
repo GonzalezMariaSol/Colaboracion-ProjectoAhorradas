@@ -372,6 +372,7 @@ const category = [
 const allCategories = getInfo("categories") || category
 
 
+
 //------------------------------------ RENDER  CATEGORY------------------------------------------------
 const renderCategory = (arrayCategorys) => {
   clear("#container-category");
