@@ -369,7 +369,8 @@ const category = [
   },
 ];
 
-const allCategories = getInfo("categories") || category;
+const allCategories = getInfo("categories") || category
+
 
 //------------------------------------ RENDER  CATEGORY------------------------------------------------
 const renderCategory = (arrayCategorys) => {
@@ -393,6 +394,7 @@ const renderCategory = (arrayCategorys) => {
       "#select-category"
     ).innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`;
   }
+
 };
 
 // --------------------------------------AGREGAR  Y EDITAR  Y BORRAR  CATEGORIA  ---------------------------------------
@@ -407,6 +409,7 @@ const saveEditCategory = () => {
   return {
     id: randomId(),
     category: just("#input-edit").value,
+
   };
 };
 const editCategory = (categoryId) => {
@@ -425,6 +428,7 @@ const addCategory = () => {
   setInfo("categories", currentData);
   renderCategory(currentData);
 };
+
 
 const editBtnCategory = () => {
   const dataId = just("#btn-edit-categorie").getAttribute("id-categori"); //
@@ -499,18 +503,23 @@ const renderReporte = (arrayOperation) => {
 
     just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
-          <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-           <td> ${categoryWithHighestEarnings.categoria}</td>
-          <td class="green"> +$ ${categoryWithHighestEarnings.value}</td>
+          <th class="w-[60%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
+           <td ><span class="bg-violet-500 p-[0.3rem] rounded-[0.3rem] text-[0.7rem]">${categoryWithHighestEarnings.categoria}
+           </span>
+            </td>
+          <td class="green text-[0.9rem]"> +$ ${categoryWithHighestEarnings.value}</td>
         </tr>
         <tr>
           <th class=" text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
-          <td>${categoryWithHighestExpenses.categorias}</td>
+          <td><span class="bg-violet-500 p-[0.3rem] rounded-[0.3rem] text-[0.7rem]">${categoryWithHighestExpenses.categorias}
+          </span>
+          </td>
           <td class="red"> -$ ${categoryWithHighestExpenses.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
-          <td>${categoryWithHighestBalance.category}</td>
+          <td><span class="bg-violet-500 p-[0.3rem] rounded-[0.3rem] text-[0.7rem]">${categoryWithHighestBalance.category}
+          </span></td>
           <td class="green">$ ${categoryWithHighestBalance.value}</td>
         </tr>
         <tr>
@@ -525,7 +534,6 @@ const renderReporte = (arrayOperation) => {
         </tr>
       </tbody>`;
   } else {
-    console.log("else");
     showElement("#section-reports");
   }
 };
@@ -534,6 +542,8 @@ const getCategoryWithHighestEarnings = () => {
   const operations = getInfo("Operations");
   const categories = getInfo("categories");
   const earningsByCategory = {};
+
+
   operations.forEach((operation) => {
     if (operation.tipo === "ganancia") {
       const categoryName = categories.find(
@@ -562,6 +572,7 @@ const getCategoryWithHighestExpenses = () => {
   const operations = getInfo("Operations");
   const categories = getInfo("categories");
   const expensesByCategory = {};
+
   operations.forEach((operation) => {
     if (operation.tipo === "gasto") {
       const categoryName = categories.find(
@@ -596,6 +607,7 @@ const getDateWithHighestEarnings = () => {
     if (operation.tipo === "ganancia") {
       const operationDate = new Date(operation.fecha);
       const formattedDate = operationDate.toLocaleDateString("es-ES");
+
       if (!earningsByDate[formattedDate]) {
         earningsByDate[formattedDate] = 0;
       }
@@ -617,18 +629,23 @@ const getDateWithHighestEarnings = () => {
 };
 
 const getDateWithHighestExpenses = () => {
-  const operations = getInfo("Operations");
+ const operations = getInfo("Operations")
+
   const expensesByDate = {};
   operations.forEach((operation) => {
+
     if (operation.tipo === "gasto") {
       const operationDate = new Date(operation.fecha);
-      const formattedDate = operationDate.toLocaleDateString("es-ES");
+        const formattedDate = operationDate.toLocaleDateString("es-ES");
+      
       if (!expensesByDate[formattedDate]) {
         expensesByDate[formattedDate] = 0;
       }
       expensesByDate[formattedDate] += Number(operation.monto);
     }
   });
+
+
 
   let maxExpensesDate = null;
   let maxExpenses = 0;
@@ -639,21 +656,18 @@ const getDateWithHighestExpenses = () => {
       maxExpensesDate = date;
     }
   }
-
   return { mes: maxExpensesDate, value: maxExpenses };
 };
 
 const getCategoryWithHighestBalance = () => {
   const operations = getInfo("Operations");
   const categories = getInfo("categories");
-
   const balanceByCategory = {};
 
   operations.forEach((operation) => {
-    const categoryName = categories.find(
-      (category) => category.id === operation.categoria
-    )?.category;
-    if (categoryName) {
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+
+      if (categoryName) {
       if (!balanceByCategory[categoryName]) {
         balanceByCategory[categoryName] = 0;
       }
@@ -663,11 +677,10 @@ const getCategoryWithHighestBalance = () => {
         balanceByCategory[categoryName] -= Number(operation.monto);
       }
     }
-  });
+  })
 
   let maxBalanceCategory = null;
   let maxBalance = 0;
-
   for (const [category, balance] of Object.entries(balanceByCategory)) {
     if (balance > maxBalance) {
       maxBalance = balance;
@@ -691,12 +704,10 @@ const getTotalByCategory = () => {
       balanceTotal: 0,
       gastoTotal: 0,
     };
-  });
-
+  
   operations.forEach((operation) => {
-    const categoryName = categories.find(
-      (category) => category.id === operation.categoria
-    )?.category;
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+
 
     if (categoryName) {
       if (operation.tipo === "ganancia") {
@@ -705,18 +716,18 @@ const getTotalByCategory = () => {
         totalsByCategory[categoryName].gastoTotal += Number(operation.monto);
       }
 
-      totalsByCategory[categoryName].balanceTotal =
-        totalsByCategory[categoryName].gananciaTotal -
-        totalsByCategory[categoryName].gastoTotal;
+      totalsByCategory[categoryName].balanceTotal = totalsByCategory[categoryName].gananciaTotal - totalsByCategory[categoryName].gastoTotal;
+
     }
   });
-
   return totalsByCategory;
 };
 
-const renderTotalCategory1 = (arrayCategorys) => {
-  const totalCategoryElement = just("#totalCategory");
 
+
+
+const renderTotalCategory = (arrayCategorys) => {
+  const totalCategoryElement = just("#totalCategory");
   totalCategoryElement.innerHTML = "";
 
   totalCategoryElement.innerHTML += `<tr>
@@ -740,20 +751,18 @@ const renderTotalCategory1 = (arrayCategorys) => {
   }
 };
 
-renderTotalCategory1(category);
+renderTotalCategory(category);
 
 // ----------------------------------------------TOTAL POR MES--------------------------------------------------------
 
 const getTotalByMonth = () => {
   const operations = getInfo("Operations") || [];
-
   const totalsByMonth = {};
 
   operations.forEach((operation) => {
     const operationDate = new Date(operation.fecha);
-    const formattedMonth = `${operationDate.getFullYear()}-${
-      operationDate.getMonth() + 1
-    }`;
+    const formattedMonth = `${operationDate.getFullYear()}-${operationDate.getMonth() + 1}`;
+
 
     if (!totalsByMonth[formattedMonth]) {
       totalsByMonth[formattedMonth] = {
@@ -769,17 +778,14 @@ const getTotalByMonth = () => {
       totalsByMonth[formattedMonth].gastoTotal += Number(operation.monto);
     }
 
-    totalsByMonth[formattedMonth].balanceTotal =
-      totalsByMonth[formattedMonth].gananciaTotal -
-      totalsByMonth[formattedMonth].gastoTotal;
-  });
+    totalsByMonth[formattedMonth].balanceTotal = totalsByMonth[formattedMonth].gananciaTotal - totalsByMonth[formattedMonth].gastoTotal;
 
+  });
   return totalsByMonth;
 };
 
 const renderTotalByMonth = () => {
   const totalMonthElement = just("#totalmonth");
-
   totalMonthElement.innerHTML = "";
 
   totalMonthElement.innerHTML = ` <tr>
@@ -788,15 +794,12 @@ const renderTotalByMonth = () => {
     <th class="w-[20%] text-[#4A4A4A] text-left">Gastos</th>
     <th class="w-[20%] text-[#4A4A4A] text-left">Balance</th>
 </tr>`;
-
   const totalsByMonth = getTotalByMonth();
-
-  const monthsWithActivity = Object.keys(totalsByMonth).filter((month) => {
+  const monthsWithActivity = Object.keys(totalsByMonth).filter(month => {
     const totals = totalsByMonth[month];
     return totals.gananciaTotal > 0 || totals.gastoTotal > 0;
   });
-
-  monthsWithActivity.forEach((month) => {
+  monthsWithActivity.forEach(month => {
     const totals = totalsByMonth[month];
 
     totalMonthElement.innerHTML += `<tr>
@@ -808,12 +811,15 @@ const renderTotalByMonth = () => {
   });
 };
 
+
 renderTotalByMonth();
 // -----------------------------------EVENTS---------------------------------------------------
 
 const inicializeApp = () => {
-  setInfo("categories", allCategories);
-  renderCategory(allCategories);
+
+  setInfo("categories", allCategories)
+  renderCategory(allCategories)
+
 
   just("#btn-add-categories").addEventListener("click", (e) => {
     if (!validateInput()) {
@@ -831,9 +837,11 @@ const inicializeApp = () => {
     editBtnCategory();
   });
   just("#btn-remove-categories").addEventListener("click", () => {
+
     hideElement(".container-eliminar");
     showElement(".section-category");
   });
+
   just(".Cancel").addEventListener("click", (e) => {
     hideElement(".container-eliminar");
     showElement(".section-category");
