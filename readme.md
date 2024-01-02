@@ -23,6 +23,9 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 
 ![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/operationsPicture.JPG?raw=true)
 
+
+![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/reportsPicture.JPG?raw=true)
+
 <details>
   <summary>Parte hecha por Sol</summary>
 
