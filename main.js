@@ -697,27 +697,22 @@ const getTotalByCategory = () => {
   const categories = getInfo("categories") || [];
 
   const totalsByCategory = {};
-
   categories.forEach((category) => {
     totalsByCategory[category.category] = {
       gananciaTotal: 0,
       balanceTotal: 0,
       gastoTotal: 0,
     };
-  
+  });
   operations.forEach((operation) => {
     const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
-
-
     if (categoryName) {
-      if (operation.tipo === "ganancia") {
+if (operation.tipo === "ganancia") {
         totalsByCategory[categoryName].gananciaTotal += Number(operation.monto);
       } else if (operation.tipo === "gasto") {
         totalsByCategory[categoryName].gastoTotal += Number(operation.monto);
       }
-
       totalsByCategory[categoryName].balanceTotal = totalsByCategory[categoryName].gananciaTotal - totalsByCategory[categoryName].gastoTotal;
-
     }
   });
   return totalsByCategory;
