@@ -22,7 +22,14 @@ body {
 
  }
 
- @media(max-width:995px){
+ @media only screen and (min-width:996px){
+   body>.menu{
+        display: none;
+    }
+
+    }
+ 
+@media(max-width:995px){
     .header-navbar>ul {
         width: 100%;
         display: none;
@@ -86,6 +93,8 @@ body {
     }
 
 }
+
+
 
 @media(max-width:471px) {
    div>.totales{
