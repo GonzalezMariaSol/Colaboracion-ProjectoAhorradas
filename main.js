@@ -455,7 +455,7 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
     just("#select-category").innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`
   }
 }
-
+// --------------------------------------AGREGAR  Y EDITAR  Y BORRAR  CATEGORIA  ------------------------------------------------------------
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
 
@@ -464,7 +464,8 @@ const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGO
   };
 };
 
-const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT 
+
+const saveEditCategory = () => { 
   return {
     id: randomId(),
     category: just("#input-edit").value,
@@ -473,22 +474,22 @@ const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT
 
 }
 // PASE POR PARAMETRO EL ID DE MI OBJETO
-const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
+const editCategory = (categoryId) => { 
 
   showElement(".section-edit-category")
   hideElement(".section-category")
-  just("#btn-edit-categorie").setAttribute("id-categori", categoryId) //AGREGA EL ATRIBUTO Y PASA POR PARAMETRO ID
-  const currentData = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
-  just("#input-edit").value = currentData.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
+  just("#btn-edit-categorie").setAttribute("id-categori", categoryId) 
+  const currentData = getInfo("categories").find(categories => categories.id === categoryId) 
+  just("#input-edit").value = currentData.category 
 
 
 }
 
 const addCategory = () => {
-  const currentData = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
-  currentData.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", currentData)// ENVIOO LA INFO AL LOCAL STORE  
-  renderCategory(currentData)  // RENDERIZO LA TABLA
+  const currentData = getInfo("categories") 
+  currentData.push(saveAddcategory())  
+  setInfo("categories", currentData)
+  renderCategory(currentData)  
 
 }
 
@@ -531,9 +532,9 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 }
 
+// -------------------------------------------VALIDACION DE INPUT CATEGORIA---------------------------------------------------------
 
-
-const validateInput = () => {   //VALIDACION DE INPUT CATEGORIA
+const validateInput = () => {   
   const input = just("#input-add").value;
 
   if (/^\s*$/.test(input)) {
@@ -618,104 +619,6 @@ const renderReporte = (arrayOperation) => {
     showElement("#section-reports");
   }
 };
-
-
-
-
-
-//--------------------------------------------------Total categoria reportes---------------------------------------------------------------------
-const getTotalByCategory = () => {
-  const operations = getInfo("Operations") || [];
-  const categories = getInfo("categories") || [];
-
-  const totalsByCategory = {};
-
-  // Inicializar los totales por categoría
-  categories.forEach((category) => {
-    totalsByCategory[category.category] = {
-      gananciaTotal: 0,
-      balanceTotal: 0,
-      gastoTotal: 0,
-    };
-  });
-
-  // Calcular los totales por categoría
-  operations.forEach((operation) => {
-    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
-
-    if (categoryName) {
-      if (operation.tipo === "ganancia") {
-        totalsByCategory[categoryName].gananciaTotal += Number(operation.monto);
-      } else if (operation.tipo === "gasto") {
-        totalsByCategory[categoryName].gastoTotal += Number(operation.monto);
-      }
-
-      // Calcular el balance
-      totalsByCategory[categoryName].balanceTotal = totalsByCategory[categoryName].gananciaTotal - totalsByCategory[categoryName].gastoTotal;
-    }
-  });
-
-  return totalsByCategory;
-};
-
-
-
-const renderTotalCategory1 = (arrayCategorys) => {
-  const totalCategoryElement = just("#totalCategory");
-
-  // Limpiar contenido existente
-  totalCategoryElement.innerHTML = "";
-
-  // Agregar encabezados
-  totalCategoryElement.innerHTML += `<tr>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
-    <th class="text-[#4A4A4A] text-left">Ganancias</th>
-    <th class="text-[#4A4A4A] text-left">Gastos</th>
-    <th class="text-[#4A4A4A] text-left">Balance</th>
-  </tr>`;
-
-  // Agregar filas por cada categoría
-  for (const categorie of arrayCategorys) {
-    // Obtener totales por categoría
-    const totals = getTotalByCategory()[categorie.category];
-
-    // Verificar si el balance total es mayor que 0  o  menor  0 antes de agregar la fila
-    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
-   
-
-      // Agregar fila
-      totalCategoryElement.innerHTML += `<tr>
-        <td class="text-left">${categorie.category}</td>
-        <td class="green">+ ${totals.gananciaTotal}</td>
-        <td class="red">- ${totals.gastoTotal}</td>
-        <td>${totals.balanceTotal}</td>
-      </tr>`;
-    }
-  }
-};
-
-renderTotalCategory1(category);
-
-
-
-const rendertotalMonth = (arrayCategorys) => {
-  for (const category of arrayCategorys) {
-    just("#totalMonth").innerHTML = ` <tr>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Mes</th>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
-</tr>
-<tr>
-    <td>Enero</td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr> `
-  }
-}
-
-// -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 const getCategoryWithHighestEarnings = () => {
   const operations = getInfo("Operations");
@@ -893,6 +796,154 @@ const getCategoryWithHighestBalance = () => {
   return { category: maxBalanceCategory, value: maxBalance };//retorno objeto con dos valores
 };
 
+
+
+
+
+//-------------------------------------------------TOTAL CATEGORIA POR MES---------------------------------------------------------------------
+const getTotalByCategory = () => {
+  const operations = getInfo("Operations") || [];
+  const categories = getInfo("categories") || [];
+
+  const totalsByCategory = {};
+
+  // Inicializar los totales por categoría
+  categories.forEach((category) => {
+    totalsByCategory[category.category] = {
+      gananciaTotal: 0,
+      balanceTotal: 0,
+      gastoTotal: 0,
+    };
+  });
+
+  // Calcular los totales por categoría
+  operations.forEach((operation) => {
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+
+    if (categoryName) {
+      if (operation.tipo === "ganancia") {
+        totalsByCategory[categoryName].gananciaTotal += Number(operation.monto);
+      } else if (operation.tipo === "gasto") {
+        totalsByCategory[categoryName].gastoTotal += Number(operation.monto);
+      }
+
+      // Calcular el balance
+      totalsByCategory[categoryName].balanceTotal = totalsByCategory[categoryName].gananciaTotal - totalsByCategory[categoryName].gastoTotal;
+    }
+  });
+
+  return totalsByCategory;
+};
+
+
+
+const renderTotalCategory1 = (arrayCategorys) => {
+  const totalCategoryElement = just("#totalCategory");
+
+  // Limpiar contenido existente
+  totalCategoryElement.innerHTML = "";
+
+  // Agregar encabezados
+  totalCategoryElement.innerHTML += `<tr>
+    <th class=" w-[20%] text-[#4A4A4A] text-left ">Categoria</th>
+    <th class=" w-[20%] text-[#4A4A4A] text-left">Ganancias</th>
+    <th class=" w-[20%] text-[#4A4A4A] text-left">Gastos</th>
+    <th class=" w-[20%] text-[#4A4A4A] text-left">Balance</th>
+  </tr>`;
+
+  // Agregar filas por cada categoría
+  for (const categorie of arrayCategorys) {
+    // Obtener totales por categoría
+    const totals = getTotalByCategory()[categorie.category];
+
+    // Verificar si el balance total es mayor que 0  o  menor  0 antes de agregar la fila
+    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
+
+
+      // Agregar fila
+      totalCategoryElement.innerHTML += `<tr>
+        <td class="w-[20%] text-left">${categorie.category}</td>
+        <td class="green">+$ ${totals.gananciaTotal}</td>
+        <td class="red">-$ ${totals.gastoTotal}</td>
+        <td> $${totals.balanceTotal}</td>
+      </tr>`;
+    }
+  }
+};
+
+renderTotalCategory1(category);
+
+// ----------------------------------------------TOTAL POR MES---------------------------------------------------------------------------
+
+const getTotalByMonth = () => {
+  const operations = getInfo("Operations") || [];
+
+  const totalsByMonth = {};
+
+  // Calcular los totales por mes
+  operations.forEach((operation) => {
+    const operationDate = new Date(operation.fecha);
+    const formattedMonth = `${operationDate.getFullYear()}-${operationDate.getMonth() + 1}`;//aca obtengo lo dias por operation
+
+    if (!totalsByMonth[formattedMonth]) {
+      totalsByMonth[formattedMonth] = { gananciaTotal: 0, gastoTotal: 0, balanceTotal: 0 };
+    }
+
+    if (operation.tipo === "ganancia") {
+      totalsByMonth[formattedMonth].gananciaTotal += Number(operation.monto);
+    } else if (operation.tipo === "gasto") {
+      totalsByMonth[formattedMonth].gastoTotal += Number(operation.monto);
+    }
+
+    // Calcular el balance
+    totalsByMonth[formattedMonth].balanceTotal = totalsByMonth[formattedMonth].gananciaTotal - totalsByMonth[formattedMonth].gastoTotal;
+  });
+
+  return totalsByMonth;
+};
+
+
+
+const renderTotalByMonth = () => {
+  const totalMonthElement = just("#totalmonth");
+
+  // Limpiar contenido existente
+  totalMonthElement.innerHTML = "";
+
+
+  totalMonthElement.innerHTML = ` <tr>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Mes</th>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Ganancias</th>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Gastos</th>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Balance</th>
+</tr>`;
+
+  // Obtener totales por mes
+  const totalsByMonth = getTotalByMonth();
+
+  // Filtrar los meses con ganancias o gastos
+  const monthsWithActivity = Object.keys(totalsByMonth).filter(month => {
+    const totals = totalsByMonth[month];
+    return totals.gananciaTotal > 0 || totals.gastoTotal > 0;
+  });
+
+  // Agregar filas por cada mes con actividad
+  monthsWithActivity.forEach(month => {
+    // Obtener totales específicos del mes
+    const totals = totalsByMonth[month];
+
+    // Agregar fila
+    totalMonthElement.innerHTML += `<tr>
+      <td class="w-[20%] text-left">${month}</td>
+      <td class=" green">+ $${totals.gananciaTotal}</td>
+      <td class="red">-$${totals.gastoTotal}</td>
+      <td class""> $${totals.balanceTotal}</td>
+    </tr>`;
+  });
+};
+
+// Llamada a la función renderTotalByMonth
+renderTotalByMonth();
 
 
 
