@@ -23,6 +23,9 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
 
 ![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/operationsPicture.JPG?raw=true)
 
+
+![Capture](https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/reportsPicture.JPG?raw=true)
+
 <details>
   <summary>Parte hecha por Sol</summary>
 
@@ -43,24 +46,28 @@ En el proyecto se aplicaron contenidos aprendidos del modulo 3 - Estructura de D
   </kbd>
 </details>
 
-
 <details>
   <summary>Parte hecha por Tamara</summary>
-
+   
 - <kbd>Vista y funcionalidad de Categorias</kbd>
 - <kbd>Vista y funcionalidad de Nueva Categoria</kbd>
 - <kbd>Vista y funcionalidad de Editar Categorias</kbd>
 - <kbd>Vista y funcionalidad de Eliminar Categorias</kbd>
 - <kbd>Vista y funcionalidad Reportes</kbd>
-- <kbd>Disenio responsivo del proyecto</kbd>
- - <kbd>
+- <kbd>Resumen</kbd>
+- <kbd>Totales por categorías</kbd>
+- <kbd>Totales por mes</kbd>
+- <kbd>Disenio responsivo del proyecto categoria y reportes</kbd>
+
+  - <kbd>
     <details>
       <summary><h4>Como terminó Tamara luego del proyecto</h4></summary>
       - <img src="https://github.com/GonzalezMariaSol/Colaboracion-ProjectoAhorradas/blob/main/img/whenTheCodeDoesntWork.jpg?raw=true" alt="Imagen Tamara">
     </details>
   </kbd>
-
 </details>
+
+<details>
 
 Proyecto _Ahorradas_ es un trabajo personal/grupal, siguiendo instrucciones pedidas. [^.]
 

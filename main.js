@@ -183,50 +183,50 @@ const validateForm = (e) => {
   // const submitAvaible = description !== "" && description !== "" && description !== "" && description !== "" && description !== "" 
 
 
-  if(description === ""){
+  if (description === "") {
     just(".warning-message-description").classList.remove("hidden")
     just(".warning-border-description").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-description").classList.add("hidden")
     just(".warning-border-description").classList.remove("border-red-500")
   }
-  
-  if(amount === ""){
+
+  if (amount === "") {
     just(".warning-message-amount").classList.remove("hidden")
     just(".warning-border-amount").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-amount").classList.add("hidden")
     just(".warning-border-amount").classList.remove("border-red-500")
   }
-  
-  if(type === ""){
+
+  if (type === "") {
     just(".warning-message-type").classList.remove("hidden")
     just(".warning-border-type").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-type").classList.add("hidden")
     just(".warning-border-type").classList.remove("border-red-500")
   }
-  
-  if(category === ""){
+
+  if (category === "") {
     just(".warning-message-category").classList.remove("hidden")
     just(".warning-border-category").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-category").classList.add("hidden")
     just(".warning-border-category").classList.remove("border-red-500")
   }
-  
-  if(date === ""){
+
+  if (date === "") {
     just(".warning-message-date").classList.remove("hidden")
     just(".warning-border-date").classList.add("border-red-500")
-  }else{
+  } else {
     just(".warning-message-date").classList.add("hidden")
     just(".warning-border-date").classList.remove("border-red-500")
   }
 
-if(description !== "" && description !== "" && description !== "" && description !== "" && description !== "" ){
-  console.log("sd;flkajdsf;lk")
-  runBtnAddNewOp(e)
-}
+  if (description !== "" && description !== "" && description !== "" && description !== "" && description !== "") {
+    console.log("sd;flkajdsf;lk")
+    runBtnAddNewOp(e)
+  }
 }//!PORQUE ME FUNCIONA SOLO SI CARGO DE ABAJO PARA ARRIBA PERO SI COMPLETO DE ARRIBA PARA ABAJO, ME LO CARGA IGUAL SIN IMPORTAR LOS FILTROS?
 
 
@@ -339,8 +339,8 @@ const showSelectedDate = (e) => {
 const showSelectedOrder = (e) => {
   const operationsCopy = [...getInfo("Operations")]; //se hace una copia superficil del array con obj del LS
 
-  
-  if(e.target.value === "masReciente"){ 
+
+  if (e.target.value === "masReciente") {
     operationsCopy.sort((a, b) => {
       const dateA = new Date(a.fecha)
       const dateB = new Date(b.fecha)
@@ -455,22 +455,17 @@ const renderCategory = (arrayCategorys) => {   // PINTO LA LISTA CON LAS CATEGOR
     just("#select-category").innerHTML += `<option value="${categorie.id}">${categorie.category}</option>`
   }
 }
-
-
-
-
-
-
-
+// --------------------------------------AGREGAR  Y EDITAR  Y BORRAR  CATEGORIA  ------------------------------------------------------------
 const saveAddcategory = (idCategori) => {   //GUARDO EL VALOR DE MI IMPUT CATEGORIA  Y AGREGO ID
   return {
-      
+
     id: idCategori ? idCategori : randomId(),
     category: just("#input-add").value,
   };
 };
 
-const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT 
+
+const saveEditCategory = () => { 
   return {
     id: randomId(),
     category: just("#input-edit").value,
@@ -479,35 +474,35 @@ const saveEditCategory = () => {  //GUARDO EL VALOR DE MI IMPUT EDIT
 
 }
 // PASE POR PARAMETRO EL ID DE MI OBJETO
-const editCategory = (categoryId) => {  // CAMBIO LA VISTA CATEGORIA A EDITAR CATEGORIA
+const editCategory = (categoryId) => { 
 
   showElement(".section-edit-category")
   hideElement(".section-category")
-  just("#btn-edit-categorie").setAttribute("id-categori", categoryId) //AGREGA EL ATRIBUTO Y PASA POR PARAMETRO ID
-  const datoActual = getInfo("categories").find(categories => categories.id === categoryId) // OBTENGO  INFORMACION ACTUAL DEL LOCAL Y LUEGO ME FIJO CON EL METODO FIND SI LOS ID COINCIDEN
-  just("#input-edit").value = datoActual.category // LLAMO A MI IMPUT Y LO FORZO A QUE TOME EL DATO QUE COICIDA CON EL ID
+  just("#btn-edit-categorie").setAttribute("id-categori", categoryId) 
+  const currentData = getInfo("categories").find(categories => categories.id === categoryId) 
+  just("#input-edit").value = currentData.category 
 
 
 }
 
 const addCategory = () => {
-  const datoActual = getInfo("categories")      // ME TRAIGO LA INFO QUE TIENE EL LOCAL
-  datoActual.push(saveAddcategory())  // MODIFICO  EL DATO 
-  setInfo("categories", datoActual)
-  renderCategory(datoActual)  // ENVIOO LA INFO AL LOCAL STORE  
+  const currentData = getInfo("categories") 
+  currentData.push(saveAddcategory())  
+  setInfo("categories", currentData)
+  renderCategory(currentData)  
 
 }
 
 const editBtnCategory = () => {
   const dataId = just("#btn-edit-categorie").getAttribute("id-categori") //
-  const datoActual = getInfo("categories").map(categorie => {
+  const currentData = getInfo("categories").map(categorie => {
     if (categorie.id === dataId) {
       return saveEditCategory(dataId)
     }
     return categorie
   })
-  setInfo("categories", datoActual);
-  renderCategory(datoActual)
+  setInfo("categories", currentData);
+  renderCategory(currentData)
 }
 
 const viewChangeRemove = (categoryId, categori) => {
@@ -519,26 +514,47 @@ const viewChangeRemove = (categoryId, categori) => {
     const IdCategoria = just("#btn-remove-categories").getAttribute("id-categori")
     deleteCategory(IdCategoria);
     deleteOperationWCategoryDeleted(IdCategoria)
-    window.location.reload()
+
+
 
   })
 
 }
 const deleteCategory = (categoryId) => {
-  const datoActual = getInfo("categories").filter(category => categoryId !== category.id)
-  setInfo("categories", datoActual)
+  const currentData = getInfo("categories").filter(category => categoryId !== category.id)
+  setInfo("categories", currentData)
+  renderCategory(currentData)
 }
 
 const deleteOperationWCategoryDeleted = (categoriaId) => {
   const currentOperations = getInfo("Operations").filter(operacion => operacion.categoria !== categoriaId);
   setInfo("Operations", currentOperations);
-  console.log(currentOperations)
+
 }
 
+// -------------------------------------------VALIDACION DE INPUT CATEGORIA---------------------------------------------------------
+
+const validateInput = () => {   
+  const input = just("#input-add").value;
+
+  if (/^\s*$/.test(input)) {
+    just(".validation").classList.remove("hidden");
+    just(".validation").classList.add("red");
+    just(".box-input").classList.add("invalid-input");
+    return false;
+  } else {
+    just(".validation").classList.remove("red");
+    just(".validation").classList.add("hidden");
+    just(".box-input").classList.remove("invalid-input");
+    return true;
+  }
+};
 
 
 
 
+
+//
 // FUNCION PARA BORRAR OPERACIONES QUE LA CETEGORIA FUE ELIMINADA --no funcion aun--
 // const opWithoutCategory = () => {
 // console.log(getInfo('Operations')) //arranco con arr de 6 
@@ -558,108 +574,377 @@ const deleteOperationWCategoryDeleted = (categoriaId) => {
 
 
 
-const renderReporte = (arrayOpertation) => {
+const renderReporte = (arrayOperation) => {
   clear("#reportes")
   const clase = "value"
-  if (arrayOpertation.length >= 3) {
-
+  if (arrayOperation.length >= 3) {
+    const categoryWithHighestEarnings = getCategoryWithHighestEarnings();
+    const categoryWithHighestExpenses = getCategoryWithHighestExpenses();
+    const monthWithHighestBalance = getDateWithHighestEarnings();
+    const monthWithHighestgasto = getDateWithHighestExpenses();
+    const categoryWithHighestBalance = getCategoryWithHighestBalance();
     hideElement("#section-reports")
     showElement("#section-edit-reports");
-     for (const operation of arrayOpertation) {
-      console.log(operation.categoria);
-      just("#reportes").innerHTML = `<tbody>
+
+    just("#reportes").innerHTML = `<tbody>
         <tr class="mb-[1rem] h-[20%] w-[50%]">
           <th class="w-[50%] mb-[1rem] ml-[1rem] text-[#4A4A4A] text-left">Categoría con mayor ganancia</th>
-           <td></td>
-          <td ></td>
+           <td> ${categoryWithHighestEarnings.categoria}</td>
+          <td class="green"> +$ ${categoryWithHighestEarnings.value}</td>
         </tr>
         <tr>
-          <th class="text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
-          <td></td>
-          <td class="valor"></td>
+          <th class=" text-[#4A4A4A] text-left">Categoría con mayor gasto</th>
+          <td>${categoryWithHighestExpenses.categorias}</td>
+          <td class="red"> -$ ${categoryWithHighestExpenses.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Categoría con mayor balance</th>
-          <td></td>
-          <td></td>
+          <td>${categoryWithHighestBalance.category}</td>
+          <td class="green">$ ${categoryWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor ganancia</th>
-          <td></td>
-          <td></td>
+          <td>${monthWithHighestBalance.mes}</td>
+          <td class="green">+ $${monthWithHighestBalance.value}</td>
         </tr>
         <tr>
           <th class="text-[#4A4A4A] text-left">Mes con mayor gasto</th>
-          <td></td>
-          <td></td>
+          <td> ${monthWithHighestgasto.mes}</td>
+          <td class="red">-$${monthWithHighestgasto.value}</td>
         </tr>
       </tbody>`;
-    }
+
   } else {
     console.log("else");
     showElement("#section-reports");
   }
 };
 
+const getCategoryWithHighestEarnings = () => {
+  const operations = getInfo("Operations");
+  const categories = getInfo("categories");
 
+  const earningsByCategory = {};
 
+  // Calcular las ganancias por categoría
+  operations.forEach((operation) => {
+    if (operation.tipo === "ganancia") {
+      const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
 
+      if (categoryName) {
+        if (!earningsByCategory[categoryName]) {
+          earningsByCategory[categoryName] = 0;
+        }
 
+        earningsByCategory[categoryName] += Number(operation.monto);
+      }
+    }
+  });
 
-const renderTotalCategory = (arrayCategorys) => {
+  // Encontrar la categoría con la mayor ganancia
+  let maxEarningsCategory = null;
+  let maxEarnings = 0;
 
-  for (const category of arrayCategorys) {
-    just("#totalCategory").innerHTML = `<tr>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
-    <th class="text-[#4A4A4A] text-left">Ganancias</th>
-    <th class="text-[#4A4A4A] text-left">Gastos</th>
-    <th class="text-[#4A4A4A] text-left">Balance</th>
-</tr>
-<tr>
-    <td class="text-left">hola</td>
-    <td>hola</td>
-    <td></td>
-    <td></td>
-</tr>`
+  for (const [category, earnings] of Object.entries(earningsByCategory)) {
+    if (earnings > maxEarnings) {
+      maxEarnings = earnings;
+      maxEarningsCategory = category;
+    }
   }
 
-}
+  return { categoria: maxEarningsCategory, value: maxEarnings };
 
 
-const rendertotalMonth = (arrayCategorys) => {
-  for (const category of arrayCategorys) {
-    just("#totalMonth").innerHTML = ` <tr>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Mes</th>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
-    <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
-</tr>
-<tr>
-    <td>Enero</td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr> `
+
+};
+
+const getCategoryWithHighestExpenses = () => {
+  const operations = getInfo("Operations");
+  const categories = getInfo("categories");
+
+  const expensesByCategory = {};
+
+  // Calcular los gastos por categoría
+  operations.forEach((operation) => {
+    if (operation.tipo === "gasto") {
+      const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+
+      if (categoryName) {
+        if (!expensesByCategory[categoryName]) {
+          expensesByCategory[categoryName] = 0;
+        }
+
+        expensesByCategory[categoryName] += Number(operation.monto);
+      }
+    }
+  });
+
+  // Encontrar la categoría con el mayor gasto
+  let maxExpensesCategory = null;
+  let maxExpenses = 0;
+
+  for (const [category, expenses] of Object.entries(expensesByCategory)) {
+    if (expenses > maxExpenses) {
+      maxExpenses = expenses;
+      maxExpensesCategory = category;
+    }
   }
-}
+
+  return { categorias: maxExpensesCategory, value: maxExpenses };
+};
+
+const getDateWithHighestEarnings = () => {
+  const operations = getInfo("Operations");
+
+  const earningsByDate = {};
+
+  // Calcular las ganancias por fecha
+  operations.forEach((operation) => {
+    if (operation.tipo === "ganancia") {
+      const operationDate = new Date(operation.fecha);
+      const formattedDate = operationDate.toLocaleDateString('es-ES'); // Utilizamos el formato local para español
+
+      if (!earningsByDate[formattedDate]) {
+        earningsByDate[formattedDate] = 0;
+      }
+
+      earningsByDate[formattedDate] += Number(operation.monto);
+    }
+  });
+
+  // Encontrar la fecha con la mayor ganancia
+  let maxEarningsDate = null;
+  let maxEarnings = 0;
+
+  for (const [date, earnings] of Object.entries(earningsByDate)) {
+    if (earnings > maxEarnings) {
+      maxEarnings = earnings;
+      maxEarningsDate = date;
+    }
+  }
+
+  return { mes: maxEarningsDate, value: maxEarnings };
+};
+
+const getDateWithHighestExpenses = () => {
+  const operations = getInfo("Operations")
+
+  const expensesByDate = {};
+
+  // Calcular los gastos por fecha
+  operations.forEach((operation) => {
+    if (operation.tipo === "gasto") {
+      const operationDate = new Date(operation.fecha);
+      const formattedDate = operationDate.toLocaleDateString('es-ES'); // Utilizamos el formato local para español
+
+      if (!expensesByDate[formattedDate]) {
+        expensesByDate[formattedDate] = 0;
+      }
+
+      expensesByDate[formattedDate] += Number(operation.monto);
+    }
+  });
+
+  // Encontrar la fecha con el mayor gasto
+  let maxExpensesDate = null;
+  let maxExpenses = 0;
+
+  for (const [date, expenses] of Object.entries(expensesByDate)) {
+    if (expenses > maxExpenses) {
+      maxExpenses = expenses;
+      maxExpensesDate = date;
+    }
+  }
+
+  return { mes: maxExpensesDate, value: maxExpenses };
+};
+
+const getCategoryWithHighestBalance = () => {
+  const operations = getInfo("Operations");
+  const categories = getInfo("categories");
+
+  const balanceByCategory = {};
+
+  // Calcular el balance por categoría
+  operations.forEach((operation) => {
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
+    //busco la categoria que ctegoria id tiene que ser igual a operation categoria
+    if (categoryName) {
+      if (!balanceByCategory[categoryName]) {
+        balanceByCategory[categoryName] = 0;
+      }
+
+      if (operation.tipo === "ganancia") {
+        balanceByCategory[categoryName] += Number(operation.monto);
+      } else if (operation.tipo === "gasto") {
+        balanceByCategory[categoryName] -= Number(operation.monto);
+      }//sumo o resto dependiendo si es ganancia o gasto
+    }
+  });
+
+  // Encontrar la categoría con el mayor balance
+  let maxBalanceCategory = null;
+  let maxBalance = 0;
+
+  for (const [category, balance] of Object.entries(balanceByCategory)) {
+    if (balance > maxBalance) {
+      maxBalance = balance;
+      maxBalanceCategory = category;
+    }
+  }
+
+  return { category: maxBalanceCategory, value: maxBalance };//retorno objeto con dos valores
+};
 
 
 
 
 
-// const highestEarninCategory = () => {
-//   const categoriafiltrada = getInfo("Operations").filter(operation => operation.tipo === "ganancia");
+//-------------------------------------------------TOTAL CATEGORIA POR MES---------------------------------------------------------------------
+const getTotalByCategory = () => {
+  const operations = getInfo("Operations") || [];
+  const categories = getInfo("categories") || [];
 
-//   let acc = 0;
+  const totalsByCategory = {};
 
-//   for (const categoria of categoriafiltrada) {
-//     acc += Number(categoria.monto);
-//   }
-//   console.log(acc);
+  // Inicializar los totales por categoría
+  categories.forEach((category) => {
+    totalsByCategory[category.category] = {
+      gananciaTotal: 0,
+      balanceTotal: 0,
+      gastoTotal: 0,
+    };
+  });
 
-// };
+  // Calcular los totales por categoría
+  operations.forEach((operation) => {
+    const categoryName = categories.find((category) => category.id === operation.categoria)?.category;
 
-// highestEarninCategory();
+    if (categoryName) {
+      if (operation.tipo === "ganancia") {
+        totalsByCategory[categoryName].gananciaTotal += Number(operation.monto);
+      } else if (operation.tipo === "gasto") {
+        totalsByCategory[categoryName].gastoTotal += Number(operation.monto);
+      }
+
+      // Calcular el balance
+      totalsByCategory[categoryName].balanceTotal = totalsByCategory[categoryName].gananciaTotal - totalsByCategory[categoryName].gastoTotal;
+    }
+  });
+
+  return totalsByCategory;
+};
+
+
+
+const renderTotalCategory1 = (arrayCategorys) => {
+  const totalCategoryElement = just("#totalCategory");
+
+  // Limpiar contenido existente
+  totalCategoryElement.innerHTML = "";
+
+  // Agregar encabezados
+  totalCategoryElement.innerHTML += `<tr>
+    <th class=" w-[20%] text-[#4A4A4A] text-left ">Categoria</th>
+    <th class=" w-[20%] text-[#4A4A4A] text-left">Ganancias</th>
+    <th class=" w-[20%] text-[#4A4A4A] text-left">Gastos</th>
+    <th class=" w-[20%] text-[#4A4A4A] text-left">Balance</th>
+  </tr>`;
+
+  // Agregar filas por cada categoría
+  for (const categorie of arrayCategorys) {
+    // Obtener totales por categoría
+    const totals = getTotalByCategory()[categorie.category];
+
+    // Verificar si el balance total es mayor que 0  o  menor  0 antes de agregar la fila
+    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
+
+
+      // Agregar fila
+      totalCategoryElement.innerHTML += `<tr>
+        <td class="w-[20%] text-left">${categorie.category}</td>
+        <td class="green">+$ ${totals.gananciaTotal}</td>
+        <td class="red">-$ ${totals.gastoTotal}</td>
+        <td> $${totals.balanceTotal}</td>
+      </tr>`;
+    }
+  }
+};
+
+renderTotalCategory1(category);
+
+// ----------------------------------------------TOTAL POR MES---------------------------------------------------------------------------
+
+const getTotalByMonth = () => {
+  const operations = getInfo("Operations") || [];
+
+  const totalsByMonth = {};
+
+  // Calcular los totales por mes
+  operations.forEach((operation) => {
+    const operationDate = new Date(operation.fecha);
+    const formattedMonth = `${operationDate.getFullYear()}-${operationDate.getMonth() + 1}`;//aca obtengo lo dias por operation
+
+    if (!totalsByMonth[formattedMonth]) {
+      totalsByMonth[formattedMonth] = { gananciaTotal: 0, gastoTotal: 0, balanceTotal: 0 };
+    }
+
+    if (operation.tipo === "ganancia") {
+      totalsByMonth[formattedMonth].gananciaTotal += Number(operation.monto);
+    } else if (operation.tipo === "gasto") {
+      totalsByMonth[formattedMonth].gastoTotal += Number(operation.monto);
+    }
+
+    // Calcular el balance
+    totalsByMonth[formattedMonth].balanceTotal = totalsByMonth[formattedMonth].gananciaTotal - totalsByMonth[formattedMonth].gastoTotal;
+  });
+
+  return totalsByMonth;
+};
+
+
+
+const renderTotalByMonth = () => {
+  const totalMonthElement = just("#totalmonth");
+
+  // Limpiar contenido existente
+  totalMonthElement.innerHTML = "";
+
+
+  totalMonthElement.innerHTML = ` <tr>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Mes</th>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Ganancias</th>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Gastos</th>
+    <th class="w-[20%] text-[#4A4A4A] text-left">Balance</th>
+</tr>`;
+
+  // Obtener totales por mes
+  const totalsByMonth = getTotalByMonth();
+
+  // Filtrar los meses con ganancias o gastos
+  const monthsWithActivity = Object.keys(totalsByMonth).filter(month => {
+    const totals = totalsByMonth[month];
+    return totals.gananciaTotal > 0 || totals.gastoTotal > 0;
+  });
+
+  // Agregar filas por cada mes con actividad
+  monthsWithActivity.forEach(month => {
+    // Obtener totales específicos del mes
+    const totals = totalsByMonth[month];
+
+    // Agregar fila
+    totalMonthElement.innerHTML += `<tr>
+      <td class="w-[20%] text-left">${month}</td>
+      <td class=" green">+ $${totals.gananciaTotal}</td>
+      <td class="red">-$${totals.gastoTotal}</td>
+      <td class""> $${totals.balanceTotal}</td>
+    </tr>`;
+  });
+};
+
+// Llamada a la función renderTotalByMonth
+renderTotalByMonth();
+
 
 
 
@@ -669,18 +954,42 @@ const inicializeApp = () => {
   setInfo("categories", allCategories)  // ENVIO INFORMACION AL LOCAL STORAGE
   renderCategory(allCategories) // LLAMO A LA FUNCION QUE ME PINTA LAS CATEGORIA Y LE PASO LA INFO DEL LOCAL
 
-
   just("#btn-add-categories").addEventListener("click", (e) => {
-    addCategory()
+    if (!validateInput()) {
+      e.preventDefault();
 
-  })
+      return;
+    }
+    addCategory();
+  });
+
+
 
   just("#btn-edit-categorie").addEventListener("click", (e) => {
     e.preventDefault()
     hideElement(".section-edit-category")
     showElement(".section-category")
     editBtnCategory()
-    window.location.reload()
+
+  })
+  just("#btn-remove-categories").addEventListener("click", () => {
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+
+
+
+
+  })
+  just(".Cancel").addEventListener("click", (e) => {
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+  })
+
+
+  just(".cancel-edit").addEventListener("click", (e) => {
+    hideElement(".container-eliminar")
+    showElement(".section-category")
+    hideElement(".section-edit-category")
   })
 
 
@@ -700,7 +1009,7 @@ const inicializeApp = () => {
   just("#btn-reports-navb").addEventListener("click", () => {
     showViews("section-reports")
     renderReporte(totalOperations)
-    renderTotalCategory(totalOperations)
+    // renderTotalCategory1(totalOperations)
   }
 
   ); //escucha el click sobre btn de reportes y esconde todas las vistas excepto la de reportes
@@ -718,7 +1027,7 @@ const inicializeApp = () => {
   just("#btn-add-newOp").addEventListener("click", (e) => {
     validateForm(e)
     // runBtnAddNewOp(e)
-    }); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
+  }); //cuando se le de click al btn agregar, ejecuta la funcion la cual transforma el obj de info del form a un arr y lo pasa al LS
 
   // -----------BOTON CANCELAR OPERACION //?funciona bien
   just("#btn-cancel-newOp").addEventListener("click", () => {
