@@ -25,7 +25,11 @@ body {
  @media(max-width:995px){
     .header-navbar>ul {
         width: 100%;
+        display: none;
         
+    }
+    header>.box-icon-menu {
+        display: block;
     }
     header>.header-navbar{
         justify-content: center;
@@ -46,6 +50,7 @@ body {
     }
     div>.section-operations {
         width: 90%;
+        margin-top: 1rem;
     }
 
  }
