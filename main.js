@@ -21,6 +21,7 @@ const showViews = (view) => {
   just(`.${view}`).classList.remove("hidden");
 };
 
+
 // FUNCIONALIDAD SECTOR DE OPERACIONES - NUEVA OPERACION - EDITAR OPERACION **************************************************
 const showOperations = (arrOperations) => {
   just(".tbody-info-loaded").innerHTML = "";
