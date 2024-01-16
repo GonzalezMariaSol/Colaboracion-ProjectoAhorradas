@@ -762,7 +762,6 @@ const renderTotalCategory = (arrayCategorys) => {
 };
 renderTotalCategory(category);
 
-
 // ----------------------------------------------TOTAL POR MES--------------------------------------------------------
 const getTotalByMonth = () => {
   const operations = getInfo("Operations") || [];
