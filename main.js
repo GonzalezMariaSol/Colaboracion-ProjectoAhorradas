@@ -198,6 +198,7 @@ const validateForm = (e) => {
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 const getEarningsBalance = () => {
   let totalEarnings = 0;
+  just(".full-earnings").innerHTML = `${totalEarnings}`;
   if (getInfo("Operations")) {
     for (const operacion of getInfo("Operations")) {
       if (operacion.tipo === "ganancia") {
@@ -753,6 +754,7 @@ const renderTotalCategory = (arrayCategorys) => {
    
   for (const categorie of arrayCategorys) {
     const totals = getTotalByCategory()[categorie.category];
+    console.log(totals);
 
     if (totals && (totals.balanceTotal > 0 || totals.balanceTotal < 0)) {
 
