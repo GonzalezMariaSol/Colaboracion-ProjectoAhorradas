@@ -735,6 +735,9 @@ const getTotalByCategory = () => {
   return totalsByCategory;
 };
 
+
+
+
 const renderTotalCategory = (arrayCategorys) => {
   const totalCategoryElement = just("#totalCategory");
 
@@ -742,25 +745,32 @@ const renderTotalCategory = (arrayCategorys) => {
 
   totalCategoryElement.innerHTML += `<tr>
     <th class="w-[30%] text-[#4A4A4A] text-left">Categoria</th>
-    <th class=" w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
-    <th class=" w-[30%] text-[#4A4A4A] text-left">Gastos</th>
-    <th class=" w-[30%] text-[#4A4A4A] text-left">Balance</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Ganancias</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Gastos</th>
+    <th class="w-[30%] text-[#4A4A4A] text-left">Balance</th>
   </tr>`;
 
+   
   for (const categorie of arrayCategorys) {
     const totals = getTotalByCategory()[categorie.category];
 
-    if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
+    if (totals && (totals.balanceTotal > 0 || totals.balanceTotal < 0)) {
+
       totalCategoryElement.innerHTML += `<tr>
         <td class="text-left">${categorie.category}</td>
         <td class="green">+ ${totals.gananciaTotal}</td>
-        <td class=" red">- ${totals.gastoTotal}</td>
+        <td class="red">- ${totals.gastoTotal}</td>
         <td>${totals.balanceTotal}</td>
       </tr>`;
     }
   }
 };
 renderTotalCategory(category);
+
+
+
+
+
 
 // ----------------------------------------------TOTAL POR MES--------------------------------------------------------
 const getTotalByMonth = () => {
