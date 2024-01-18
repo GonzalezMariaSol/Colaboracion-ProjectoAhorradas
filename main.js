@@ -747,8 +747,10 @@ const renderTotalCategory = (arrayCategorys) => {
     <th class=" w-[30%] text-[#4A4A4A] text-left">Balance</th>
   </tr>`;
 
+  console.log(getTotalByCategory);
   for (const categorie of arrayCategorys) {
     const totals = getTotalByCategory()[categorie.category];
+    console.log(totals);
 
     if (totals.balanceTotal > 0 || totals.balanceTotal < 0) {
       totalCategoryElement.innerHTML += `<tr>
