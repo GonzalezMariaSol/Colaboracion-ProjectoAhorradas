@@ -198,6 +198,7 @@ const validateForm = (e) => {
 // FUNCIONALIDAD DE BALANCE *****************************************************************************************
 const getEarningsBalance = () => {
   let totalEarnings = 0;
+  just(".full-earnings").innerHTML = `${totalEarnings}`;
   if (getInfo("Operations")) {
     for (const operacion of getInfo("Operations")) {
       if (operacion.tipo === "ganancia") {
